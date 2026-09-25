@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tienda Pokédex | PokéTech</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="w hd">
+<a class="logo" href="index.html"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="#fff" stroke="#000" stroke-width="4"/><path d="M3 20a17 17 0 0 1 34 0z" fill="var(--red)" stroke="#000" stroke-width="4"/><circle cx="20" cy="20" r="6" fill="#fff" stroke="#000" stroke-width="4"/></svg><b>PokéTech</b></a>
+<nav>
+<a href="tienda.html" class="on">Tienda Pokédex</a>
+<a href="estrategia.html">Estrategia</a>
+<a href="organizacion.html">Organización</a>
+<a href="trabajo.html">Forma de trabajar</a>
+<a href="compromiso.html">Compromiso</a>
+</nav>
+<button class="cartb" id="cb">Carrito<b id="cn">0</b></button>
+</div></header>
+
+<div class="pagehead"><div class="w">
+<h1>Tienda Pokédex</h1>
+<p>Cada modelo está restaurado y certificado por PokéTech. Elige la generación de tu región.</p>
+</div></div>
+
+<main>
+<section><div class="w">
+<div class="row" id="cat"></div>
+</div></section>
+</main>
+
+<div class="bd2"></div>
+<footer><div class="w">
+<div class="fg">
+<div><h4>PokéTech Research &amp; Development Corp.</h4><p>Investigación de especies y tecnología Pokédex para todas las regiones.</p><p class="dots" style="margin-top:14px"><i style="background:#000"></i><i style="background:var(--red)"></i><i style="background:#fff"></i><i style="background:var(--blu)"></i></p></div>
+<div><h4>Empresa</h4><a href="estrategia.html">Estrategia</a><a href="organizacion.html">Organización</a><a href="compromiso.html">Compromiso</a></div>
+<div><h4>Tienda</h4><a href="tienda.html">Catálogo Pokédex</a><a href="trabajo.html">Trabaja con nosotros</a></div>
+</div>
+<div class="cp">© 2026 PokéTech Research &amp; Development Corp. Todos los derechos reservados. Privacidad · Términos · Ética Pokémon</div>
+</div></footer>
+
+<div id="ov"></div>
+<aside id="dr" aria-label="Carrito">
+<div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-size:26px">Tu carrito</h3><button id="cx" class="btn w2" style="padding:6px 14px;font-size:14px">Cerrar</button></div>
+<ul id="cl"></ul>
+<div class="tot"><span>Total</span><span id="ct">$0</span></div>
+<button class="btn r" id="co">Finalizar compra</button>
+<p id="cm" style="margin-top:12px;color:var(--mut);font-size:15px"></p>
+</aside>
+
+<script src="script.js"></script>
+<script>
+ptInitCatalog([
+{g:'I',n:'Kanto',p:199,d:'Registro de 151 especies, sprites 2D y mapa regional. Resistente a impactos.',c:'#E3350D'},
+{g:'II',n:'Johto',p:249,d:'100 nuevas especies, reloj en tiempo real, registro de huevos y radio regional.',c:'#000000'},
+{g:'III',n:'Hoenn',p:299,d:'Pantalla a color de alta resolución, visor de hábitats y huellas dactilares.',c:'#0075BE'},
+{g:'IV',n:'Sinnoh',p:349,d:'Buscador de objetos, análisis de evolución y medidor de amistad.',c:'#E3350D'},
+{g:'V',n:'Unova',p:399,d:'Primer modelo 100% digital, formas alternativas y conectividad global.',c:'#000000'},
+{g:'VI',n:'Kalos',p:449,d:'Registro de Mega-Evolución, sensor holográfico y cristal premium.',c:'#0075BE'},
+{g:'VII',n:'Alola',p:499,d:'Inteligencia artificial Rotom, asistente de voz y escaneo de movimientos Z.',c:'#E3350D'},
+{g:'VIII',n:'Galar',p:549,d:'Sensor de energía Dinamax, sincronización con smartphone y rutas en vivo.',c:'#000000'},
+{g:'IX',n:'Paldea',p:599,d:'Análisis de Teracristalización, formas paradoja y GPS multirregional Ultra.',c:'#0075BE'}
+]);
+</script>
+</body>
+</html>
