@@ -4,29 +4,33 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PokéTech | Pokédex de nueva generación</title>
+<link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+
+<!-- ===== HEADER (igual en todas las páginas; fuente: components/header.html) ===== -->
 <header><div class="w hd">
 <a class="logo" href="index.html"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="#fff" stroke="#000" stroke-width="4"/><path d="M3 20a17 17 0 0 1 34 0z" fill="var(--red)" stroke="#000" stroke-width="4"/><circle cx="20" cy="20" r="6" fill="#fff" stroke="#000" stroke-width="4"/></svg><b>PokéTech</b></a>
 <nav>
-<a href="tienda.html">Tienda Pokédex</a>
-<a href="estrategia.html">Estrategia</a>
-<a href="organizacion.html">Organización</a>
-<a href="trabajo.html">Forma de trabajar</a>
-<a href="compromiso.html">Compromiso</a>
+<a href="pages/tienda.html">Tienda Pokédex</a>
+<a href="pages/estrategia.html">Estrategia</a>
+<a href="pages/organizacion.html">Organización</a>
+<a href="pages/trabajo.html">Forma de trabajar</a>
+<a href="pages/compromiso.html">Compromiso</a>
 </nav>
-<button class="cartb" id="cb">Carrito<b id="cn">0</b></button>
 </div></header>
 
+<!-- ===== CONTENIDO ===== -->
 <main>
 <div class="hero">
 <div class="w hg">
 <div>
 <h1>Pokédex Paldea. Todo Pokémon, en tu mano.</h1>
 <p class="lead">PokéTech investiga nuevas especies y fabrica la Pokédex de cada generación, con presencia en todas las regiones.</p>
-<div class="cta"><a class="btn r" href="tienda.html">Comprar ahora</a><a class="btn w2" href="estrategia.html">Conocer PokéTech</a></div>
+<div class="cta"><a class="btn r" href="pages/tienda.html">Comprar ahora</a><a class="btn w2" href="pages/estrategia.html">Conocer PokéTech</a></div>
 </div>
 <svg class="dev" viewBox="0 0 400 480" role="img" aria-label="Pokédex PokéTech escaneando">
 <rect x="34" y="34" width="360" height="440" rx="30" fill="#000"/>
@@ -55,34 +59,25 @@
 <h2 class="sh">Explora PokéTech</h2>
 <p class="lead">Selecciona una sección para conocer nuestra estrategia, organización, forma de trabajar y compromiso.</p>
 <div class="g3">
-<a class="bx tz" href="estrategia.html"><h3>Estrategia</h3><p>Misión, visión, valores y nuestro panorama FODA.</p><span>Ver más →</span></a>
-<a class="bx tz" href="organizacion.html"><h3>Organización</h3><p>Organigrama, departamentos clave y equipo directivo.</p><span>Ver más →</span></a>
-<a class="bx tz" href="trabajo.html"><h3>Forma de trabajar</h3><p>Nuestros principios, liderazgo y cultura de equipo.</p><span>Ver más →</span></a>
-<a class="bx tz" href="compromiso.html"><h3>Compromiso</h3><p>Estándares de calidad y sostenibilidad certificados.</p><span>Ver más →</span></a>
-<a class="bx tz" href="tienda.html"><h3>Tienda Pokédex</h3><p>Las 9 generaciones de Pokédex, listas para pedir.</p><span>Comprar →</span></a>
+<a class="bx tz" href="pages/estrategia.html"><h3>Estrategia</h3><p>Misión, visión, valores y nuestro panorama FODA.</p><span>Ver más →</span></a>
+<a class="bx tz" href="pages/organizacion.html"><h3>Organización</h3><p>Organigrama, departamentos clave y equipo directivo.</p><span>Ver más →</span></a>
+<a class="bx tz" href="pages/trabajo.html"><h3>Forma de trabajar</h3><p>Nuestros principios, liderazgo y cultura de equipo.</p><span>Ver más →</span></a>
+<a class="bx tz" href="pages/compromiso.html"><h3>Compromiso</h3><p>Estándares de calidad y sostenibilidad certificados.</p><span>Ver más →</span></a>
+<a class="bx tz" href="pages/tienda.html"><h3>Tienda Pokédex</h3><p>Las 9 generaciones de Pokédex, listas para pedir.</p><span>Comprar →</span></a>
 </div>
 </div></section>
 </main>
 
+<!-- ===== FOOTER (igual en todas las páginas; fuente: components/footer.html) ===== -->
 <div class="bd2"></div>
 <footer><div class="w">
 <div class="fg">
 <div><h4>PokéTech Research &amp; Development Corp.</h4><p>Investigación de especies y tecnología Pokédex para todas las regiones.</p><p class="dots" style="margin-top:14px"><i style="background:#000"></i><i style="background:var(--red)"></i><i style="background:#fff"></i><i style="background:var(--blu)"></i></p></div>
-<div><h4>Empresa</h4><a href="estrategia.html">Estrategia</a><a href="organizacion.html">Organización</a><a href="compromiso.html">Compromiso</a></div>
-<div><h4>Tienda</h4><a href="tienda.html">Catálogo Pokédex</a><a href="trabajo.html">Trabaja con nosotros</a></div>
+<div><h4>Empresa</h4><a href="pages/estrategia.html">Estrategia</a><a href="pages/organizacion.html">Organización</a><a href="pages/compromiso.html">Compromiso</a></div>
+<div><h4>Tienda</h4><a href="pages/tienda.html">Catálogo Pokédex</a><a href="pages/trabajo.html">Trabaja con nosotros</a></div>
 </div>
 <div class="cp">© 2026 PokéTech Research &amp; Development Corp. Todos los derechos reservados. Privacidad · Términos · Ética Pokémon</div>
 </div></footer>
 
-<div id="ov"></div>
-<aside id="dr" aria-label="Carrito">
-<div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-size:26px">Tu carrito</h3><button id="cx" class="btn w2" style="padding:6px 14px;font-size:14px">Cerrar</button></div>
-<ul id="cl"></ul>
-<div class="tot"><span>Total</span><span id="ct">$0</span></div>
-<button class="btn r" id="co">Finalizar compra</button>
-<p id="cm" style="margin-top:12px;color:var(--mut);font-size:15px"></p>
-</aside>
-
-<script src="script.js"></script>
 </body>
 </html>

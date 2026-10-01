@@ -1,0 +1,5 @@
+/* Variables de diseño y tema oscuro */
+:root{--red:#E3350D;--blu:#0075BE;--cha:#000000;--bg:#fff;--alt:#f2f4f7;--card:#fff;--ink:#000000;--mut:#5b6472;--ln:#000000;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15161a;--alt:#1c1e24;--card:#212329;--ink:#ffffff;--mut:#a7acb8;--ln:#000000}}
+:root[data-theme="dark"]{--bg:#15161a;--alt:#1c1e24;--card:#212329;--ink:#ffffff;--mut:#a7acb8;--ln:#000000}
