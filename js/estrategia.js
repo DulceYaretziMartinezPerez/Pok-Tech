@@ -267,13 +267,49 @@
     if (!mons.length) return;
 
     mons.forEach(function (m) {
+      var base = m.getAttribute('src').replace(/[^\/]*$/, '');
+      var chain = (m.getAttribute('data-evo') || '').split(',').filter(Boolean);
+      var idx = 0, busy = false;
+
       function hop() {
         m.classList.remove('hop');
         void m.offsetWidth;
         m.classList.add('hop');
         window.setTimeout(function () { m.classList.remove('hop'); }, 750);
       }
-      m.addEventListener('click', hop);
+
+      /* Evolución: destello blanco, cambia la imagen a media animación y
+         vuelve a la normalidad. Al llegar a la última etapa, el siguiente
+         toque lo regresa a la forma inicial. Si falta el archivo de la
+         siguiente etapa, solo salta (no se rompe nada). */
+      function evolve() {
+        if (busy) return;
+        busy = true;
+        idx = (idx + 1) % chain.length;
+        var next = base + chain[idx] + '.png';
+        var probe = new Image();
+        probe.onload = function () {
+          if (reduceMotion) { m.src = next; busy = false; return; }
+          m.classList.remove('hop', 'evolving');
+          void m.offsetWidth;
+          m.classList.add('evolving');
+          window.setTimeout(function () { m.src = next; }, 600);
+          window.setTimeout(function () { m.classList.remove('evolving'); busy = false; }, 1150);
+        };
+        probe.onerror = function () {
+          idx = (idx - 1 + chain.length) % chain.length;
+          busy = false;
+          hop();
+        };
+        probe.src = next;
+      }
+
+      if (chain.length > 1) {
+        chain.forEach(function (n) { new Image().src = base + n + '.png'; }); // precarga
+        m.addEventListener('click', evolve);
+      } else {
+        m.addEventListener('click', hop);
+      }
     });
 
     if (reduceMotion) return;
