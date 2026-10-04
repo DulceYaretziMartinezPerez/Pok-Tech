@@ -8,6 +8,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/variables.css">
 <link rel="stylesheet" href="css/main.css">
+<!-- Paleta propia SOLO del inicio: versión OSCURA (guinda + azul medianoche + casi negro).
+     Las demás páginas siguen con los colores de variables.css.
+     Rojo anterior (burdeos más ladrillo): #8F2B25 · Paleta más clara: --red:#B8352B; --blu:#2D6A9F; --cha:#141922 -->
+<style>
+:root{--red:#B8352B;--blu:#1D4B73;--cha:#0a0d12}
+:root[data-theme="dark"]{--bg:#0a0d12;--alt:#10141b;--card:#131821;--mut:#98a3b3;--ln:#262d3b}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0d12;--alt:#10141b;--card:#131821;--mut:#98a3b3;--ln:#262d3b}}
+/* círculo decorativo del hero: Poké Ball fantasma */
+.hero::before{background:radial-gradient(circle,var(--cha) 0 13%,rgba(255,255,255,.95) 13.5% 19%,transparent 19.5%),conic-gradient(var(--red) 0 50%,#e6ebf2 0);opacity:.10}
+.hero .lead{color:#a3aebd}
+/* textos rojos más claros para que se lean sobre fondos oscuros */
+:root[data-theme="dark"] .spec strong,:root[data-theme="dark"] .tz span{color:#B8352B}
+/* bordes y sombras en tono azulado para que no desaparezcan sobre el fondo oscuro */
+:root[data-theme="dark"] .bx{box-shadow:6px 6px 0 #000}
+footer{background:#07090d}
+header{border-bottom-color:#000}
+</style>
+
+
+<link rel="stylesheet" href="css/tema.css">
+<script src="js/tema.js"></script>
 </head>
 <body>
 
@@ -34,16 +55,16 @@
 </div>
 <svg class="dev" viewBox="0 0 400 480" role="img" aria-label="Pokédex PokéTech escaneando">
 <rect x="34" y="34" width="360" height="440" rx="30" fill="#000"/>
-<rect x="20" y="20" width="360" height="440" rx="30" fill="#E3350D" stroke="#000" stroke-width="8"/>
-<circle cx="80" cy="76" r="34" fill="#0075BE" stroke="#000" stroke-width="7"/><circle cx="70" cy="66" r="10" fill="#fff" opacity=".55"/>
-<circle cx="150" cy="58" r="9" fill="#E3350D" stroke="#000" stroke-width="3"/><circle cx="180" cy="58" r="9" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="210" cy="58" r="9" fill="#0075BE" stroke="#000" stroke-width="3"/>
+<rect x="20" y="20" width="360" height="440" rx="30" fill="var(--red)" stroke="#000" stroke-width="8"/>
+<circle cx="80" cy="76" r="34" fill="var(--blu)" stroke="#000" stroke-width="7"/><circle cx="70" cy="66" r="10" fill="#fff" opacity=".55"/>
+<circle cx="150" cy="58" r="9" fill="var(--red)" stroke="#000" stroke-width="3"/><circle cx="180" cy="58" r="9" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="210" cy="58" r="9" fill="var(--blu)" stroke="#000" stroke-width="3"/>
 <rect x="50" y="128" width="300" height="200" rx="12" fill="#000" stroke="#000" stroke-width="7"/>
 <clipPath id="sc"><rect x="54" y="132" width="292" height="192" rx="9"/></clipPath>
-<g clip-path="url(#sc)"><circle cx="140" cy="228" r="48" fill="none" stroke="#0075BE" stroke-width="5"/><path d="M92 228h96" stroke="#0075BE" stroke-width="5"/><circle cx="140" cy="228" r="13" fill="#000" stroke="#0075BE" stroke-width="5"/>
-<g fill="#fff"><rect x="216" y="170" width="110" height="9" rx="4"/><rect x="216" y="192" width="80" height="9" rx="4" opacity=".7"/><rect x="216" y="214" width="100" height="9" rx="4" opacity=".7"/><rect x="216" y="248" width="60" height="9" rx="4" fill="#E3350D"/><rect x="216" y="270" width="90" height="9" rx="4" opacity=".5"/></g>
+<g clip-path="url(#sc)"><circle cx="140" cy="228" r="48" fill="none" stroke="var(--blu)" stroke-width="5"/><path d="M92 228h96" stroke="var(--blu)" stroke-width="5"/><circle cx="140" cy="228" r="13" fill="#000" stroke="var(--blu)" stroke-width="5"/>
+<g fill="#fff"><rect x="216" y="170" width="110" height="9" rx="4"/><rect x="216" y="192" width="80" height="9" rx="4" opacity=".7"/><rect x="216" y="214" width="100" height="9" rx="4" opacity=".7"/><rect x="216" y="248" width="60" height="9" rx="4" fill="var(--red)"/><rect x="216" y="270" width="90" height="9" rx="4" opacity=".5"/></g>
 <rect class="scn" x="54" y="140" width="292" height="4" fill="#fff"/></g>
 <path d="M70 392h50M95 367v50" stroke="#000" stroke-width="20" stroke-linecap="square"/>
-<circle cx="270" cy="395" r="20" fill="#fff" stroke="#000" stroke-width="6"/><circle cx="326" cy="372" r="20" fill="#0075BE" stroke="#000" stroke-width="6"/>
+<circle cx="270" cy="395" r="20" fill="#fff" stroke="#000" stroke-width="6"/><circle cx="326" cy="372" r="20" fill="var(--blu)" stroke="#000" stroke-width="6"/>
 <path d="M180 385h50M180 401h50M180 417h50" stroke="#000" stroke-width="6" stroke-linecap="round"/>
 </svg>
 </div></div>
