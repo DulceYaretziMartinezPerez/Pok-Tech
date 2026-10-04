@@ -10,12 +10,88 @@
   var canObserve = 'IntersectionObserver' in window;
 
   document.addEventListener('DOMContentLoaded', function () {
+    setupHeroCarousel();
+    setupAvatarWobble();
+    setupContentReveal();
     setupEntranceReveal();
     setupStrategyCards();
     setupEvolutionSteps();
     setupHpBars();
     setupFlavorText();
+    setupSideMons();
   });
+
+  /* Carrusel de fotos del encabezado: rota sola cada 4.5s y se puede
+     saltar tocando los puntos. Se detiene al pasar el mouse o teclado
+     por encima, y no gira sola si hay prefers-reduced-motion
+     (los puntos siguen funcionando igual). */
+  function setupHeroCarousel() {
+    var slides = document.querySelectorAll('.pagehead-slide');
+    var dotsWrap = document.querySelector('.pagehead-dots');
+    if (!slides.length || !dotsWrap) return;
+    var dots = Array.prototype.slice.call(dotsWrap.querySelectorAll('button'));
+    var i = 0, timer;
+
+    function show(n) {
+      i = (n + slides.length) % slides.length;
+      slides.forEach(function (s, k) { s.classList.toggle('on', k === i); });
+      dots.forEach(function (d, k) {
+        d.classList.toggle('on', k === i);
+        d.setAttribute('aria-selected', k === i ? 'true' : 'false');
+      });
+    }
+    function start() {
+      if (reduceMotion) return;
+      window.clearInterval(timer);
+      timer = window.setInterval(function () { show(i + 1); }, 4500);
+    }
+    function stop() { window.clearInterval(timer); }
+
+    dots.forEach(function (d, k) {
+      d.addEventListener('click', function () { show(k); start(); });
+    });
+    var hero = document.querySelector('.pagehead');
+    hero.addEventListener('mouseenter', stop);
+    hero.addEventListener('mouseleave', start);
+    hero.addEventListener('focusin', stop);
+    hero.addEventListener('focusout', start);
+
+    show(0);
+    start();
+  }
+
+  /* Retratos de Misión/Visión: un pequeño "wobble" repetible al tocarlos. */
+  function setupAvatarWobble() {
+    document.querySelectorAll('.mv-ava').forEach(function (img) {
+      img.addEventListener('click', function () {
+        img.classList.remove('wobble');
+        void img.offsetWidth; // fuerza reflow para poder repetir
+        img.classList.add('wobble');
+      });
+    });
+  }
+
+  /* Aparición al hacer scroll para Misión/Visión, valores y tarjetas FODA.
+     La clase que las oculta (.reveal-pre) solo se agrega aquí mismo, justo
+     antes de observarlas: si este script no llega a correr, esos bloques
+     jamás reciben la clase y se ven normales desde el primer momento. */
+  function setupContentReveal() {
+    var targets = document.querySelectorAll('.mv, .vals span, .fd');
+    if (!targets.length || reduceMotion || !canObserve) return;
+    targets.forEach(function (el, i) {
+      el.classList.add('reveal-pre');
+      el.style.transitionDelay = (i % 6) * 0.07 + 's';
+    });
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    targets.forEach(function (el) { obs.observe(el); });
+  }
 
   /* Entrada de las cartas y pasos al hacer scroll (una sola vez).
      Si hay prefers-reduced-motion o no hay IntersectionObserver,
@@ -182,5 +258,54 @@
       });
     }, { threshold: 0.6 });
     obs.observe(flavor);
+  }
+
+  /* Pokémon de las orillas: aparecen al hacer scroll, se mueven con parallax
+     (cada uno a distinta velocidad), flotan solos y saltan al tocarlos. */
+  function setupSideMons() {
+    var mons = Array.prototype.slice.call(document.querySelectorAll('.side-mon'));
+    if (!mons.length) return;
+
+    mons.forEach(function (m) {
+      function hop() {
+        m.classList.remove('hop');
+        void m.offsetWidth;
+        m.classList.add('hop');
+        window.setTimeout(function () { m.classList.remove('hop'); }, 750);
+      }
+      m.addEventListener('click', hop);
+    });
+
+    if (reduceMotion) return;
+
+    if (canObserve) {
+      mons.forEach(function (m, i) {
+        m.classList.add('reveal-pre');
+        m.style.transitionDelay = (i % 5) * 0.1 + 's';
+      });
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('reveal-pre');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      mons.forEach(function (m) { obs.observe(m); });
+    }
+
+    var ticking = false;
+    function update() {
+      var y = window.pageYOffset || document.documentElement.scrollTop;
+      mons.forEach(function (m) {
+        var speed = parseFloat(m.getAttribute('data-speed')) || 0;
+        m.style.setProperty('--py', (y * speed).toFixed(1) + 'px');
+      });
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
   }
 })();

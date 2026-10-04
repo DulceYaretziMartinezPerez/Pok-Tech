@@ -1,0 +1,113 @@
+/* ============================================================
+   css/tema.css  —  Modo claro / modo oscuro para TODO el sitio.
+   Cárgalo DESPUÉS del CSS de cada página:
+     <link rel="stylesheet" href="../css/tema.css">
+   js/tema.js pone data-theme="light" o "dark" en <html>.
+   - Barra de navegación, banner del título y footer: se quedan como
+     estaban (rojo / negro / negro) en ambos modos.
+   - Claro: todo lo demás en blanco.
+   - Oscuro: todo oscuro.
+   ============================================================ */
+
+/* ---------- Variables ---------- */
+:root[data-theme="light"]{color-scheme:light;--bg:#fff;--alt:#fff;--card:#fff;--ink:#000;--mut:#5b6472;--ln:#000}
+:root[data-theme="dark"]{color-scheme:dark}
+
+/* ---------- Botón de tema (lo inyecta tema.js dentro de .hd) ---------- */
+.tema-btn{display:inline-flex;align-items:center;gap:8px;flex:none;padding:8px 14px;border:2px solid #fff;border-radius:99px;
+ background:transparent;color:#fff;font:600 14px Fredoka,system-ui,sans-serif;cursor:pointer;transition:background .15s,transform .15s}
+.tema-btn:hover{background:#000;border-color:#000;transform:translateY(-1px)}
+.tema-btn:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.tema-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tema-btn .tema-sun{display:none}
+:root[data-theme="dark"] .tema-btn .tema-sun{display:block}
+:root[data-theme="dark"] .tema-btn .tema-moon{display:none}
+@media(max-width:940px){.tema-btn{margin-left:auto}}
+@media(max-width:520px){.tema-btn .tema-txt{display:none}.tema-btn{padding:8px 10px}}
+@media(prefers-reduced-motion:reduce){.tema-btn{transition:none}}
+
+/* ============================================================
+   MODO CLARO — todo blanco (menos barra, banner y footer)
+   ============================================================ */
+:root[data-theme="light"] body{background-color:#fff;background-image:none}
+
+/* Home (hero) y secciones oscuras genéricas */
+:root[data-theme="light"] .dk{background:#fff;color:var(--ink)}
+:root[data-theme="light"] .dk .lead{color:var(--mut)}
+:root[data-theme="light"] .wc{background:#fff;color:var(--ink);border-color:#000}
+:root[data-theme="light"] .wc p{color:var(--mut)}
+:root[data-theme="light"] .pk-team>h2{color:var(--ink)}
+:root[data-theme="light"] .pk-team>p{color:var(--mut)}
+
+/* Compromiso — principios */
+:root[data-theme="light"] .bl{background:#fff;color:var(--ink)}
+:root[data-theme="light"] .bl .lead,
+:root[data-theme="light"] .commit-section-heading p,
+:root[data-theme="light"] .kp p{color:var(--mut)}
+:root[data-theme="light"] .commit-section-heading>span{color:var(--blu)}
+:root[data-theme="light"] .commit-arrow{background:#fff;color:#000;border-color:#000}
+:root[data-theme="light"] .commit-arrow:hover:not(:disabled){background:var(--red);color:#fff}
+
+/* Compromiso — evaluación */
+:root[data-theme="light"] .evaluation{background:#fff;color:var(--ink)}
+:root[data-theme="light"] .evaluation-heading p{color:var(--mut)}
+:root[data-theme="light"] .evaluation-card{background:#fff;border:3px solid #000;box-shadow:6px 6px 0 #000}
+:root[data-theme="light"] .evaluation-copy h3{color:var(--ink)}
+:root[data-theme="light"] .evaluation-copy p{color:var(--mut)}
+
+/* Compromiso — seguimiento y mejora */
+:root[data-theme="light"] .improvement{background:#fff;color:var(--ink)}
+:root[data-theme="light"] .improvement-backdrop-image{opacity:.08}
+:root[data-theme="light"] .improvement::before{background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.85) 200px,rgba(255,255,255,.9))}
+:root[data-theme="light"] .improvement::after{background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.72) 36%,transparent 100%)}
+:root[data-theme="light"] .improvement-heading>span,
+:root[data-theme="light"] .improvement-kicker{color:var(--blu)}
+:root[data-theme="light"] .improvement-description,
+:root[data-theme="light"] .improvement-count{color:var(--mut)}
+:root[data-theme="light"] .improvement-arrow{border-color:#000;color:#000}
+:root[data-theme="light"] .improvement-arrow:hover{background:var(--red);color:#fff;border-color:var(--red)}
+:root[data-theme="light"] .improvement-wheel-ring{border-color:rgba(0,117,190,.3);background:radial-gradient(circle at center,rgba(0,117,190,.06) 0 51%,rgba(0,117,190,.03) 52% 68%,rgba(0,117,190,.14) 68.5% 69%,transparent 69.5%);box-shadow:inset 0 0 48px rgba(0,0,0,.04)}
+:root[data-theme="light"] .improvement-wheel-ring::before,
+:root[data-theme="light"] .improvement-wheel-ring::after{border-color:rgba(0,117,190,.15)}
+:root[data-theme="light"] .improvement-image{border-color:var(--blu);box-shadow:0 16px 40px rgba(0,0,0,.18)}
+:root[data-theme="light"] .improvement-card{background:#fff;color:var(--ink);border:2px solid #000;box-shadow:4px 4px 0 #000}
+:root[data-theme="light"] .improvement-card:hover{border-color:var(--blu)}
+:root[data-theme="light"] .improvement-card[aria-current="true"]{background:linear-gradient(135deg,var(--blu),#005b93);color:#fff;border-color:#000;box-shadow:4px 4px 0 #000}
+
+/* Estrategia — consola FODA, objetivos y cartas */
+:root[data-theme="light"] .dex-frame{background:linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.04) 1px,transparent 1px),#fff;background-size:20px 20px,20px 20px,auto;border:3px solid #000}
+:root[data-theme="light"] .dex-rec{color:var(--red)}
+:root[data-theme="light"] .flavor{color:var(--mut)}
+:root[data-theme="light"] .stat-card{background:#fff;color:var(--ink)}
+:root[data-theme="light"] .stat-card::before{background-image:linear-gradient(rgba(0,0,0,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.05) 1px,transparent 1px)}
+:root[data-theme="light"] .stat-label{color:var(--ink)}
+:root[data-theme="light"] .stat-bar{background:#e8eaef}
+:root[data-theme="light"] .strat-card{background:#fff;color:var(--ink)}
+:root[data-theme="light"] .chip-hint,
+:root[data-theme="light"] .cover-hint,
+:root[data-theme="light"] .chip-n{color:var(--mut)}
+:root[data-theme="light"] .chip-face{background:#fff;border-color:#000}
+:root[data-theme="light"] .chip-face::after{background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%),rgba(0,117,190,.12),transparent 60%)}
+:root[data-theme="light"] .cover-label,
+:root[data-theme="light"] .chip-content h4{color:var(--ink)}
+:root[data-theme="light"] .chip-content p{color:var(--mut)}
+
+/* ============================================================
+   MODO OSCURO — todo oscuro
+   ============================================================ */
+/* FODA: versiones oscuras de las tarjetas pastel */
+:root[data-theme="dark"] .fd{color:var(--ink)}
+:root[data-theme="dark"] .fd.f1{background:#0f2e20}
+:root[data-theme="dark"] .fd.f2{background:#0f2236}
+:root[data-theme="dark"] .fd.f3{background:#33290a}
+:root[data-theme="dark"] .fd.f4{background:#361414}
+:root[data-theme="dark"] .fd.f1 h3{color:#4ade80}
+:root[data-theme="dark"] .fd.f2 h3{color:#60a5fa}
+:root[data-theme="dark"] .fd.f3 h3{color:#fbbf24}
+:root[data-theme="dark"] .fd.f4 h3{color:#f87171}
+/* Compromiso: tarjetas de evaluación oscuras */
+:root[data-theme="dark"] .evaluation-card{background:var(--card);border:2px solid #2d3039}
+:root[data-theme="dark"] .evaluation-copy h3{color:var(--ink)}
+:root[data-theme="dark"] .evaluation-copy p{color:#c7cbd3}
+/* Estrategia: borde de la consola visible sobre fondo oscuro */
+:root[data-theme="dark"] .dex-frame{border-color:#2d3039}

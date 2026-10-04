@@ -4,8 +4,69 @@
    No se toca main.css para no chocar con el trabajo de las demás.
    ============================================================ */
 
+/* La página entera se trata como una consola de diagnóstico: textura de
+   cuadrícula de esquemático + resplandor ambiental muy sutil, en vez de
+   un fondo plano. Nada de esto depende de ninguna imagen. */
+body{
+ background-color:var(--bg);
+ background-image:
+  linear-gradient(rgba(0,0,0,.035) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(0,0,0,.035) 1px,transparent 1px),
+  radial-gradient(circle at 10% 4%, rgba(227,53,13,.09), transparent 40%),
+  radial-gradient(circle at 94% 60%, rgba(0,117,190,.1), transparent 44%);
+ background-size:28px 28px,28px 28px,auto,auto;
+ background-attachment:fixed;
+}
+.alt{position:relative;overflow-x:clip}
+.alt>.w{position:relative;z-index:1}
+
+/* ===== Portada con carrusel de fotos (mismo patrón que compromiso.css, recoloreado) ===== */
+.pagehead{position:relative;isolation:isolate;display:flex;align-items:center;min-height:460px;overflow:hidden;background:#000;color:#fff;border:0;padding:0}
+.pagehead::before{content:"";position:absolute;z-index:1;inset:auto 0 0;height:clamp(80px,14vw,150px);backdrop-filter:blur(8px);background:linear-gradient(0deg,#000 0%,rgba(0,0,0,.72) 24%,transparent 100%);mask-image:linear-gradient(0deg,#000 0%,#000 38%,transparent 100%);pointer-events:none}
+.pagehead::after{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(90deg,#000 0%,#000 26%,rgba(0,0,0,.87) 42%,rgba(0,0,0,.24) 72%,rgba(0,0,0,.06) 100%)}
+.pagehead-media{position:absolute;inset:0 0 0 auto;width:74%;overflow:hidden}
+.pagehead-media::after{content:"";position:absolute;inset:0;backdrop-filter:blur(8px);mask-image:linear-gradient(90deg,#000 0%,transparent 58%)}
+/* Carrusel controlado por JS (estrategia.js): alterna la clase .on entre fotos */
+.pagehead-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;transition:opacity 1s ease}
+.pagehead-slide.on{opacity:1}
+.pagehead-dots{position:absolute;z-index:2;right:26px;bottom:20px;display:flex;gap:8px}
+.pagehead-dots button{width:10px;height:10px;padding:0;border-radius:50%;border:2px solid #fff;background:rgba(255,255,255,.3);cursor:pointer}
+.pagehead-dots button.on{background:var(--red)}
+.pagehead-inner{position:relative;z-index:2;width:100%}
+/* Corchetes tipo visor de cámara/HUD, marcando el bloque de texto como "objetivo escaneado" */
+.pagehead-copy{position:relative}
+.pagehead-copy::before,.pagehead-copy::after{content:"";position:absolute;width:26px;height:26px;pointer-events:none;opacity:.85}
+.pagehead-copy::before{top:-16px;left:-16px;border-top:3px solid var(--red);border-left:3px solid var(--red)}
+.pagehead-copy::after{bottom:-16px;left:calc(100% - 10px);border-bottom:3px solid var(--blu);border-right:3px solid var(--blu)}
+.pagehead-copy{max-width:540px;animation:heroIn .6s ease both}
+@keyframes heroIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.pagehead-copy h1{font-size:clamp(34px,5vw,54px);letter-spacing:-.02em}
+.pagehead-copy p{color:#d8d8d8;margin-top:14px;max-width:48ch;font-size:clamp(16px,1.5vw,19px)}
+@media(max-width:700px){
+ .pagehead{min-height:520px;align-items:flex-end;padding:220px 0 44px}
+ .pagehead-media{inset:0 0 auto;width:100%;height:68%}
+ .pagehead-media::after{mask-image:linear-gradient(180deg,transparent 38%,#000 100%)}
+ .pagehead::after{background:linear-gradient(180deg,rgba(0,0,0,.03) 0%,rgba(0,0,0,.12) 40%,rgba(0,0,0,.82) 75%,#000 100%)}
+ .pagehead-dots{right:16px;bottom:14px}
+}
+
+/* Retratos circulares en las tarjetas de Misión / Visión — tócalos para un pequeño wobble */
+.mv-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.mv-ava{width:52px;height:52px;border-radius:50%;object-fit:cover;border:3px solid #fff;flex:none;cursor:pointer;
+ box-shadow:0 4px 10px rgba(0,0,0,.25);transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.mv-ava:hover{transform:scale(1.08) rotate(-4deg)}
+.mv-ava.wobble{animation:avaWobble .5s ease}
+@keyframes avaWobble{0%{transform:scale(1) rotate(0)}30%{transform:scale(1.18) rotate(-10deg)}60%{transform:scale(.94) rotate(7deg)}100%{transform:scale(1) rotate(0)}}
+.mv-head h3{margin:0}
+
+/* Aparición al hacer scroll para Misión/Visión, valores y tarjetas FODA
+   (estrategia.js agrega .reveal-pre antes de observarlas; si JS no corre,
+   nunca reciben esta clase y se ven normales desde el inicio) */
+.reveal-pre{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.reveal-pre.show{opacity:1;transform:translateY(0)}
+
 /* Franja "Pokédex" arriba del título */
-.dex-strip{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px}
+.dex-strip{display:flex;align-items:center;justify-content:flex-start;gap:10px;margin-bottom:14px}
 .dex-strip .ball{width:18px;height:18px;border-radius:50%;flex:none;border:2px solid #000;
  background:linear-gradient(#E3350D 0 46%,#000 46% 54%,#fff 54%);
  animation:ballDrop .55s cubic-bezier(.34,1.56,.64,1) both}
@@ -23,8 +84,27 @@
 /* Si en vez de <i class="bi ..."> pones una <img>, queda del mismo tamaño */
 .vals span img{width:16px;height:16px;object-fit:contain}
 
-/* Pantalla negra tipo Pokédex alrededor del FODA */
-.dex-frame{position:relative;overflow:hidden;background:#000;border-radius:18px;padding:16px;margin-top:24px;box-shadow:6px 6px 0 var(--ln)}
+/* Envoltura del FODA: la pantalla + el dispositivo decorativo a un lado */
+.foda-wrap{display:flex;align-items:flex-end;gap:22px;margin-top:24px}
+.dex-device{width:210px;flex:none;filter:drop-shadow(10px 16px 0 rgba(0,0,0,.28));
+ transform:rotate(-4deg);animation:deviceFloat 4.5s ease-in-out infinite}
+@keyframes deviceFloat{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(-4deg) translateY(-10px)}}
+@media(max-width:860px){.foda-wrap{flex-direction:column-reverse;align-items:center}.dex-device{width:150px}}
+
+/* Pantalla negra tipo Pokédex alrededor del FODA: consola de diagnóstico
+   con textura de esquemático y un borde que "respira" con energía */
+.dex-frame{position:relative;overflow:hidden;background:
+ linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px),
+ #000;
+ background-size:20px 20px,20px 20px,auto;
+ border-radius:18px;padding:16px;margin-top:0;border:2px solid #1d1d1d;
+ box-shadow:6px 6px 0 var(--ln),0 0 0 2px rgba(227,53,13,.0);
+ flex:1;min-width:0;animation:consoleGlow 4s ease-in-out infinite}
+@keyframes consoleGlow{
+ 0%,100%{box-shadow:6px 6px 0 var(--ln),0 0 18px rgba(227,53,13,.18)}
+ 50%{box-shadow:6px 6px 0 var(--ln),0 0 18px rgba(0,117,190,.22)}
+}
 .dex-frame .g4{margin-top:0}
 
 /* Franja de luz que "escanea" la pantalla */
@@ -38,6 +118,10 @@
  font:600 12px Fredoka,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:#ff6b6b}
 .dex-rec i{width:8px;height:8px;border-radius:50%;background:#ff3b3b;animation:recblink 1.3s ease-in-out infinite}
 @keyframes recblink{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* Las tarjetas del FODA se levantan un poco al pasar el mouse, como las cartas */
+.fd{transition:transform .22s ease,box-shadow .22s ease}
+.fd:hover{transform:translateY(-5px);box-shadow:9px 9px 0 var(--ln)}
 
 /* Viñetas tipo Pokéball dentro del FODA */
 .fd h3{display:flex;align-items:center;gap:8px}
@@ -54,16 +138,38 @@
 
 @media(max-width:480px){.dex-tag{position:static;display:inline-block;margin-bottom:10px;box-shadow:none}}
 
-/* 1.3 Hacia dónde vamos — barras tipo "HP" */
-.stat-card{padding:28px;margin-top:24px}
-.stat-row+.stat-row{margin-top:22px}
-.stat-label{display:flex;justify-content:space-between;gap:10px;font:600 15px Fredoka,sans-serif;margin-bottom:8px}
-.stat-bar{height:16px;border:3px solid #000;border-radius:99px;background:var(--alt);overflow:hidden;
+/* Encabezados de sección tipo HUD: etiqueta de lectura + línea + título.
+   Mismo patrón estructural que usan otras páginas del sitio (kicker + heading),
+   pero con la identidad propia de esta página (consola/Pokédex). */
+.sec-head{margin-top:58px;margin-bottom:8px}
+.sec-kicker{display:flex;align-items:center;gap:10px;margin-bottom:8px;
+ font:600 12px Fredoka,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+.sec-kicker::before{content:"";width:26px;height:2px;background:var(--red);flex:none}
+.sec-head.b .sec-kicker,.sec-head.b .sec-kicker::before{color:var(--blu);background:var(--blu)}
+.sec-title{font-size:clamp(28px,4vw,42px);font-weight:600;letter-spacing:-.01em}
+
+/* Divisores tipo Pokébola reutilizados dentro del contenido (no solo antes del footer) */
+.alt .bd2{margin:52px 0;border-radius:10px}
+
+/* 1.3 Hacia dónde vamos — panel de control oscuro con barras tipo "HP" que brillan */
+.stat-card{position:relative;overflow:hidden;padding:30px;margin-top:24px;
+ background:#0b0c0e;border-color:#000;color:#fff}
+.stat-card::before{content:"";position:absolute;inset:0;pointer-events:none;
+ background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+ background-size:22px 22px}
+.stat-row{position:relative}
+.stat-row+.stat-row{margin-top:24px}
+.stat-label{display:flex;justify-content:space-between;gap:10px;font:600 15px Fredoka,sans-serif;margin-bottom:8px;color:#fff}
+.stat-label b{color:var(--red);font-size:17px}
+.stat-row:nth-child(2) .stat-label b{color:var(--blu)}
+.stat-bar{height:16px;border:3px solid #000;border-radius:99px;background:#1b1d22;overflow:hidden;
  cursor:pointer;position:relative}
 .stat-bar:focus-visible{outline:3px solid var(--blu);outline-offset:3px}
 .stat-fill{height:100%;width:0;background:var(--red);border-radius:99px;
+ box-shadow:0 0 12px rgba(227,53,13,.75);
  transition:width 1.1s cubic-bezier(.22,1,.36,1)}
-.stat-fill.b{background:var(--blu)}
+.stat-fill.b{background:var(--blu);box-shadow:0 0 12px rgba(0,117,190,.75)}
 /* "recarga" tipo batalla: tiembla cuando se vuelve a tocar la barra */
 .stat-bar.shake{animation:barShake .4s ease}
 @keyframes barShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
@@ -78,6 +184,14 @@
  opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
 .strat-chip.show{opacity:1;transform:translateY(0)}
 .strat-chip:focus-visible{outline:3px solid var(--blu);outline-offset:4px;border-radius:14px}
+
+/* Aura holográfica arcoíris detrás de cada carta, como el foil de una carta premium */
+.strat-chip::before{content:"";position:absolute;inset:-7px;z-index:-1;border-radius:20px;
+ background:conic-gradient(from 0deg,#ff4d6d,#ffd93d,#6bff8f,#4dd2ff,#9b6bff,#ff4d6d);
+ filter:blur(11px) saturate(1.3);opacity:.38;
+ animation:holoSpin 7s linear infinite}
+@keyframes holoSpin{to{transform:rotate(360deg)}}
+.strat-chip:hover::before{opacity:.6}
 
 /* Capa que rota: tilt en vivo con el mouse (--rx/--ry) + volteo al tocar (--flip),
    fijados vía JS; un único transition para que ambos se sientan como un mismo objeto */
@@ -107,12 +221,16 @@
 
 /* Cara con el contenido (pre-rotada 180°, se ve al voltear) */
 .chip-content{transform:rotateY(180deg)}
+.chip-icon{width:32px;height:32px;object-fit:contain;margin-bottom:8px}
 .chip-n{display:block;font:600 13px Fredoka,sans-serif;color:#6c7380;margin-bottom:6px}
 .chip-content h4{font-size:16.5px;color:#fff;margin-bottom:8px}
 .chip-content p{font-size:13.5px;line-height:1.55;color:#a7acb8;margin:0}
 
-/* 1.5 De la estrategia a la acción — cadena tipo evolución */
-.evo-chain{display:flex;align-items:center;gap:14px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+/* 1.5 De la estrategia a la acción — cadena tipo evolución, con un riel de energía detrás */
+.evo-chain{position:relative;display:flex;align-items:center;gap:14px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+.evo-chain::before{content:"";position:absolute;left:6%;right:6%;top:50%;height:4px;z-index:-1;
+ background:linear-gradient(90deg,var(--red),var(--blu));border-radius:4px;opacity:.45;transform:translateY(-50%)}
+@media(max-width:780px){.evo-chain::before{display:none}}
 .evo-step{position:relative;flex:1;min-width:180px;max-width:230px;background:var(--card);border:3px solid #000;border-radius:16px;box-shadow:6px 6px 0 #000;padding:22px;text-align:center;cursor:pointer;
  opacity:0;transform:translateY(22px) scale(.96);transition:opacity .5s ease,transform .5s ease}
 .evo-step.show{opacity:1;transform:translateY(0) scale(1)}
@@ -123,7 +241,8 @@
 .evo-step.evolving{animation:evoPulse .6s ease}
 @keyframes evoFlash{0%{opacity:0}35%{opacity:.85}100%{opacity:0}}
 @keyframes evoPulse{0%{transform:scale(1)}40%{transform:scale(1.07)}100%{transform:scale(1)}}
-.evo-n{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--red);color:#fff;font:600 16px Fredoka,sans-serif;margin-bottom:10px}
+.evo-n{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--red);color:#fff;font:600 16px Fredoka,sans-serif;margin-bottom:10px;
+ box-shadow:0 0 0 4px rgba(227,53,13,.18),0 0 14px rgba(227,53,13,.55)}
 .evo-step h4{font-size:17px;margin-bottom:6px}
 .evo-step p{font-size:14px;color:var(--mut)}
 .evo-arrow{font-size:22px;color:var(--blu);flex:none}
@@ -138,4 +257,32 @@
  .evo-step,.strat-chip{opacity:1;transform:none;transition:none}
  .chip-inner{transition:none}
  .evo-step.evolving,.evo-step.evolving::after,.stat-bar.shake{animation:none}
+ .pagehead-copy{animation:none}
+ .pagehead-slide{transition:none}
+ .mv-ava.wobble,.mv-ava{animation:none;transition:none}
+ .reveal-pre{opacity:1;transform:none;transition:none}
+ .dex-device{animation:none}
+ .dex-frame{animation:none}
+ .strat-chip::before{animation:none;opacity:.3}
 }
+
+/* ===== Pokémon decorativos en las orillas =====
+   Solo aparecen cuando hay margen libre a los lados del contenido
+   (pantallas anchas); en pantallas chicas se ocultan para no tapar texto.
+   JS controla: parallax (--py), entrada (.show) y salto al tocarlos (.hop). */
+.side-mons{position:absolute;inset:0;z-index:0;pointer-events:none;display:none}
+.side-mon{position:absolute;width:clamp(120px,11vw,200px);height:auto;cursor:pointer;pointer-events:auto;
+ -webkit-user-drag:none;user-select:none;
+ filter:drop-shadow(6px 10px 0 rgba(0,0,0,.14));
+ transform:translateY(var(--py,0px)) scaleX(var(--flip,1));
+ animation:mon-float 5s ease-in-out infinite;animation-delay:calc(var(--d,0s) * -1);
+ transition:opacity .6s ease, scale .25s ease}
+.side-mon.l{left:max(8px,calc((100vw - 1180px) / 4 - 90px))}
+.side-mon.r{right:max(8px,calc((100vw - 1180px) / 4 - 90px));--flip:-1}
+.side-mon.reveal-pre{opacity:0}
+.side-mon:hover{scale:1.08}
+.side-mon.hop{animation:mon-hop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes mon-float{0%,100%{translate:0 0}50%{translate:0 -14px}}
+@keyframes mon-hop{0%{translate:0 0;rotate:0deg}35%{translate:0 -46px;rotate:-12deg}65%{translate:0 -10px;rotate:10deg}100%{translate:0 0;rotate:0deg}}
+@media(min-width:1280px){.side-mons{display:block}}
+@media(prefers-reduced-motion:reduce){.side-mon,.side-mon.hop{animation:none;transition:none}}
