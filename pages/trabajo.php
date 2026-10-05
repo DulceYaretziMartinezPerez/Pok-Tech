@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Forma de trabajar | PokéTech</title>
+<link rel="icon" href="../assets/img/logo.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/trabajo.css">
+<link rel="stylesheet" href="../css/tema.css">
+<script src="../js/tema.js"></script>
+</head>
+<body>
+
+<?php $base_url = '../'; include __DIR__ . '/../components/header.php'; ?>
+
+<!-- ===== CONTENIDO ===== -->
+<div class="pagehead"><div class="w">
+<h1>Forma de trabajar</h1>
+<p>Cómo pensamos, colaboramos y lideramos dentro de PokéTech.</p>
+</div></div>
+
+<main>
+<section class="dk pk"><div class="w">
+<p class="lead">Curiosidad infinita, respeto por la biodiversidad y agilidad técnica en cada prototipo.</p>
+
+<!-- Para cada imagen: pon tu archivo en ../assets/img/trabajo/ con el nombre indicado. -->
+<div class="pk-grid">
+
+  <article class="pk-card">
+    <div class="pk-img" data-ico="."><img src="../assets/img/trabajo/cultura.jpg" alt="Equipo proponiendo ideas en el laboratorio" loading="lazy" onerror="this.remove()"></div>
+    <h3>Nuestra cultura de trabajo</h3>
+    <p>Trabajamos por departamentos, cada uno con un responsable alineado a las metas de la dirección general. Nos guiamos por liderazgo claro, comunicación abierta mediante reuniones, correo y plataformas digitales, motivación basada en el reconocimiento y el desarrollo, y trabajo en equipo con decisiones compartidas entre áreas.</p>
+  </article>
+
+  <article class="pk-card">
+    <div class="pk-img" data-ico="."><img src="../assets/img/trabajo/lideramos.jpg" alt="Liderazgo por departamentos" loading="lazy" onerror="this.remove()"></div>
+    <h3>Cómo lideramos</h3>
+    <p>La empresa cuenta con una estructura por departamentos, cada uno con un responsable que coordina sus objetivos y actividades en alineación con la Dirección General.</p>
+  </article>
+
+  <article class="pk-card">
+    <div class="pk-img" data-ico="."><img src="../assets/img/trabajo/comunicamos.jpg" alt="Comunicación entre departamentos" loading="lazy" onerror="this.remove()"></div>
+    <h3>Cómo nos comunicamos</h3>
+    <p>Nuestra comunicación fluye en dos direcciones: los responsables reportan avances a la dirección general y los departamentos se coordinan directamente entre sí, a través de reuniones periódicas, correo electrónico y plataformas digitales de gestión.</p>
+  </article>
+
+  <article class="pk-card pk-wide">
+    <div class="pk-img" data-ico="."><img src="../assets/img/trabajo/impulsamos.jpg" alt="Equipo celebrando un logro" loading="lazy" onerror="this.remove()"></div>
+    <div class="pk-body">
+      <h3>Cómo impulsamos a nuestro equipo</h3>
+      <br>
+      <p>La motivación del equipo se fortalece mediante el reconocimiento de los logros, la retroalimentación continua y la generación de oportunidades de desarrollo profesional en cada departamento, promoviendo así el compromiso, crecimiento y participación activa de los colaboradores en el cumplimiento de los objetivos de la empresa.</p>
+    </div>
+  </article>
+
+</div>
+
+<!-- Trabajo en equipo: carrusel horizontal (desliza o usa scroll) -->
+<div class="pk-team">
+  <h2>Trabajo en equipo</h2>
+  <p>Desliza para ver cómo trabajamos juntos →</p>
+  <div class="pk-rail" tabindex="0" aria-label="Trabajo en equipo">
+
+    <article class="pk-card">
+      <div class="pk-img" data-ico="."><img src="../assets/img/trabajo/coordinacion.jpg" alt="Coordinación entre departamentos" loading="lazy" onerror="this.remove()"></div>
+      <h3>Coordinación entre áreas</h3>
+      <p>Los departamentos se comunican de forma constante para alinear tareas, compartir avances y resolver cualquier obstáculo en conjunto.</p>
+    </article>
+
+    <article class="pk-card">
+      <div class="pk-img" data-ico="."><img src="../assets/img/trabajo/decisiones.jpg" alt="Decisiones compartidas" loading="lazy" onerror="this.remove()"></div>
+      <h3>Decisiones compartidas</h3>
+      <p>Todos los integrantes participan activamente en la toma de decisiones, aportando ideas y puntos de vista desde su área.</p>
+    </article>
+
+    <article class="pk-card">
+      <div class="pk-img" data-ico="."><img src="../assets/img/trabajo/fortalezas.jpg" alt="Fortalezas de cada área" loading="lazy" onerror="this.remove()"></div>
+      <h3>Fortalezas de cada área</h3>
+      <p>Cada departamento aporta su experiencia y conocimiento, y juntos creamos un ambiente de trabajo donde todos suman.</p>
+    </article>
+
+    <article class="pk-card">
+      <div class="pk-img" data-ico="."><img src="../assets/img/trabajo/metas.jpg" alt="Metas comunes" loading="lazy" onerror="this.remove()"></div>
+      <h3>Metas comunes</h3>
+      <p>Trabajamos hacia los mismos objetivos, avanzando como una sola empresa para cumplir lo que nos proponemos.</p>
+    </article>
+
+  </div><!-- /pk-rail -->
+</div><!-- /pk-team -->
+
+</div><!-- /w -->
+</section>
+</main>
+
+<div class="bd2"></div>
+<?php include __DIR__ . '/../components/footer.php'; ?>
+
+</body>
+</html>

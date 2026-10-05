@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
@@ -14,18 +14,7 @@
 </head>
 <body>
 
-<!-- ===== HEADER (igual en todas las páginas; fuente: components/header.html) ===== -->
-<header>
-    <div class="w hd">
-    <a class="logo" href="../index.html"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="#fff" stroke="#000" stroke-width="4"/><path d="M3 20a17 17 0 0 1 34 0z" fill="var(--red)" stroke="#000" stroke-width="4"/><circle cx="20" cy="20" r="6" fill="#fff" stroke="#000" stroke-width="4"/></svg><b>PokéTech</b></a>
-    <nav>
-        <a href="../pages/tienda.html">Tienda Pokédex</a>
-        <a href="../pages/estrategia.html">Estrategia</a>
-        <a href="../pages/organizacion.html" class="on">Organización</a>
-        <a href="../pages/trabajo.html">Forma de trabajar</a>
-        <a href="../pages/compromiso.html">Compromiso</a>
-    </nav>
-</div></header>
+<?php $base_url = '../'; include __DIR__ . '/../components/header.php'; ?>
 
 <!-- ===== CONTENIDO ===== -->
 <section class="pagehead">
@@ -94,16 +83,8 @@
   <div class="og-mb"></div>
 </dialog>
 
-<!-- ===== FOOTER (igual en todas las páginas; fuente: components/footer.html) ===== -->
 <div class="bd2"></div>
-<footer><div class="w">
-<div class="fg">
-<div><h4>PokéTech Research &amp; Development Corp.</h4><p>Investigación de especies y tecnología Pokédex para todas las regiones.</p><p class="dots" style="margin-top:14px"><i style="background:#000"></i><i style="background:var(--red)"></i><i style="background:#fff"></i><i style="background:var(--blu)"></i></p></div>
-<div><h4>Empresa</h4><a href="../pages/estrategia.html">Estrategia</a><a href="../pages/organizacion.html">Organización</a><a href="../pages/compromiso.html">Compromiso</a></div>
-<div><h4>Tienda</h4><a href="../pages/tienda.html">Catálogo Pokédex</a><a href="../pages/trabajo.html">Trabaja con nosotros</a></div>
-</div>
-<div class="cp">© 2026 PokéTech Research &amp; Development Corp. Todos los derechos reservados. Privacidad · Términos · Ética Pokémon</div>
-</div></footer>
+<?php include __DIR__ . '/../components/footer.php'; ?>
 
 <script src="../js/organizacion.js"></script>
 </body>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nuestra estrategia | PokéTech</title>
+<link rel="icon" href="../assets/img/logo.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="../css/estrategia.css">
+<link rel="stylesheet" href="../css/tema.css">
+<script src="../js/tema.js"></script>
+</head>
+<body>
+
+<?php $base_url = '../'; include __DIR__ . '/../components/header.php'; ?>
+
+<!-- ===== CONTENIDO ===== -->
+<section class="pagehead">
+<div class="pagehead-media" aria-hidden="true">
+<img class="pagehead-slide on" src="../assets/img/estrategia/hero1.jpg" alt="" onerror="this.remove()">
+<img class="pagehead-slide" src="../assets/img/estrategia/hero2.jpg" alt="" onerror="this.remove()">
+<img class="pagehead-slide" src="../assets/img/estrategia/hero3.jpg" alt="" onerror="this.remove()">
+<div class="pagehead-dots" role="tablist" aria-label="Fotos de la portada">
+<button class="on" aria-selected="true" aria-label="Foto 1"></button>
+<button aria-selected="false" aria-label="Foto 2"></button>
+<button aria-selected="false" aria-label="Foto 3"></button>
+</div>
+</div>
+<div class="w pagehead-inner">
+<div class="pagehead-copy">
+<div class="dex-strip"><span class="ball"></span><span>Pokédex corporativo · Entrada 01</span></div>
+<h1>Nuestra estrategia</h1>
+<p>Misión, visión, valores y el panorama FODA que guían cada decisión de PokéTech.</p>
+</div>
+</div>
+</section>
+
+<main>
+<section class="alt">
+<div class="side-mons" aria-hidden="true">
+<img class="side-mon l" data-speed="0.06" style="top:3%;--d:0.6s" data-evo="pikachu,raichu" title="¡Tócame!" src="../assets/img/estrategia/mons/pikachu.png" alt="" loading="lazy" onerror="this.remove()">
+<img class="side-mon r" data-speed="-0.05" style="top:7%;--d:1.2s" data-evo="bulbasaur,ivysaur,venusaur" title="¡Tócame!" src="../assets/img/estrategia/mons/bulbasaur.png" alt="" loading="lazy" onerror="this.remove()">
+<img class="side-mon l" data-speed="0.08" style="top:22%;--d:1.8s" data-evo="eevee,vaporeon,jolteon,flareon" title="¡Tócame!" src="../assets/img/estrategia/mons/eevee.png" alt="" loading="lazy" onerror="this.remove()">
+<img class="side-mon r" data-speed="-0.07" style="top:30%;--d:2.4s" data-evo="squirtle,wartortle,blastoise" title="¡Tócame!" src="../assets/img/estrategia/mons/squirtle.png" alt="" loading="lazy" onerror="this.remove()">
+<img class="side-mon l" data-speed="0.05" style="top:43%;--d:3.0s" src="../assets/img/estrategia/mons/gengar.png" alt="" loading="lazy" onerror="this.remove()">
+<img class="side-mon r" data-speed="-0.06" style="top:52%;--d:3.6s" src="../assets/img/estrategia/mons/snorlax.png" alt="" loading="lazy" onerror="this.remove()">
+<img class="side-mon l" data-speed="0.09" style="top:62%;--d:4.2s" data-evo="charmander,charmeleon,charizard" title="¡Tócame!" src="../assets/img/estrategia/mons/charmander.png" alt="" loading="lazy" onerror="this.remove()">
+<img class="side-mon r" data-speed="-0.04" style="top:72%;--d:4.8s" src="../assets/img/estrategia/mons/mew.png" alt="" loading="lazy" onerror="this.remove()">
+<img class="side-mon l" data-speed="0.07" style="top:82%;--d:5.4s" data-evo="psyduck,golduck" title="¡Tócame!" src="../assets/img/estrategia/mons/psyduck.png" alt="" loading="lazy" onerror="this.remove()">
+<img class="side-mon r" data-speed="-0.08" style="top:91%;--d:6.0s" data-evo="meowth,persian" title="¡Tócame!" src="../assets/img/estrategia/mons/meowth.png" alt="" loading="lazy" onerror="this.remove()">
+</div>
+<div class="w">
+<div class="g2">
+<div class="bx mv r"><span class="dex-tag">Nº 001</span><div class="mv-head"><img class="mv-ava" src="../assets/img/estrategia/Mision.jpg" alt="" onerror="this.remove()"><h3>Misión</h3></div><p>Centralizar sistemas, tecnologías y dispositivos que muestran información de cualquier Pokémon de forma rápida, con presencia en todas las regiones.</p></div>
+<div class="bx mv b"><span class="dex-tag">Nº 002</span><div class="mv-head"><img class="mv-ava" src="../assets/img/estrategia/Vision.jpg" alt="" onerror="this.remove()"><h3>Visión</h3></div><p>Llevar conocimiento a cada persona, en cualquier región, con comodidad e innovación.</p></div>
+</div>
+
+<div class="vals">
+<span><i class="bi bi-wallet2"></i>Accesibilidad</span>
+<span><i class="bi bi-lightning-charge"></i>Innovación</span>
+<span><i class="bi bi-recycle"></i>Sostenibilidad</span>
+<span><i class="bi bi-heart-pulse"></i>Respeto por la vida animal</span>
+<span><i class="bi bi-compass"></i>Espíritu de aventura</span>
+</div>
+<p class="vd">Opciones para todo bolsillo, actualizaciones al ritmo de la tecnología, cuidado del medio ambiente y de los Pokémon que documentamos, y menos fricción entre Pokémon y humanos para que más personas salgan al exterior.</p>
+
+<div class="sec-head"><span class="sec-kicker">Diagnóstico // 02</span><h3 class="sec-title">Panorama FODA</h3></div>
+<div class="foda-wrap">
+<div class="dex-frame">
+<span class="dex-rec"><i></i>Escaneando</span>
+<div class="g4">
+<div class="bx fd f1"><h3><i class="bi bi-shield-check"></i> Fortalezas</h3><ul><li>Dominio de la tecnología identificadora de Pokémon</li><li>Personal altamente capacitado</li><li>Disponibilidad en todas las regiones</li><li>Innovación continua</li><li>Calidad y experiencia del cliente</li></ul></div>
+<div class="bx fd f2"><h3><i class="bi bi-globe2"></i> Oportunidades</h3><ul><li>Productos complementarios</li><li>Alianzas con laboratorios como Aether</li><li>Integración con celulares</li><li>Alianzas con creadores de contenido</li><li>Mercado coleccionista</li></ul></div>
+<div class="bx fd f3"><h3><i class="bi bi-exclamation-triangle"></i> Debilidades</h3><ul><li>Dependencia de la Pokédex</li><li>Falta de gestión del descubrimiento de Pokémon</li><li>Base de datos siempre por actualizar</li><li>Alto costo de fabricación</li><li>Personal especializado en cada área</li></ul></div>
+<div class="bx fd f4"><h3><i class="bi bi-fire"></i> Amenazas</h3><ul><li>Equipos clandestinos que roban Pokédex</li><li>Vulnerabilidad a eventos mundiales</li><li>Áreas naturales destruidas</li><li>Pokémon peligrosos</li><li>Regulaciones de privacidad</li></ul></div>
+</div>
+</div>
+<img class="dex-device" src="../assets/img/estrategia/dex-device.png" alt="" onerror="this.remove()">
+</div>
+<p class="flavor" data-text="«Como toda tecnología Pokémon, PokéTech también evoluciona.»">«Como toda tecnología Pokémon, PokéTech también evoluciona.»</p>
+
+<div class="bd2"></div>
+
+<div class="sec-head b"><span class="sec-kicker">Ruta // 03</span><h3 class="sec-title">Hacia dónde vamos</h3></div>
+<p class="lead">Cinco objetivos SMART orientan el crecimiento de PokéTech en los próximos 6 a 12 meses.</p>
+<div class="bx stat-card">
+<div class="stat-row">
+<div class="stat-label"><span>Satisfacción de entrenadores usuarios de la Pokédex (6 meses)</span><b>+20%</b></div>
+<div class="stat-bar"><div class="stat-fill" style="--target:20%"></div></div>
+</div>
+<div class="stat-row">
+<div class="stat-label"><span>Reconocimiento de marca en redes sociales (12 meses)</span><b>+40%</b></div>
+<div class="stat-bar"><div class="stat-fill b" style="--target:40%"></div></div>
+</div>
+<div class="stat-row">
+<div class="stat-label"><span>Precisión de reconocimiento de Pokémon vía app móvil (12 meses)</span><b>80%</b></div>
+<div class="stat-bar"><div class="stat-fill" style="--target:80%"></div></div>
+</div>
+</div>
+
+<div class="g2" style="margin-top:20px">
+<div class="bx mv r"><span class="dex-tag">Nº 003</span><div class="mv-head"><img class="mv-ava" src="../assets/img/estrategia/Pokedex-objetivo.jpg" alt="" onerror="this.remove()"><h3>Pokédex más completa</h3></div><p>Implementar al menos 3 nuevas funciones (buscador con filtros por tipo, región y habilidad) para facilitar la consulta de información en 6 meses.</p></div>
+<div class="bx mv b"><span class="dex-tag">Nº 004</span><div class="mv-head"><img class="mv-ava" src="../assets/img/estrategia/Alianzas-objetivo.jpg" alt="" onerror="this.remove()"><h3>Más puntos de venta</h3></div><p>Establecer alianzas con los Centros Pokémon de al menos una región para ampliar los puntos de venta en un plazo de 8 meses.</p></div>
+</div>
+
+<div class="sec-head"><span class="sec-kicker">Archivo // 04</span><h3 class="sec-title">Nuestras estrategias</h3></div>
+<p class="lead">Las líneas de acción con las que respondemos a nuestro panorama FODA y avanzamos hacia nuestros objetivos.</p>
+<div class="bx strat-card">
+<span class="dex-rec"><i></i>Archivo de estrategia</span>
+<p class="chip-hint">Toca una carta para voltearla.</p>
+<div class="strat-grid">
+
+<div class="strat-chip c1" tabindex="0" role="button" aria-pressed="false" aria-label="Carta de estrategia 1: Pokédex más inteligente. Toca para voltear.">
+<div class="chip-inner">
+<div class="chip-face chip-cover"><span class="cover-ball"></span><span class="cover-label">Estrategia 01</span><span class="cover-hint">Toca para revelar</span></div>
+<div class="chip-face chip-content"><img class="chip-icon" src="../assets/img/estrategia/icon-buscador.png" alt="" onerror="this.remove()"><span class="chip-n">01</span><h4>Pokédex más inteligente</h4><p>Implementar nuevas funciones que hagan más rápida y sencilla la búsqueda de información de los Pokémon.</p></div>
+</div>
+</div>
+
+<div class="strat-chip c2" tabindex="0" role="button" aria-pressed="false" aria-label="Carta de estrategia 2: Entrenadores satisfechos. Toca para voltear.">
+<div class="chip-inner">
+<div class="chip-face chip-cover"><span class="cover-ball"></span><span class="cover-label">Estrategia 02</span><span class="cover-hint">Toca para revelar</span></div>
+<div class="chip-face chip-content"><img class="chip-icon" src="../assets/img/estrategia/icon-encuesta.png" alt="" onerror="this.remove()"><span class="chip-n">02</span><h4>Entrenadores satisfechos</h4><p>Aumentar la satisfacción de los usuarios mediante encuestas y mejoras continuas a la interfaz.</p></div>
+</div>
+</div>
+
+<div class="strat-chip c1" tabindex="0" role="button" aria-pressed="false" aria-label="Carta de estrategia 3: Rumbo al móvil. Toca para voltear.">
+<div class="chip-inner">
+<div class="chip-face chip-cover"><span class="cover-ball"></span><span class="cover-label">Estrategia 03</span><span class="cover-hint">Toca para revelar</span></div>
+<div class="chip-face chip-content"><img class="chip-icon" src="../assets/img/estrategia/icon-movil.png" alt="" onerror="this.remove()"><span class="chip-n">03</span><h4>Rumbo al móvil</h4><p>Implementar una aplicación tipo Pokédex que reconozca Pokémon con alta precisión.</p></div>
+</div>
+</div>
+
+<div class="strat-chip c2" tabindex="0" role="button" aria-pressed="false" aria-label="Carta de estrategia 4: Marca reconocida. Toca para voltear.">
+<div class="chip-inner">
+<div class="chip-face chip-cover"><span class="cover-ball"></span><span class="cover-label">Estrategia 04</span><span class="cover-hint">Toca para revelar</span></div>
+<div class="chip-face chip-content"><img class="chip-icon" src="../assets/img/estrategia/icon-marca.png" alt="" onerror="this.remove()"><span class="chip-n">04</span><h4>Marca reconocida</h4><p>Aumentar el reconocimiento de PokéTech en redes sociales con contenido y colaboraciones.</p></div>
+</div>
+</div>
+
+<div class="strat-chip c1" tabindex="0" role="button" aria-pressed="false" aria-label="Carta de estrategia 5: Más puntos de venta. Toca para voltear.">
+<div class="chip-inner">
+<div class="chip-face chip-cover"><span class="cover-ball"></span><span class="cover-label">Estrategia 05</span><span class="cover-hint">Toca para revelar</span></div>
+<div class="chip-face chip-content"><img class="chip-icon" src="../assets/img/estrategia/icon-alianza.png" alt="" onerror="this.remove()"><span class="chip-n">05</span><h4>Más puntos de venta</h4><p>Expandir nuestros canales mediante alianzas con los Centros Pokémon de cada región.</p></div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="bd2"></div>
+
+<div class="sec-head b"><span class="sec-kicker">Ejecución // 05</span><h3 class="sec-title">De la estrategia a la acción</h3></div>
+<p class="lead">Así bajamos cada estrategia a acciones concretas, con responsable, recursos y tiempo.</p>
+<div class="evo-chain">
+<div class="evo-step"><span class="evo-n">1</span><h4>Buscador Pokédex</h4><p>Depto. Desarrollo · Filtros por tipo, región y habilidad · 6 meses</p></div>
+<div class="evo-arrow"><i class="bi bi-arrow-right"></i></div>
+<div class="evo-step"><span class="evo-n">2</span><h4>Encuestas de calidad</h4><p>Depto. Calidad · Encuestas y mejoras a la interfaz · 6 meses</p></div>
+<div class="evo-arrow"><i class="bi bi-arrow-right"></i></div>
+<div class="evo-step"><span class="evo-n">3</span><h4>App de reconocimiento</h4><p>Depto. Desarrollo/Tecnológico · Modelo con 80% de precisión · 9 meses</p></div>
+<div class="evo-arrow"><i class="bi bi-arrow-right"></i></div>
+<div class="evo-step"><span class="evo-n">4</span><h4>Contenido y marca</h4><p>Depto. Marketing · Contenido semanal y colaboraciones · 12 meses</p></div>
+<div class="evo-arrow"><i class="bi bi-arrow-right"></i></div>
+<div class="evo-step"><span class="evo-n">5</span><h4>Alianzas regionales</h4><p>Depto. Comercial · Convenios con Centros Pokémon · 8 meses</p></div>
+</div>
+</div></section>
+</main>
+
+<div class="bd2"></div>
+<?php include __DIR__ . '/../components/footer.php'; ?>
+
+<script defer src="../js/estrategia.js"></script>
+</body>
+</html>
