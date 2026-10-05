@@ -1138,4 +1138,68 @@ footer .cp {
   .pk-card:hover {
     transform: none
   }
+<<<<<<< Updated upstream
+=======
+.pk-card{position:relative;background:linear-gradient(160deg,var(--pk-red),#a02d24 55%,var(--pk-red));
+  border:3px solid var(--pk-edge);border-radius:20px 20px 20px 46px;padding:44px 14px 14px;
+  box-shadow:6px 6px 0 var(--pk-edge);color:var(--pk-ink);display:flex;flex-direction:column;gap:12px;
+  transition:transform .25s ease,box-shadow .25s ease}
+.pk-card:hover{transform:translateY(-6px);box-shadow:6px 12px 0 var(--pk-edge)}
+.pk-card::before{content:"";position:absolute;top:12px;left:18px;width:20px;height:20px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#bfe6ff,#2a8be0 55%,#145aa0);border:3px solid #f2f2f2;
+  box-shadow:0 0 0 2px var(--pk-edge),34px 3px 0 -4px var(--pk-red),52px 3px 0 -4px #ffcb05,70px 3px 0 -4px #4cd964;
+  animation:led 2.4s ease-in-out infinite}
+.pk-card h3{font-family:'Fredoka',sans-serif;color:#fff;font-size:1.25rem;margin:0;padding:0 4px}
+.pk-card p{margin:0;padding:12px 14px;line-height:1.5;font-size:.95rem;background:#16242b;color:#e6f3ee;
+  border:2px solid var(--pk-edge);border-radius:10px;box-shadow:inset 0 0 12px rgba(0,0,0,.45)}
+
+.pk-img{position:relative;aspect-ratio:16/10;border-radius:14px;overflow:hidden;border:6px solid #e8e8ec;
+  outline:2px solid var(--pk-edge);background:linear-gradient(135deg,#1f6f8b,#0e2a38);
+  display:grid;place-items:center}
+.pk-img::before{content:attr(data-ico);font-size:3rem;opacity:.85}
+.pk-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.pk-card:hover .pk-img img{transform:scale(1.08)}
+
+/* ===== 2) CARTA POKÉMON (la ancha): compacta, imagen a la izquierda, sin luces ===== */
+.pk-wide{grid-column:1/-1;flex-direction:row;align-items:center;gap:20px;padding:14px 18px;
+  background:#ece7da;color:#1d1d1d;border:3px solid var(--pk-edge);border-radius:18px;
+  box-shadow:6px 6px 0 var(--pk-red)}
+.pk-wide:hover{box-shadow:6px 12px 0 var(--pk-red)}
+.pk-wide::before{display:none}
+.pk-wide .pk-img{flex:0 0 200px;width:200px;aspect-ratio:4/3;border:4px solid var(--pk-edge);outline:none;border-radius:8px}
+.pk-wide .pk-body{flex:1;display:flex;flex-direction:column;gap:8px}
+.pk-wide .pk-body br{display:none}
+.pk-wide h3{color:var(--pk-red);font-size:1.3rem;padding:0}
+.pk-wide p{padding:10px 12px;font-size:.9rem;background:#fbf9f3;color:#2b2b2b;border:2px solid #cfc7b0;border-radius:8px;box-shadow:none}
+
+/* ===== 3) FICHAS DE ENTRENADOR (carrusel) ===== */
+.pk-team{margin-top:48px}
+.pk-team>h2{font-family:'Fredoka',sans-serif;color:#fff;font-size:1.8rem;margin:0 0 6px}
+.pk-team>p{color:#cfcfcf;margin:0 0 18px;display:inline-block;animation:nudge 1.8s ease-in-out infinite}
+.pk-rail{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 8px 22px;
+  scrollbar-color:var(--pk-red) transparent}
+.pk-rail .pk-card{flex:0 0 min(290px,78%);scroll-snap-align:start;align-items:center;text-align:center;
+  padding:22px 18px 20px;background:var(--pk-red);border-radius:24px;box-shadow:none;gap:12px}
+.pk-rail .pk-card::before{display:none}
+.pk-rail .pk-card:hover{transform:translateY(-4px)}
+.pk-rail .pk-img{width:120px;flex:none;aspect-ratio:1;border-radius:50%;border:5px solid #f2f2f2;outline:3px solid var(--pk-edge);
+  transition:transform .35s ease}
+.pk-rail .pk-card:hover .pk-img{transform:rotate(6deg) scale(1.06)}
+.pk-rail .pk-img::before{font-size:2.2rem}
+.pk-rail h3{padding:0}
+.pk-rail .pk-card p{background:none;border:none;box-shadow:none;padding:0;color:#f6e9ec;font-size:.92rem}
+
+@media (max-width:860px){
+  .pk-grid{grid-template-columns:1fr}
+  .pk-wide{flex-direction:column;align-items:stretch}
+  .pk-wide .pk-img{flex:none;width:100%;aspect-ratio:16/9}
+}
+@media (prefers-reduced-motion:reduce){
+  .js .rv{opacity:1}
+  .js .rv.in,.pk-card::before,.pk-team>p{animation:none}
+  .pk-card,.pk-img img,.pk-rail .pk-img{transition:none}
+  .pk-card:hover,.pk-rail .pk-card:hover{transform:none}
+  .pk-card:hover .pk-img img,.pk-rail .pk-card:hover .pk-img{transform:none}
+>>>>>>> origin/yass-trabajo
+>>>>>>> Stashed changes
 }
