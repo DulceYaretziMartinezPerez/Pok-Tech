@@ -1,83 +1,100 @@
-document.addEventListener('DOMContentLoaded', function () {
+function initCommitCarousel() {
   var carousel = document.querySelector('.commit-carousel');
-  if (carousel) {
-    var track = carousel.querySelector('.commit-track');
-    var cards = Array.from(track.querySelectorAll('.cf'));
-    var previous = carousel.querySelector('.commit-prev');
-    var next = carousel.querySelector('.commit-next');
-    var current = 0;
+  if (!carousel) return;
 
-    function updateNavigation() {
-      if (previous) {
-        previous.disabled = current <= 0;
-        previous.style.opacity = current <= 0 ? '0.35' : '1';
-        previous.style.cursor = current <= 0 ? 'not-allowed' : 'pointer';
-      }
-      if (next) {
-        next.disabled = current >= cards.length - 1;
-        next.style.opacity = current >= cards.length - 1 ? '0.35' : '1';
-        next.style.cursor = current >= cards.length - 1 ? 'not-allowed' : 'pointer';
-      }
-    }
+  var track = carousel.querySelector('.commit-track');
+  if (!track) return;
 
-    function showCard(index) {
-      current = Math.max(0, Math.min(index, cards.length - 1));
-      cards.forEach(function (card) {
-        card.style.transform = 'translateX(-' + (current * 100) + '%)';
-      });
-      updateNavigation();
-    }
+  var cards = Array.from(track.querySelectorAll('.cf'));
+  var previous = carousel.querySelector('.commit-prev');
+  var next = carousel.querySelector('.commit-next');
+  var current = 0;
 
-    if (previous) {
-      previous.addEventListener('click', function (e) {
-        e.preventDefault();
-        if (current > 0) {
-          showCard(current - 1);
-        }
-      });
-    }
-
-    if (next) {
-      next.addEventListener('click', function (e) {
-        e.preventDefault();
-        if (current < cards.length - 1) {
-          showCard(current + 1);
-        }
-      });
-    }
-
-    track.addEventListener('keydown', function (event) {
-      if (event.key === 'ArrowLeft') {
-        event.preventDefault();
-        showCard(current - 1);
-      }
-      if (event.key === 'ArrowRight') {
-        event.preventDefault();
-        showCard(current + 1);
+  function updateCards(index, direction) {
+    current = Math.max(0, Math.min(index, cards.length - 1));
+    cards.forEach(function (card, i) {
+      card.classList.remove('slide-next', 'slide-prev');
+      if (i === current) {
+        card.classList.add('is-active');
+        if (direction === 'next') card.classList.add('slide-next');
+        else if (direction === 'prev') card.classList.add('slide-prev');
+      } else {
+        card.classList.remove('is-active');
       }
     });
 
-    var startX = 0;
-    var isSwiping = false;
-    track.addEventListener('touchstart', function (e) {
-      startX = e.touches[0].clientX;
-      isSwiping = true;
-    }, { passive: true });
-
-    track.addEventListener('touchend', function (e) {
-      if (!isSwiping) return;
-      isSwiping = false;
-      var diffX = e.changedTouches[0].clientX - startX;
-      if (diffX > 45 && current > 0) {
-        showCard(current - 1);
-      } else if (diffX < -45 && current < cards.length - 1) {
-        showCard(current + 1);
-      }
-    }, { passive: true });
-
-    showCard(0);
+    if (previous) {
+      previous.disabled = current <= 0;
+      previous.style.opacity = current <= 0 ? '0.35' : '1';
+      previous.style.cursor = current <= 0 ? 'not-allowed' : 'pointer';
+    }
+    if (next) {
+      next.disabled = current >= cards.length - 1;
+      next.style.opacity = current >= cards.length - 1 ? '0.35' : '1';
+      next.style.cursor = current >= cards.length - 1 ? 'not-allowed' : 'pointer';
+    }
   }
 
+  if (previous) {
+    previous.onclick = function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (current > 0) updateCards(current - 1, 'prev');
+    };
+  }
+
+  if (next) {
+    next.onclick = function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (current < cards.length - 1) updateCards(current + 1, 'next');
+    };
+  }
+
+  track.addEventListener('keydown', function (event) {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      if (current > 0) updateCards(current - 1, 'prev');
+    }
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      if (current < cards.length - 1) updateCards(current + 1, 'next');
+    }
+  });
+
+  var startX = 0;
+  var isSwiping = false;
+  track.addEventListener('touchstart', function (e) {
+    startX = e.touches[0].clientX;
+    isSwiping = true;
+  }, { passive: true });
+
+  track.addEventListener('touchend', function (e) {
+    if (!isSwiping) return;
+    isSwiping = false;
+    var diffX = e.changedTouches[0].clientX - startX;
+    if (diffX > 45 && current > 0) {
+      updateCards(current - 1, 'prev');
+    } else if (diffX < -45 && current < cards.length - 1) {
+      updateCards(current + 1, 'next');
+    }
+  }, { passive: true });
+
+  updateCards(0);
+}
+
+function initAll() {
+  initCommitCarousel();
+  initImprovementCarousel();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAll);
+} else {
+  initAll();
+}
+
+function initImprovementCarousel() {
   var improvementCarousel = document.querySelector('.improvement-carousel');
   if (!improvementCarousel) return;
 
@@ -148,4 +165,4 @@ document.addEventListener('DOMContentLoaded', function () {
     if (event.key === 'ArrowRight') { event.preventDefault(); selectImprovement(selected + 1) }
   });
   renderImprovement();
-});
+}

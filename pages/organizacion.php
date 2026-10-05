@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
@@ -112,6 +112,6 @@
 
 <?php include __DIR__ . '/../components/footer.php'; ?>
 
-<script src="../js/organizacion.js"></script>
+<script src="../js/organizacion.js?v=4"></script>
 </body>
 </html>

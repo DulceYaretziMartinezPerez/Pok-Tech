@@ -1,45 +1,45 @@
 /* Nuestra organización — datos y comportamiento (sin dependencias externas) */
 (() => {
   const IMG = '../assets/img/organizacion/';
-  const P = (n, r, img, fn) => ({ n, r, img, fn });
+  const P = (n, r, img, fn, deb) => ({ n, r, img, fn, deb });
   const D = [
     { id: 'tec', name: 'Tecnología', c: 'var(--blu)',
       d: '¿Cómo funciona la Pokédex por dentro?',
       desc: 'Procesa la información de cada Pokémon, actualiza el sistema con nuevas especies y mantiene el reconocimiento en tiempo real y la interfaz.',
-      dir: P('Jared de Jesús Olazarán López', 'Director de Tecnología (CTO)', 'Jared', ['Define la visión tecnológica de la Pokédex', 'Coordina software, infraestructura y datos', 'Impulsa el reconocimiento en tiempo real']),
+      dir: P('Jared de Jesús Olazarán López', 'Director de Tecnología (CTO)', 'Jared', ['Define la visión tecnológica de la Pokédex', 'Coordina software, infraestructura y datos', 'Impulsa el reconocimiento en tiempo real'], ['Los hombres', 'El amor']),
       m: [
-        [P('Jesús Alejandro Aguilar Hernández', 'Gerente de Desarrollo de Software', 'Jesus', ['Dirige al equipo de desarrollo', 'Supervisa la interfaz y el conteo de capturas']), ['Programadores', 'Diseñadores UX/UI', 'Ingenieros de software']],
-        [P('Alejandro Sánchez Varela', 'Gerente de Infraestructura y TI', 'Alejandro', ['Mantiene servidores y redes operando', 'Protege los sistemas y la información']), ['Administradores de sistemas', 'Soporte técnico', 'Ciberseguridad']],
-        [P('Arturo Rosales Velázquez', 'Gerente de Datos', 'Arturo', ['Organiza la base de datos de especies', 'Garantiza datos confiables y actualizados']), ['Ingenieros de datos', 'Administradores de bases de datos']] ] },
+        [P('Jesús Alejandro Aguilar Hernández', 'Gerente de Desarrollo de Software', 'Jesus', ['Dirige al equipo de desarrollo', 'Supervisa la interfaz y el conteo de capturas'], ['Bailar cumbias a solas', 'Los gatos naranjas sin neuronas']), ['Programadores', 'Diseñadores UX/UI', 'Ingenieros de software']],
+        [P('Alejandro Sánchez Varela', 'Gerente de Infraestructura y TI', 'Alejandro', ['Mantiene servidores y redes operando', 'Protege los sistemas y la información'], ['Llorar con comerciales de perritos', 'No saberse la tabla del 7']), ['Administradores de sistemas', 'Soporte técnico', 'Ciberseguridad']],
+        [P('Arturo Rosales Velázquez', 'Gerente de Datos', 'Arturo', ['Organiza la base de datos de especies', 'Garantiza datos confiables y actualizados'], ['Comerse los mocos en secreto', 'Creer en los horóscopos']), ['Ingenieros de datos', 'Administradores de bases de datos']] ] },
     { id: 'ope', name: 'Operaciones', c: 'var(--red)',
       desc: 'Fabrica y ensambla cada Pokédex y verifica su calidad con pruebas antes de llegar a tus manos.',
-      dir: P('Angel Gabriel Coronado Sánchez', 'Director de Operaciones (COO)', 'Angel', ['Dirige la fabricación y el ensamblaje', 'Asegura entregas y estándares de calidad']),
+      dir: P('Angel Gabriel Coronado Sánchez', 'Director de Operaciones (COO)', 'Angel', ['Dirige la fabricación y el ensamblaje', 'Asegura entregas y estándares de calidad'], ['Las milanesas empanizadas frías', 'Bailar la Chona poseído']),
       m: [
-        [P('Diego Ramírez Ibarra', 'Gerente de Producción', 'Diego_Ibarra', ['Planea la línea de ensamblaje', 'Coordina a técnicos y operarios']), ['Técnicos de hardware', 'Operarios']],
-        [P('Ana Sofía Cano Sandoval', 'Gerente de Calidad', 'Ana', ['Define las pruebas de calidad', 'Valida que cada equipo funcione bien']), ['Supervisores de calidad', 'Técnicos de pruebas']] ] },
+        [P('Diego Ramírez Ibarra', 'Gerente de Producción', 'Diego_Ibarra', ['Planea la línea de ensamblaje', 'Coordina a técnicos y operarios'], ['Dormirse sentado en el camión', 'El reggaetón viejito']), ['Técnicos de hardware', 'Operarios']],
+        [P('Ana Sofía Cano Sandoval', 'Gerente de Calidad', 'Ana', ['Define las pruebas de calidad', 'Valida que cada equipo funcione bien'], ['Stalkear a su ex de la primaria', 'Atragantarse con su propia saliva']), ['Supervisores de calidad', 'Técnicos de pruebas']] ] },
     { id: 'fin', name: 'Finanzas', c: 'var(--blu)',
       desc: 'Cuida el capital de la empresa, calcula márgenes y evalúa la factibilidad de cada producto nuevo.',
-      dir: P('Diego Eduardo Zapata Aguilar', 'Director Financiero (CFO)', 'Diego_Zapata', ['Administra el presupuesto y la inversión', 'Evalúa la viabilidad de nuevos productos']),
-      m: [[P('César Euresti', 'Gerente Financiero', 'Cesar', ['Supervisa la contabilidad diaria', 'Reporta márgenes y resultados']), ['Contadores', 'Analistas financieros', 'Auxiliares administrativos']]] },
+      dir: P('Diego Eduardo Zapata Aguilar', 'Director Financiero (CFO)', 'Diego_Zapata', ['Administra el presupuesto y la inversión', 'Evalúa la viabilidad de nuevos productos'], ['Gastar la quincena en monas chinas', 'Regatear en el OXXO']),
+      m: [[P('César Euresti', 'Gerente Financiero', 'Cesar', ['Supervisa la contabilidad diaria', 'Reporta márgenes y resultados'], ['Cantarle a las plantas a solas', 'El olor a tierra mojada']), ['Contadores', 'Analistas financieros', 'Auxiliares administrativos']]] },
     { id: 'mkt', name: 'Marketing', c: 'var(--red)',
       desc: 'Da a conocer la Pokédex al mundo, atiende dudas del público y negocia ventas a sucursales y clientes privados.',
-      dir: P('Dulce Yaretzi Martínez Pérez', 'Directora de Marketing (CMO)', 'Dulce', ['Diseña la estrategia de marca', 'Une comunicación, ventas y atención']),
+      dir: P('Dulce Yaretzi Martínez Pérez', 'Directora de Marketing (CMO)', 'Dulce', ['Diseña la estrategia de marca', 'Une comunicación, ventas y atención'], ['Los rockeros', 'Doctor Mario malo']),
       m: [
-        [P('Aldo Mizahel Ornelas García', 'Gerente de Marketing', 'Aldo', ['Lidera campañas y contenido', 'Cuida la imagen de PokéTech']), ['Publicidad', 'Diseño', 'Redes sociales']],
-        [P('Nahomi Sherlyn Grimaldo Cruz', 'Gerente de Ventas', 'Sherlyn', ['Cierra ventas mayoristas y privadas', 'Supervisa la atención al cliente']), ['Ejecutivos de ventas', 'Atención al cliente']] ] },
+        [P('Aldo Mizahel Ornelas García', 'Gerente de Marketing', 'Aldo', ['Lidera campañas y contenido', 'Cuida la imagen de PokéTech'], ['Las fotos con filtro de perro de 2016', 'Los payasos de fiesta infantil']), ['Publicidad', 'Diseño', 'Redes sociales']],
+        [P('Nahomi Sherlyn Grimaldo Cruz', 'Gerente de Ventas', 'Sherlyn', ['Cierra ventas mayoristas y privadas', 'Supervisa la atención al cliente'], ['Comprar en Shein a las 3 AM', 'Las películas de Shrek']), ['Ejecutivos de ventas', 'Atención al cliente']] ] },
     { id: 'inv', name: 'Investigación Pokémon', c: 'var(--blu)',
       desc: 'Descubre especies, analiza su tipo, habilidades y distribución en las rutas, y apoya el cuidado de la flora y fauna.',
-      dir: P('Melissa Jazmin Torres Martínez', 'Directora de Investigación Pokémon', 'Melissa', ['Dirige los estudios de campo y laboratorio', 'Valida científicamente nuevas especies']),
+      dir: P('Melissa Jazmin Torres Martínez', 'Directora de Investigación Pokémon', 'Melissa', ['Dirige los estudios de campo y laboratorio', 'Valida científicamente nuevas especies'], ['Hablarle a las palomas de la plaza', 'Los villanos con traumas']),
       m: [
-        [P('Hiram Alejandro Alvarado López', 'Gerente de Investigación', 'Hiram', ['Coordina investigaciones científicas', 'Revisa los hallazgos del laboratorio']), ['Maestros Pokémon', 'Biólogos y especialistas']],
-        [P('Luis Arturo Villar Sudek', 'Gerente de Exploración', 'Luis', ['Organiza expediciones a las rutas', 'Mapea hábitats y poblaciones']), ['Exploradores', 'Investigadores de campo', 'Cartógrafos']],
-        [P('Sujin Kim', 'Coordinadora de Registro Pokémon', 'Chinguamiga', ['Cataloga cada especie descubierta', 'Mantiene el registro oficial']), ['Analistas de información', 'Catalogadores de especies']] ] },
+        [P('Hiram Alejandro Alvarado López', 'Gerente de Investigación', 'Hiram', ['Coordina investigaciones científicas', 'Revisa los hallazgos del laboratorio'], ['Creer que la tierra es hueca', 'Tomarse fotos con duck face']), ['Maestros Pokémon', 'Biólogos y especialistas']],
+        [P('Luis Arturo Villar Sudek', 'Gerente de Exploración', 'Luis', ['Organiza expediciones a las rutas', 'Mapea hábitats y poblaciones'], ['Los tacos de 5 por 15 pesos', 'Perderse en su propia colonia']), ['Exploradores', 'Investigadores de campo', 'Cartógrafos']],
+        [P('Sujin Kim', 'Coordinadora de Registro Pokémon', 'Chinguamiga', ['Cataloga cada especie descubierta', 'Mantiene el registro oficial'], ['Cantar banda sinaloense peda', 'Los memes de tías en Facebook']), ['Analistas de información', 'Catalogadores de especies']] ] },
     { id: 'rh', name: 'Recursos Humanos', c: 'var(--red)',
       desc: 'Cuida al equipo: contrata talento, capacita, paga la nómina y vela por el bienestar laboral.',
-      dir: P('Liliana Sarahi Gutiérrez Balderas', 'Directora de Recursos Humanos', 'Liliana', ['Impulsa la cultura organizacional', 'Atrae y retiene al mejor talento']),
-      m: [[P('Emanuel Hernández Aguirre', 'Gerente de Recursos Humanos', 'Emanuel', ['Gestiona contratación y nómina', 'Organiza capacitación y bienestar']), ['Reclutamiento', 'Capacitación', 'Nómina', 'Bienestar laboral']]] }
+      dir: P('Liliana Sarahi Gutiérrez Balderas', 'Directora de Recursos Humanos', 'Liliana', ['Impulsa la cultura organizacional', 'Atrae y retiene al mejor talento'], ['Pelearse con desconocidos en Twitter', 'Los señores con bigote']),
+      m: [[P('Emanuel Hernández Aguirre', 'Gerente de Recursos Humanos', 'Emanuel', ['Gestiona contratación y nómina', 'Organiza capacitación y bienestar'], ['Tenerle fobia a las botargas', 'Bailar Payaso de Rodeo descoordinado']), ['Reclutamiento', 'Capacitación', 'Nómina', 'Bienestar laboral']]] }
   ];
-  const CEO = P('Georgina Reta Limas', 'Directora General (CEO)', 'Georgina', ['Guía la visión y la estrategia de PokéTech', 'Alinea a las seis direcciones con una meta común', 'Representa a la empresa ante socios y regiones']);
+  const CEO = P('Georgina Reta Limas', 'Directora General (CEO)', 'Georgina', ['Guía la visión y la estrategia de PokéTech', 'Alinea a las seis direcciones con una meta común', 'Representa a la empresa ante socios y regiones'], ['Los chicos emo', 'Los femboys']);
   D[0].d = D[0].desc;
 
   const $ = s => document.querySelector(s);
@@ -114,6 +114,10 @@
     const screenRight = dlg.querySelector('#pokedex-typewriter');
     if (screenRight) {
       const duties = o.p.fn.map(f => `  > ${f}`).join('\n');
+      const debilidades = Array.isArray(o.p.deb) 
+        ? o.p.deb.map(d => `  > ${d}`).join('\n') 
+        : (o.p.deb ? `  > ${o.p.deb}` : '');
+      const debilidadesSection = debilidades ? `\n[ DEBILIDADES ]\n${debilidades}\n` : '';
       const team = (o.t && o.t.length) ? o.t.map(s => `  • ${s}`).join('\n') : '  • Dirección General';
 
       const fullText = 
@@ -126,7 +130,7 @@ CARGO: ${o.p.r}
 
 [ QUÉ HACE ]
 ${duties}
-
+${debilidadesSection}
 [ A SU CARGO ]
 ${team}
 --------------------------------
@@ -182,7 +186,9 @@ ${team}
   function showTip(el) {
     const o = all[el.dataset.i];
     tip.style.setProperty('--c', o.d.c);
-    tip.innerHTML = `<b>${ic(o.d.id)}${o.p.n}</b><em>${o.p.r}</em><p>${o.desc}</p><i>Clic para ver más</i>`;
+    const debList = Array.isArray(o.p.deb) ? o.p.deb.join(' · ') : o.p.deb;
+    const debTip = debList ? `<span style="display:block;margin:6px 0;font-size:12px;color:#ffd6ce;font-weight:600">Debilidades: ${debList}</span>` : '';
+    tip.innerHTML = `<b>${ic(o.d.id)}${o.p.n}</b><em>${o.p.r}</em><p>${o.desc}</p>${debTip}<i>Clic para ver Pokédex</i>`;
     const r = el.getBoundingClientRect(), t = tip.getBoundingClientRect();
     let top = r.top - t.height - 12; if (top < 8) top = r.bottom + 12;
     const left = Math.max(8, Math.min(innerWidth - t.width - 8, r.left + r.width / 2 - t.width / 2));

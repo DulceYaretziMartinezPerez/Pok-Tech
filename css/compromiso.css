@@ -180,27 +180,19 @@
 
 .commit-track {
     position: relative;
-    display: flex !important;
-    gap: 0;
+    width: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    border-radius: 24px;
-    width: 100%;
 }
 
 .cf {
+    display: none;
     position: relative;
     isolation: isolate;
-    display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(220px, .72fr);
     gap: 32px;
     align-items: center;
-    flex: 0 0 100% !important;
-    width: 100% !important;
-    min-width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box;
+    width: 100%;
     min-height: 370px;
     padding: 42px 48px;
     overflow: hidden;
@@ -209,8 +201,41 @@
     background: var(--blu);
     color: #fff;
     box-shadow: none;
-    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
-    will-change: transform;
+    box-sizing: border-box;
+}
+
+.cf.is-active {
+    display: grid !important;
+}
+
+.cf.slide-next {
+    animation: cfSlideNext 0.35s cubic-bezier(0.2, 0.8, 0.4, 1);
+}
+
+.cf.slide-prev {
+    animation: cfSlidePrev 0.35s cubic-bezier(0.2, 0.8, 0.4, 1);
+}
+
+@keyframes cfSlideNext {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes cfSlidePrev {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .cf::before {
