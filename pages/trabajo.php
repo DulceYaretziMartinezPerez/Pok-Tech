@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
@@ -9,7 +9,9 @@
 <link rel="stylesheet" href="../css/variables.css">
 <link rel="stylesheet" href="../css/main.css">
 <link rel="stylesheet" href="../css/trabajo.css">
+<link rel="stylesheet" href="../css/tema.css">
 <script>document.documentElement.classList.add('js')</script>
+<script src="../js/tema.js"></script>
 </head>
 <body>
 
