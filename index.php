@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PokéTech | Pokédex de nueva generación</title>
+<link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/main.css">
+<!-- Paleta propia SOLO del inicio: versión OSCURA (guinda + azul medianoche + casi negro).
+     Las demás páginas siguen con los colores de variables.css.
+     Rojo anterior (burdeos más ladrillo): #8F2B25 · Paleta más clara: --red:#B8352B; --blu:#2D6A9F; --cha:#141922 -->
+<style>
+:root{--red:#B8352B;--blu:#1D4B73;--cha:#0a0d12}
+:root[data-theme="dark"]{--bg:#0a0d12;--alt:#10141b;--card:#131821;--mut:#98a3b3;--ln:#262d3b}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0d12;--alt:#10141b;--card:#131821;--mut:#98a3b3;--ln:#262d3b}}
+/* círculo decorativo del hero: Poké Ball fantasma */
+.hero::before{background:radial-gradient(circle,var(--cha) 0 13%,rgba(255,255,255,.95) 13.5% 19%,transparent 19.5%),conic-gradient(var(--red) 0 50%,#e6ebf2 0);opacity:.10}
+.hero .lead{color:#a3aebd}
+/* textos rojos más claros para que se lean sobre fondos oscuros */
+:root[data-theme="dark"] .spec strong,:root[data-theme="dark"] .tz span{color:#B8352B}
+/* bordes y sombras en tono azulado para que no desaparezcan sobre el fondo oscuro */
+:root[data-theme="dark"] .bx{box-shadow:6px 6px 0 #000}
+footer{background:#07090d}
+header{border-bottom-color:#000}
+</style>
+
+
+<link rel="stylesheet" href="css/tema.css">
+<script src="js/tema.js"></script>
+</head>
+<body>
+
+<?php $base_url = ''; include __DIR__ . '/components/header.php'; ?>
+
+<!-- ===== CONTENIDO ===== -->
+<main>
+<div class="hero">
+<div class="w hg">
+<div>
+<h1>Pokédex Paldea. Todo Pokémon, en tu mano.</h1>
+<p class="lead">PokéTech investiga nuevas especies y fabrica la Pokédex de cada generación, con presencia en todas las regiones.</p>
+<div class="cta"><a class="btn r" href="pages/tienda.php">Comprar ahora</a><a class="btn w2" href="pages/estrategia.php">Conocer PokéTech</a></div>
+</div>
+<svg class="dev" viewBox="0 0 400 480" role="img" aria-label="Pokédex PokéTech escaneando">
+<rect x="34" y="34" width="360" height="440" rx="30" fill="#000"/>
+<rect x="20" y="20" width="360" height="440" rx="30" fill="var(--red)" stroke="#000" stroke-width="8"/>
+<circle cx="80" cy="76" r="34" fill="var(--blu)" stroke="#000" stroke-width="7"/><circle cx="70" cy="66" r="10" fill="#fff" opacity=".55"/>
+<circle cx="150" cy="58" r="9" fill="var(--red)" stroke="#000" stroke-width="3"/><circle cx="180" cy="58" r="9" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="210" cy="58" r="9" fill="var(--blu)" stroke="#000" stroke-width="3"/>
+<rect x="50" y="128" width="300" height="200" rx="12" fill="#000" stroke="#000" stroke-width="7"/>
+<clipPath id="sc"><rect x="54" y="132" width="292" height="192" rx="9"/></clipPath>
+<g clip-path="url(#sc)"><circle cx="140" cy="228" r="48" fill="none" stroke="var(--blu)" stroke-width="5"/><path d="M92 228h96" stroke="var(--blu)" stroke-width="5"/><circle cx="140" cy="228" r="13" fill="#000" stroke="var(--blu)" stroke-width="5"/>
+<g fill="#fff"><rect x="216" y="170" width="110" height="9" rx="4"/><rect x="216" y="192" width="80" height="9" rx="4" opacity=".7"/><rect x="216" y="214" width="100" height="9" rx="4" opacity=".7"/><rect x="216" y="248" width="60" height="9" rx="4" fill="var(--red)"/><rect x="216" y="270" width="90" height="9" rx="4" opacity=".5"/></g>
+<rect class="scn" x="54" y="140" width="292" height="4" fill="#fff"/></g>
+<path d="M70 392h50M95 367v50" stroke="#000" stroke-width="20" stroke-linecap="square"/>
+<circle cx="270" cy="395" r="20" fill="#fff" stroke="#000" stroke-width="6"/><circle cx="326" cy="372" r="20" fill="var(--blu)" stroke="#000" stroke-width="6"/>
+<path d="M180 385h50M180 401h50M180 417h50" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+</svg>
+</div></div>
+
+<div class="w"><div class="spec bx">
+<div><strong>9</strong><span>generaciones de Pokédex</span></div>
+<div><strong>9</strong><span>regiones con disponibilidad</span></div>
+<div><strong>99.9%</strong><span>uptime global</span></div>
+<div><strong>4</strong><span>regiones con drones de escaneo</span></div>
+</div></div>
+
+<section><div class="w">
+<h2 class="sh">Explora PokéTech</h2>
+<p class="lead">Selecciona una sección para conocer nuestra estrategia, organización, forma de trabajar y compromiso.</p>
+<div class="g3">
+<a class="bx tz" href="pages/estrategia.php"><h3>Estrategia</h3><p>Misión, visión, valores y nuestro panorama FODA.</p><span>Ver más →</span></a>
+<a class="bx tz" href="pages/organizacion.php"><h3>Organización</h3><p>Organigrama, departamentos clave y equipo directivo.</p><span>Ver más →</span></a>
+<a class="bx tz" href="pages/trabajo.php"><h3>Forma de trabajar</h3><p>Nuestros principios, liderazgo y cultura de equipo.</p><span>Ver más →</span></a>
+<a class="bx tz" href="pages/compromiso.php"><h3>Compromiso</h3><p>Estándares de calidad y sostenibilidad certificados.</p><span>Ver más →</span></a>
+<a class="bx tz" href="pages/tienda.php"><h3>Tienda Pokédex</h3><p>Las 9 generaciones de Pokédex, listas para pedir.</p><span>Comprar →</span></a>
+</div>
+</div></section>
+</main>
+
+<div class="bd2"></div>
+<?php include __DIR__ . '/components/footer.php'; ?>
+
+</body>
+</html>
