@@ -76,16 +76,106 @@
   D.forEach(x => { all.push({ p: x.dir, d: x, t: x.m.map(([m]) => m.r), desc: x.desc });
     x.m.forEach(([p, t]) => all.push({ p, d: x, t, desc: p.fn[0] })); });
 
-  /* ---- modal ---- */
+  /* ---- modal Pokédex con máquina de escribir ---- */
   const dlg = $('#og-modal');
+  let typeTimer = null;
+
   function openPerson(o, e) {
     burst(e); hideTip();
+    if (typeTimer) { clearInterval(typeTimer); typeTimer = null; }
     dlg.style.setProperty('--c', o.d.c);
-    dlg.querySelector('.og-mh').innerHTML = `${av(o.p)}<div><h3>${o.p.n}</h3><small>${o.p.r}</small></div>`;
-    dlg.querySelector('.og-mb').innerHTML = `<h4>Qué hace</h4><ul>${o.p.fn.map(f => `<li>${f}</li>`).join('')}</ul><h4>${o.t === undefined ? '' : 'A su cargo'}</h4><div class="og-chips">${o.t.map(s => `<span>${s}</span>`).join('')}</div>`;
+
+    // Pantalla Izquierda: Imagen y datos
+    const photo = dlg.querySelector('.pokedex-photo');
+    const fallback = dlg.querySelector('.pokedex-avatar-fallback');
+    const nameEl = dlg.querySelector('.pokedex-name');
+    const roleEl = dlg.querySelector('.pokedex-role');
+    const badgeEl = dlg.querySelector('.pokedex-dept-badge');
+
+    if (photo) {
+      photo.style.display = 'block';
+      photo.src = `${IMG}${o.p.img}.png`;
+      photo.alt = o.p.n;
+      photo.onerror = () => { photo.style.display = 'none'; if (fallback) fallback.style.display = 'grid'; };
+    }
+    if (fallback) {
+      fallback.style.display = 'none';
+      fallback.textContent = ini(o.p.n);
+      fallback.style.backgroundColor = o.d.c;
+    }
+    if (nameEl) nameEl.textContent = o.p.n;
+    if (roleEl) roleEl.textContent = o.p.r;
+    if (badgeEl) {
+      badgeEl.textContent = o.d.name;
+      badgeEl.style.backgroundColor = o.d.c;
+    }
+
+    // Pantalla Derecha: Texto robótico tipo terminal
+    const screenRight = dlg.querySelector('#pokedex-typewriter');
+    if (screenRight) {
+      const duties = o.p.fn.map(f => `  > ${f}`).join('\n');
+      const team = (o.t && o.t.length) ? o.t.map(s => `  • ${s}`).join('\n') : '  • Dirección General';
+
+      const fullText = 
+`>> REGISTRO POKÉDEX CORPORATIVO
+>> ACCESO AUTORIZADO
+--------------------------------
+PERSONAL: ${o.p.n.toUpperCase()}
+CARGO: ${o.p.r}
+ÁREA: ${o.d.name}
+
+[ QUÉ HACE ]
+${duties}
+
+[ A SU CARGO ]
+${team}
+--------------------------------
+>> ESTADO: ACTIVO / VERIFICADO`;
+
+      screenRight.innerHTML = '';
+      const textNode = document.createElement('pre');
+      textNode.className = 'pokedex-terminal-text';
+      const cursor = document.createElement('span');
+      cursor.className = 'pokedex-cursor';
+      cursor.textContent = '█';
+
+      screenRight.appendChild(textNode);
+      screenRight.appendChild(cursor);
+
+      let charIdx = 0;
+      const speed = 10; // ms por carácter
+
+      function finishTyping() {
+        if (typeTimer) { clearInterval(typeTimer); typeTimer = null; }
+        textNode.textContent = fullText;
+      }
+
+      screenRight.onclick = finishTyping;
+
+      typeTimer = setInterval(() => {
+        if (charIdx < fullText.length) {
+          textNode.textContent += fullText[charIdx];
+          charIdx++;
+          screenRight.scrollTop = screenRight.scrollHeight;
+        } else {
+          clearInterval(typeTimer);
+          typeTimer = null;
+        }
+      }, speed);
+    }
+
     dlg.showModal();
   }
-  dlg.addEventListener('click', e => { if (e.target === dlg || e.target.closest('.og-x')) dlg.close(); });
+
+  dlg.addEventListener('click', e => {
+    if (e.target === dlg || e.target.closest('.og-x')) {
+      if (typeTimer) { clearInterval(typeTimer); typeTimer = null; }
+      dlg.close();
+    }
+  });
+  dlg.addEventListener('close', () => {
+    if (typeTimer) { clearInterval(typeTimer); typeTimer = null; }
+  });
 
   /* ---- tooltip ---- */
   const tip = document.createElement('div'); tip.className = 'og-tip'; tip.setAttribute('role', 'tooltip'); document.body.appendChild(tip);

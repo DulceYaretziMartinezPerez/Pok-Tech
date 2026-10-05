@@ -77,13 +77,39 @@
 </section>
 </main>
 
-<dialog class="og-modal" id="og-modal" aria-label="Detalle del puesto">
-  <button class="og-x" aria-label="Cerrar">✕</button>
-  <div class="og-mh"></div>
-  <div class="og-mb"></div>
+<dialog class="og-modal pokedex-dialog" id="og-modal" aria-label="Pokédex - Detalle del puesto">
+  <div class="pokedex-modal-wrapper">
+    <img class="pokedex-frame-img" src="../assets/img/organizacion/Pokedex.png" alt="Pokédex" aria-hidden="true">
+    <button class="og-x pokedex-close-btn" aria-label="Cerrar Pokédex">✕</button>
+    
+    <!-- Pantalla Izquierda: Imagen del personal en recuadro transparente -->
+    <div class="pokedex-screen-left">
+      <div class="pokedex-photo-wrap">
+        <img class="pokedex-photo" src="" alt="" onerror="this.style.display='none'">
+        <div class="pokedex-avatar-fallback"></div>
+      </div>
+      <div class="pokedex-personal-info">
+        <h3 class="pokedex-name"></h3>
+        <p class="pokedex-role"></p>
+        <span class="pokedex-dept-badge"></span>
+      </div>
+      <div class="pokedex-scanline" aria-hidden="true"></div>
+    </div>
+    
+    <!-- Pantalla Derecha: Información en verde con animación robótica -->
+    <div class="pokedex-screen-right">
+      <div class="pokedex-terminal-header">
+        <span class="pokedex-status-dot"></span>
+        <span class="pokedex-terminal-title">REGISTRO POKÉDEX</span>
+      </div>
+      <div class="pokedex-typewriter-content" id="pokedex-typewriter">
+        <!-- Contenido generado por js con efecto máquina de escribir -->
+      </div>
+      <div class="pokedex-terminal-scanline" aria-hidden="true"></div>
+    </div>
+  </div>
 </dialog>
 
-<div class="bd2"></div>
 <?php include __DIR__ . '/../components/footer.php'; ?>
 
 <script src="../js/organizacion.js"></script>
