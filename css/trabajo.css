@@ -45,15 +45,131 @@ nav a:hover,nav a.on{background:#000}
 @media(max-width:860px){.hg{grid-template-columns:1fr}.dev{max-width:290px}}
 
 /* sub-page banner */
-.pagehead{position:relative;overflow:hidden;background:#000;color:#fff;padding:60px 0 46px;border-bottom:5px solid var(--red)}
-.pagehead::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.13) 2px,transparent 2.5px);background-size:28px 28px;animation:drift 22s linear infinite;pointer-events:none}
-.pagehead::after{content:"";position:absolute;left:0;bottom:0;width:30px;height:30px;border-radius:50%;border:3px solid #000;background:linear-gradient(var(--red) 0 44%,#000 44% 56%,#fff 56%);animation:roll 10s linear infinite;pointer-events:none}
-.pagehead .w{position:relative;z-index:1}
-.pagehead h1{font-size:clamp(30px,4.5vw,46px);text-shadow:4px 4px 0 var(--red);animation:slideIn .8s cubic-bezier(.2,.8,.2,1) both}
-.pagehead p{color:#c8ceda;margin-top:10px;max-width:60ch;font-size:17px;animation:fadeUp .8s .55s both}
-.ph-line{display:block;height:6px;width:0;border-radius:99px;margin-top:14px;background:linear-gradient(90deg,var(--red) 0 60%,#fff 60% 80%,var(--blu) 80%);animation:grow 1s .35s cubic-bezier(.2,.8,.2,1) forwards}
-.ph-ball{position:absolute;right:-70px;top:50%;width:320px;height:320px;margin-top:-160px;border-radius:50%;border:8px solid #000;background:linear-gradient(var(--red) 0 46%,#000 46% 54%,#fff 54%);opacity:.32;animation:spin 28s linear infinite;pointer-events:none}
-.ph-ball::after{content:"";position:absolute;left:50%;top:50%;width:90px;height:90px;margin:-45px;border-radius:50%;background:#fff;border:10px solid #000;box-shadow:inset 0 0 0 6px #fff,inset 0 0 0 10px var(--blu)}
+.pagehead {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    min-height: 560px;
+    overflow: hidden;
+    background: #050916;
+    color: #fff;
+    border-bottom: 5px solid var(--red);
+    padding: 0;
+}
+
+.pagehead::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: auto 0 0;
+    height: clamp(90px, 16vw, 180px);
+    backdrop-filter: blur(8px);
+    background: linear-gradient(0deg, #050916 0%, rgba(5, 9, 22, .72) 22%, transparent 100%);
+    mask-image: linear-gradient(0deg, #000 0%, #000 38%, transparent 100%);
+    pointer-events: none;
+}
+
+.pagehead::after {
+    content: "";
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    bottom: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid #000;
+    background: linear-gradient(var(--red) 0 44%, #000 44% 56%, #fff 56%);
+    animation: roll 10s linear infinite;
+    pointer-events: none;
+}
+
+.pagehead-media {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 76%;
+    overflow: hidden;
+}
+
+.pagehead-media::before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    background: linear-gradient(90deg, #050916 0%, #050916 26%, rgba(5, 9, 22, .88) 42%, rgba(5, 9, 22, .25) 72%, rgba(5, 9, 22, .08) 100%);
+    pointer-events: none;
+}
+
+.pagehead-media::after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    inset: 0;
+    backdrop-filter: blur(10px);
+    mask-image: linear-gradient(90deg, #000 0%, transparent 58%);
+    pointer-events: none;
+}
+
+.pagehead-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 1;
+}
+
+.pagehead-inner {
+    position: relative;
+    z-index: 4;
+    width: 100%;
+}
+
+.pagehead-copy {
+    max-width: 560px;
+}
+
+.pagehead h1 {
+    font-size: clamp(36px, 5vw, 58px);
+    letter-spacing: -.02em;
+    color: #fff;
+}
+
+.pagehead p {
+    color: #d5d8e1;
+    margin-top: 16px;
+    max-width: 48ch;
+    font-size: clamp(17px, 1.6vw, 20px);
+    line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+    .pagehead {
+        min-height: 620px;
+        align-items: flex-end;
+        padding: 250px 0 52px;
+    }
+
+    .pagehead-media {
+        inset: 0 0 auto;
+        width: 100%;
+        height: 72%;
+    }
+
+    .pagehead-media::before {
+        background: linear-gradient(180deg, rgba(5, 9, 22, .03) 0%, rgba(5, 9, 22, .12) 40%, rgba(5, 9, 22, .78) 75%, #050916 100%);
+    }
+
+    .pagehead-media::after {
+        mask-image: linear-gradient(180deg, transparent 38%, #000 100%);
+    }
+
+    .pagehead h1 {
+        font-size: clamp(34px, 9vw, 48px);
+    }
+}
 
 /* spec strip */
 .spec{display:grid;grid-template-columns:repeat(4,1fr);margin-top:-70px;position:relative;z-index:2}

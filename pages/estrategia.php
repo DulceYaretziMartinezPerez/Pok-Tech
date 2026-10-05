@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
@@ -20,14 +20,9 @@
 <!-- ===== CONTENIDO ===== -->
 <section class="pagehead">
 <div class="pagehead-media" aria-hidden="true">
-<img class="pagehead-slide on" src="../assets/img/estrategia/hero1.jpg" alt="" onerror="this.remove()">
-<img class="pagehead-slide" src="../assets/img/estrategia/hero2.jpg" alt="" onerror="this.remove()">
-<img class="pagehead-slide" src="../assets/img/estrategia/hero3.jpg" alt="" onerror="this.remove()">
-<div class="pagehead-dots" role="tablist" aria-label="Fotos de la portada">
-<button class="on" aria-selected="true" aria-label="Foto 1"></button>
-<button aria-selected="false" aria-label="Foto 2"></button>
-<button aria-selected="false" aria-label="Foto 3"></button>
-</div>
+<img class="pagehead-slide" src="../assets/img/estrategia/hero1.jpg" alt="">
+<img class="pagehead-slide" src="../assets/img/estrategia/hero2.jpg" alt="">
+<img class="pagehead-slide" src="../assets/img/estrategia/hero3.jpg" alt="">
 </div>
 <div class="w pagehead-inner">
 <div class="pagehead-copy">
@@ -169,7 +164,6 @@
 </div></section>
 </main>
 
-<div class="bd2"></div>
 <?php include __DIR__ . '/../components/footer.php'; ?>
 
 <script defer src="../js/estrategia.js"></script>
