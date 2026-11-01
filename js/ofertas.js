@@ -3,8 +3,8 @@
    - Toma los precios reales de js/catalogo.js (window.PT_CATALOGO)
      y les aplica el descuento definido en OFERTAS (aquí abajo).
    - Para cambiar/añadir ofertas, edita SOLO el arreglo OFERTAS.
-   - Al pulsar "Lo quiero" se lanza el evento 'pt:agregar'
-     (para conectarlo al carrito de la tienda) y sale un aviso.
+   - Al pulsar "Lo quiero" se agrega el producto al carrito de la
+     tienda (mismo localStorage) y se lanza el evento 'pt:agregar'.
    Carga este archivo DESPUÉS de utilidades.js y catalogo.js.
    ============================================================ */
 (function () {
@@ -53,7 +53,7 @@
 
   /* ---------- EFECTOS: confeti de pokébolas ---------- */
   var cv, cx, parts = [], raf = 0;
-  var COLS = ['#b82707', '#0075BE', '#ffcb05', '#ffffff', '#000000'];
+  var COLS = ['#E3350D', '#0075BE', '#ffffff', '#000000', '#E3350D'];
   function medir() {
     var d = window.devicePixelRatio || 1;
     cv.width = innerWidth * d; cv.height = innerHeight * d;
@@ -85,7 +85,7 @@
       cx.translate(q.x, q.y); cx.rotate(q.r);
       if (q.ball) {
         cx.fillStyle = '#fff'; cx.beginPath(); cx.arc(0, 0, 7, 0, 6.29); cx.fill();
-        cx.fillStyle = '#b82707'; cx.beginPath(); cx.arc(0, 0, 7, Math.PI, 0); cx.fill();
+        cx.fillStyle = '#E3350D'; cx.beginPath(); cx.arc(0, 0, 7, Math.PI, 0); cx.fill();
         cx.lineWidth = 2; cx.strokeStyle = '#000'; cx.beginPath(); cx.arc(0, 0, 7, 0, 6.29); cx.moveTo(-7, 0); cx.lineTo(7, 0); cx.stroke();
       } else {
         cx.fillStyle = q.c; cx.fillRect(-q.w / 2, -q.h / 2, q.w, q.h);
@@ -118,53 +118,6 @@
         });
       })(els[i]);
     }
-  }
-
-  /* ---------- EFECTOS: aparecer al hacer scroll ---------- */
-  function revelar() {
-    var els = document.querySelectorAll('.of-head, .of-bar-tools, .of-combo, .of-info > div, .of-coupon, .of-dia');
-    var i;
-    if (!('IntersectionObserver' in window) || REDUCE) { for (i = 0; i < els.length; i++) els[i].classList.add('in'); return; }
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: .15, rootMargin: '0px 0px -6% 0px' });
-    for (i = 0; i < els.length; i++) {
-      var idx = Array.prototype.indexOf.call(els[i].parentNode.children, els[i]);
-      els[i].style.setProperty('--d', Math.min(idx, 4) * 110 + 'ms');
-      els[i].classList.add('of-rv');
-      io.observe(els[i]);
-    }
-  }
-
-  /* ---------- EFECTOS: inclinación 3D de las tarjetas ---------- */
-  function inclinar() {
-    var grid = $('of-grid');
-    if (!grid || REDUCE || !window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    var ult = null;
-    function quitar(c) { c.style.removeProperty('--rx'); c.style.removeProperty('--ry'); }
-    grid.addEventListener('pointermove', function (e) {
-      var c = e.target.closest ? e.target.closest('.of-card') : null;
-      if (ult && ult !== c) quitar(ult);
-      ult = c; if (!c) return;
-      var r = c.getBoundingClientRect();
-      c.style.setProperty('--rx', (-((e.clientY - r.top) / r.height - .5) * 7).toFixed(2) + 'deg');
-      c.style.setProperty('--ry', (((e.clientX - r.left) / r.width - .5) * 7).toFixed(2) + 'deg');
-    });
-    grid.addEventListener('pointerleave', function () { if (ult) quitar(ult); ult = null; });
-  }
-
-  /* ---------- EFECTOS: barra de progreso de lectura ---------- */
-  function progreso() {
-    var b = document.createElement('div');
-    b.className = 'of-progress'; b.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(b);
-    function f() {
-      var h = document.documentElement.scrollHeight - innerHeight;
-      b.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, window.pageYOffset / h) : 0) + ')';
-    }
-    window.addEventListener('scroll', f, { passive: true });
-    window.addEventListener('resize', f);
-    f();
   }
 
   /* ---------- DATOS ---------- */
@@ -222,18 +175,21 @@
     return '<div class="of-buy"><button type="button" class="btn r" data-g="' + p.g + '">Lo quiero</button></div>';
   }
 
-  /* ---------- OFERTA DEL DÍA ---------- */
+  /* ---------- OFERTAS DESTACADAS (carrusel con las 3 de mayor descuento) ---------- */
   function pintarDia() {
-    var host = $('of-dia'); if (!host || !items.length) return null;
-    var p = items.slice().sort(function (a, b) { return b.off - a.off; })[0];
-    host.innerHTML =
-      '<div class="of-dia-vis" style="background-color:' + p.c + '"><span class="of-gen">Gen ' + p.g + '</span>' + visual(p) +
-      '<i class="of-spark sp1"></i><i class="of-spark sp2"></i><i class="of-spark sp3"></i>' +
-      '<div class="of-burst" aria-label="' + p.off + '% de descuento">-' + p.off + '%<small>OFF</small></div></div>' +
-      '<div class="of-dia-body"><span class="of-flag">⚡ Oferta del día</span><h3>Pokédex ' + p.n + '</h3><p>' + p.d + '</p>' +
-      precioHtml(p) + stockHtml(p) + boton(p) + '</div>';
+    var host = $('of-dia'), tr = host && host.querySelector('.cr-track');
+    if (!tr || !items.length) return null;
+    var top = items.slice().sort(function (a, b) { return b.off - a.off; }).slice(0, 3);
+    tr.innerHTML = top.map(function (p, i) {
+      return '<article class="cr-slide of-dia">' +
+        '<div class="of-dia-vis" style="--c:' + p.c + '"><span class="of-gen">Gen ' + p.g + '</span>' + visual(p) +
+        '<div class="of-burst" aria-label="' + p.off + '% de descuento">-' + p.off + '%<small>OFF</small></div></div>' +
+        '<div class="of-dia-body"><span class="of-flag">' + (i === 0 ? 'Oferta del día' : 'Oferta destacada') + '</span><h3>Pokédex ' + p.n + '</h3><p>' + p.d + '</p>' +
+        precioHtml(p) + stockHtml(p) + boton(p) + '</div></article>';
+    }).join('');
     contar(host);
-    return p;
+    if (window.PTCarrusel) window.PTCarrusel.init(host);
+    return null;
   }
 
   /* ---------- LISTA CON FILTROS ---------- */
@@ -256,7 +212,7 @@
     if (cnt) cnt.textContent = lista.length === 1 ? 'Mostrando 1 oferta' : 'Mostrando ' + lista.length + ' ofertas';
     if (!lista.length) { grid.innerHTML = '<p class="of-empty bx">No hay ofertas en esta categoría por ahora. ¡Vuelve pronto!</p>'; return; }
     grid.innerHTML = lista.map(function (p, i) {
-      return '<article class="bx of-card' + (p.off >= 30 ? ' of-hot' : '') + '" style="--i:' + i + '"><span class="of-ribbon">-' + p.off + '%</span>' +
+      return '<article class="bx of-card' + (p.off >= 30 ? ' of-hot' : '') + '"><span class="of-ribbon">-' + p.off + '%</span>' +
         '<div class="of-th" style="background-color:' + p.c + '"><span class="of-gen">Gen ' + p.g + '</span>' + visual(p) +
         (p.tag ? '<span class="of-tag">' + p.tag + '</span>' : '') + '</div>' +
         '<div class="of-bd"><h3>Pokédex ' + p.n + '</h3><p class="of-d">' + p.d + '</p>' +
@@ -284,12 +240,13 @@
       var sumaVieja = ps.reduce(function (s, p) { return s + p.viejo; }, 0);
       var total = Math.round(sumaNueva * (1 - COMBO_EXTRA / 100));
       var minis = ps.map(mini).join('<b>+</b>');
-      return '<article class="bx of-combo"><div class="of-minis">' + minis + '</div><h3>' + c.n + '</h3><p>' + c.d + '</p>' +
+      return '<article class="bx of-combo cr-slide"><div class="of-minis">' + minis + '</div><h3>' + c.n + '</h3><p>' + c.d + '</p>' +
         '<div class="of-price"><span class="of-now">' + money(total) + '</span><span class="of-was">' + money(sumaVieja) + '</span></div>' +
         '<span class="of-save">Ahorras ' + money(sumaVieja - total) + '</span>' +
         '<div class="of-buy"><button type="button" class="btn w2" data-combo="' + c.n + '" data-precio="' + total + '">Quiero el combo</button></div></article>';
     }).join('');
     contar(host);
+    if (window.PTCarrusel) window.PTCarrusel.init($('of-combos-cr'));
   }
 
   /* ---------- CUENTA REGRESIVA (hasta el domingo 23:59:59) ---------- */
@@ -340,6 +297,27 @@
       navigator.clipboard.writeText(CUPON).then(ok, function () { aviso('Tu código es ' + CUPON); });
     } else { aviso('Tu código es ' + CUPON); }
   }
+  /* ---------- CARRITO (compartido con la tienda) ---------- */
+  var KEY_CARRITO = 'poketech-carrito';   // misma llave que usa js/tienda.js
+  var COMBO_ID = { 'Dúo Clásico': 'combo-clasico', 'Dúo Hoenn + Unova': 'combo-hoenn', 'Trío Moderno': 'combo-moderno' };
+  function leerCarrito() {
+    try { var v = JSON.parse(localStorage.getItem(KEY_CARRITO)); return Array.isArray(v) ? v : []; } catch (e) { return []; }
+  }
+  function agregarAlCarrito(id) {
+    if (!id) return;
+    var c = leerCarrito(), l = c.filter(function (x) { return x.id === id; })[0];
+    if (l) l.q = Math.min(9, l.q + 1); else c.push({ id: id, q: 1 });
+    try { localStorage.setItem(KEY_CARRITO, JSON.stringify(c)); } catch (e) {}
+  }
+  function pintarFab(rebote) {
+    var n = $('of-fab-n'), f = $('of-fab'); if (!n || !f) return;
+    n.textContent = leerCarrito().reduce(function (s, x) { return s + (x.q || 0); }, 0);
+    if (rebote) { f.classList.remove('bump'); void f.offsetWidth; f.classList.add('bump'); }
+  }
+  document.addEventListener('DOMContentLoaded', function () { pintarFab(false); });
+  addEventListener('pageshow', function () { pintarFab(false); });   // al volver desde la tienda
+  addEventListener('storage', function () { pintarFab(false); });
+
   function alComprar(e) {
     var b = e.target.closest ? e.target.closest('button[data-g],button[data-combo]') : null;
     if (!b) return;
@@ -353,6 +331,8 @@
       detalle = { tipo: 'pokedex', gen: p.g, nombre: nombre, precio: p.nuevo };
     }
     document.dispatchEvent(new CustomEvent('pt:agregar', { detail: detalle }));
+    agregarAlCarrito(detalle.tipo === 'combo' ? COMBO_ID[nombre] : 'gen-' + detalle.gen);
+    pintarFab(true);
     aviso('✓ ' + nombre + ' agregado');
     desdeBoton(b, 28);
     if (!b.getAttribute('data-txt')) b.setAttribute('data-txt', b.textContent);
@@ -394,7 +374,6 @@
     pintarCombos();
     animarBarras(document);
     tic(); setInterval(tic, 1000);
-    revelar(); inclinar(); progreso();
 
     var chips = document.querySelectorAll('.of-chip');
     for (var i = 0; i < chips.length; i++) {
