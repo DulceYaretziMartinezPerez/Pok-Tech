@@ -274,14 +274,14 @@ footer .cp{border-top:1px solid #3a3a3a;margin-top:34px;padding-top:18px;font-si
 
 /* ===== ANIMACIONES GLOBALES ===== */
 .js .rv:not(.in){opacity:0}
-.rv.in{animation:rise .85s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s)}
+.rv.in{animation:rise .85s cubic-bezier(.2,.8,.2,1) var(--d,0s) backwards}
 .rv-l.in{animation-name:riseL}
 .rv-r.in{animation-name:riseR}
 .rv-z.in{animation-name:zoomIn}
-@keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
-@keyframes riseL{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:none}}
-@keyframes riseR{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:none}}
-@keyframes zoomIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;translate:0 40px}}
+@keyframes riseL{from{opacity:0;translate:-60px 0}}
+@keyframes riseR{from{opacity:0;translate:60px 0}}
+@keyframes zoomIn{from{opacity:0;scale:.8}}
 @keyframes drop{from{transform:translateY(-100%)}to{transform:none}}
 @keyframes slideIn{from{opacity:0;transform:translateX(-50px)}to{opacity:1;transform:none}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
@@ -338,7 +338,7 @@ footer .cp{border-top:1px solid #3a3a3a;margin-top:34px;padding-top:18px;font-si
 .pk-team>h2{font-family:'Fredoka',sans-serif;color:#fff;font-size:1.8rem;margin:0 0 6px}
 .pk-team>h2::after{content:"";display:block;height:5px;width:0;margin-top:8px;border-radius:99px;
   background:linear-gradient(90deg,var(--pk-red) 0 60%,#fff 60% 80%,var(--blu) 80%)}
-.pk-team>h2.in::after{animation:growS .9s .3s cubic-bezier(.2,.8,.2,1) forwards}
+.pk-team>h2.in::after,.pk-team>h2.fx-in::after{animation:growS .9s .3s cubic-bezier(.2,.8,.2,1) forwards}
 .pk-team>p{color:#cfcfcf;margin:0 0 18px}
 .arr{display:inline-block;animation:nudge 1.6s ease-in-out infinite}
 .pk-rail{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 8px 22px;

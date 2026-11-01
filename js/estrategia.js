@@ -12,7 +12,6 @@
   document.addEventListener('DOMContentLoaded', function () {
     setupHeroCarousel();
     setupAvatarWobble();
-    setupContentReveal();
     setupEntranceReveal();
     setupStrategyCards();
     setupEvolutionSteps();
@@ -69,28 +68,6 @@
         img.classList.add('wobble');
       });
     });
-  }
-
-  /* Aparición al hacer scroll para Misión/Visión, valores y tarjetas FODA.
-     La clase que las oculta (.reveal-pre) solo se agrega aquí mismo, justo
-     antes de observarlas: si este script no llega a correr, esos bloques
-     jamás reciben la clase y se ven normales desde el primer momento. */
-  function setupContentReveal() {
-    var targets = document.querySelectorAll('.mv, .vals span, .fd');
-    if (!targets.length || reduceMotion || !canObserve) return;
-    targets.forEach(function (el, i) {
-      el.classList.add('reveal-pre');
-      el.style.transitionDelay = (i % 6) * 0.07 + 's';
-    });
-    var obs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-    targets.forEach(function (el) { obs.observe(el); });
   }
 
   /* Entrada de las cartas y pasos al hacer scroll (una sola vez).

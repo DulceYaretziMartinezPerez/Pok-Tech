@@ -8,25 +8,95 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/variables.css">
 <link rel="stylesheet" href="css/main.css">
-<!-- Paleta propia SOLO del inicio: versión OSCURA (guinda + azul medianoche + casi negro).
-     Las demás páginas siguen con los colores de variables.css.
-     Rojo anterior (burdeos más ladrillo): #8F2B25 · Paleta más clara: --red:#B8352B; --blu:#2D6A9F; --cha:#141922 -->
+<link rel="stylesheet" href="css/animaciones.css">
+<!-- Paleta propia del inicio + mejoras visuales de tarjetas, hero y llamada a la acción -->
 <style>
 :root{--red:#B8352B;--blu:#1D4B73;--cha:#0a0d12}
 :root[data-theme="dark"]{--bg:#0a0d12;--alt:#10141b;--card:#131821;--mut:#98a3b3;--ln:#262d3b}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0d12;--alt:#10141b;--card:#131821;--mut:#98a3b3;--ln:#262d3b}}
-/* círculo decorativo del hero: Poké Ball fantasma */
-.hero::before{background:radial-gradient(circle,var(--cha) 0 13%,rgba(255,255,255,.95) 13.5% 19%,transparent 19.5%),conic-gradient(var(--red) 0 50%,#e6ebf2 0);opacity:.10}
-.hero .lead{color:#a3aebd}
-/* textos rojos más claros para que se lean sobre fondos oscuros */
-:root[data-theme="dark"] .spec strong,:root[data-theme="dark"] .tz span{color:#B8352B}
-/* bordes y sombras en tono azulado para que no desaparezcan sobre el fondo oscuro */
+
+/* Hero mejorado */
+.hero{padding:76px 0 144px;background:radial-gradient(60% 90% at 0% 0%,rgba(184,53,43,.28),transparent 62%),radial-gradient(55% 85% at 100% 100%,rgba(29,75,115,.36),transparent 65%),var(--cha)}
+.hero::before{background:radial-gradient(circle,var(--cha) 0 13%,rgba(255,255,255,.95) 13.5% 19%,transparent 19.5%),conic-gradient(var(--red) 0 50%,#e6ebf2 0);opacity:.10;animation:fx-spin 110s linear infinite}
+.hero .lead{color:#b6c0cf;max-width:52ch}
+.hm-badge{display:inline-flex;align-items:center;gap:10px;padding:6px 16px;border-radius:99px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.18);font:600 13px Fredoka,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:#e6ebf2;margin-bottom:18px;backdrop-filter:blur(6px)}
+.hm-dot{width:9px;height:9px;border-radius:50%;background:#4ade80;box-shadow:0 0 10px #4ade80;animation:fx-pulse 1.6s ease-in-out infinite}
+.cta .btn.b2{background:var(--blu);color:#fff;border-color:#000}
+
+/* Escenario interactivo de la Pokédex */
+.hm-stage{position:relative;display:grid;place-items:center;justify-self:center;width:100%;max-width:430px}
+.hm-ring{position:absolute;width:92%;aspect-ratio:1;border-radius:50%;border:2px dashed rgba(255,255,255,.14);pointer-events:none;animation:fx-spin 48s linear infinite}
+.hm-ring::after{content:"";position:absolute;inset:24px;border-radius:50%;border:1px solid rgba(29,75,115,.45)}
+.hm-chip{position:absolute;z-index:3;display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:16px;background:rgba(16,20,27,.88);border:2px solid rgba(255,255,255,.2);color:#fff;font:600 13px Fredoka,sans-serif;box-shadow:0 14px 28px rgba(0,0,0,.45);backdrop-filter:blur(8px);animation:fx-float 4.6s ease-in-out infinite}
+.hm-chip small{display:block;font:400 11.5px Rubik,sans-serif;color:#98a3b3}
+.hm-chip i{width:10px;height:10px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red);flex:none}
+.hm-chip.c1{top:10%;left:-12px;animation-delay:-1.2s}
+.hm-chip.c2{bottom:12%;right:-10px;animation-delay:-2.8s}
+.hm-chip.c2 i{background:#38bdf8;box-shadow:0 0 8px #38bdf8}
+
+/* Franja de métricas */
+.spec{background:var(--card);border-radius:20px;overflow:hidden}
+.spec div{display:flex;flex-direction:column;gap:4px;position:relative}
+.spec-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.spec-ico{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(184,53,43,.12);color:var(--red);flex:none}
+.spec div:nth-child(even) .spec-ico{background:rgba(29,75,115,.16);color:#38bdf8}
+:root[data-theme="light"] .spec div:nth-child(even) .spec-ico{color:var(--blu)}
+.spec-ico svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* Encabezados de sección */
+.hm-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px 32px;margin-bottom:36px}
+.hm-kicker{display:inline-flex;align-items:center;gap:8px;font:600 13px Fredoka,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.hm-kicker::before{content:"";width:22px;height:2.5px;background:var(--red);border-radius:2px}
+.hm-head.b .hm-kicker{color:#38bdf8}
+:root[data-theme="light"] .hm-head.b .hm-kicker{color:var(--blu)}
+.hm-head.b .hm-kicker::before{background:currentColor}
+
+/* Tarjetas de exploración (Explora PokéTech) */
+.tz{padding:28px;display:flex;flex-direction:column;gap:10px;border-top:6px solid var(--c,var(--red))}
+.tz.b{--c:var(--blu)}
+.tz-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.tz-ico{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--c,var(--red));color:#fff;border:2px solid #000;box-shadow:3px 3px 0 #000}
+.tz-ico svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.tz-tag{font:600 12px Fredoka,sans-serif;padding:4px 12px;border-radius:99px;background:var(--alt);color:var(--ink);border:1.5px solid var(--ln)}
+.tz h3{font-size:22px;margin:0}
+.tz p{flex:1;line-height:1.55}
+.tz .tz-go{margin-top:10px;font:600 15px Fredoka,sans-serif;color:var(--red)}
+.tz.b .tz-go{color:#38bdf8}
+:root[data-theme="light"] .tz.b .tz-go{color:var(--blu)}
+
+/* Sección de tecnología y llamada a la acción */
+.hm-alt{background:var(--alt);border-top:2px solid var(--ln);border-bottom:2px solid var(--ln)}
+.hm-feats{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.hm-feat{padding:28px;display:flex;flex-direction:column;gap:12px}
+.hm-feat-ico{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:rgba(184,53,43,.14);color:var(--red);border:2px solid currentColor}
+.hm-feat:nth-child(2) .hm-feat-ico{background:rgba(29,75,115,.2);color:#38bdf8}
+:root[data-theme="light"] .hm-feat:nth-child(2) .hm-feat-ico{color:var(--blu)}
+.hm-feat-ico svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.hm-feat h3{font-size:21px}
+.hm-feat p{color:var(--mut);font-size:15.5px;line-height:1.6}
+
+.hm-cta-box{margin-top:44px;padding:38px 42px;background:linear-gradient(135deg,#131821 0%,#1d283a 55%,#2b1618 100%);color:#fff;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;position:relative;overflow:hidden;border-color:#000}
+.hm-cta-box::before{content:"";position:absolute;right:-90px;top:-90px;width:280px;height:280px;border-radius:50%;border:6px solid rgba(255,255,255,.08);background:linear-gradient(transparent 46%,rgba(255,255,255,.08) 46% 54%,transparent 54%);pointer-events:none;animation:fx-spin 45s linear infinite}
+.hm-cta-copy{max-width:56ch;position:relative;z-index:1}
+.hm-cta-copy span{display:inline-block;font:600 12.5px Fredoka,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#ff8a80;margin-bottom:8px}
+.hm-cta-copy h3{font-size:clamp(24px,3.2vw,34px);margin-bottom:8px;color:#fff}
+.hm-cta-copy p{color:#c8ceda;font-size:16px}
+.hm-cta-btns{display:flex;flex-wrap:wrap;gap:14px;position:relative;z-index:1}
+
+/* Ajustes modo oscuro y responsivo */
+:root[data-theme="dark"] .spec strong,:root[data-theme="dark"] .tz .tz-go{color:#ff6b5e}
+:root[data-theme="dark"] .tz.b .tz-go{color:#60a5fa}
 :root[data-theme="dark"] .bx{box-shadow:6px 6px 0 #000}
 .logo-img{height:40px;width:auto;display:block}
 footer{background:#07090d}
 header{border-bottom-color:#000}
-</style>
 
+@media(max-width:940px){
+  .hm-feats{grid-template-columns:1fr}
+  .hm-chip{display:none}
+  .hm-cta-box{padding:28px 24px}
+}
+</style>
 
 <link rel="stylesheet" href="css/tema.css">
 <script src="js/tema.js"></script>
@@ -52,10 +122,19 @@ header{border-bottom-color:#000}
 <div class="hero">
 <div class="w hg">
 <div>
+<div class="hm-badge"><i class="hm-dot" aria-hidden="true"></i><span>PokéTech OS · Red Interregional Activa</span></div>
 <h1>Pokédex Paldea. Todo Pokémon, en tu mano.</h1>
-<p class="lead">PokéTech investiga nuevas especies y fabrica la Pokédex de cada generación, con presencia en todas las regiones.</p>
-<div class="cta"><a class="btn r" href="pages/tienda.html">Comprar ahora</a><a class="btn w2" href="pages/estrategia.html">Conocer PokéTech</a></div>
+<p class="lead">PokéTech investiga nuevas especies y fabrica la Pokédex oficial de cada generación, con sincronización en tiempo real y presencia en las 9 regiones.</p>
+<div class="cta">
+<a class="btn r" href="pages/tienda.html">Comprar ahora</a>
+<a class="btn b2" href="pages/ofertas.html">Ver ofertas</a>
+<a class="btn w2" href="pages/estrategia.html">Conocer PokéTech</a>
 </div>
+</div>
+<div class="hm-stage">
+<div class="hm-ring" aria-hidden="true"></div>
+<div class="hm-chip c1" aria-hidden="true"><i></i><div><b>Escáner Biométrico</b><small>Precisión óptica 99.9%</small></div></div>
+<div class="hm-chip c2" aria-hidden="true"><i></i><div><b>Red PokéTech 5G</b><small>Kanto a Paldea en vivo</small></div></div>
 <svg class="dev" viewBox="0 0 400 480" role="img" aria-label="Pokédex PokéTech escaneando">
 <rect x="34" y="34" width="360" height="440" rx="30" fill="#000"/>
 <rect x="20" y="20" width="360" height="440" rx="30" fill="var(--red)" stroke="#000" stroke-width="8"/>
@@ -70,24 +149,105 @@ header{border-bottom-color:#000}
 <circle cx="270" cy="395" r="20" fill="#fff" stroke="#000" stroke-width="6"/><circle cx="326" cy="372" r="20" fill="var(--blu)" stroke="#000" stroke-width="6"/>
 <path d="M180 385h50M180 401h50M180 417h50" stroke="#000" stroke-width="6" stroke-linecap="round"/>
 </svg>
+</div>
 </div></div>
 
 <div class="w"><div class="spec bx">
-<div><strong>9</strong><span>generaciones de Pokédex</span></div>
-<div><strong>9</strong><span>regiones con disponibilidad</span></div>
-<div><strong>99.9%</strong><span>uptime global</span></div>
-<div><strong>4</strong><span>regiones con drones de escaneo</span></div>
+<div><div class="spec-top"><strong>9</strong><span class="spec-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="3"/><circle cx="12" cy="17" r="1.5"/><path d="M9 6h6"/></svg></span></div><span>generaciones de Pokédex</span></div>
+<div><div class="spec-top"><strong>9</strong><span class="spec-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span></div><span>regiones con disponibilidad</span></div>
+<div><div class="spec-top"><strong>99.9%</strong><span class="spec-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></span></div><span>uptime global en ruta</span></div>
+<div><div class="spec-top"><strong>4</strong><span class="spec-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M5 5l4 4m6 6 4 4M19 5l-4 4m-6 6-4 4"/><circle cx="4" cy="4" r="2"/><circle cx="20" cy="4" r="2"/><circle cx="4" cy="20" r="2"/><circle cx="20" cy="20" r="2"/></svg></span></div><span>regiones con drones de escaneo</span></div>
 </div></div>
 
 <section><div class="w">
+<div class="hm-head">
+<div>
+<span class="hm-kicker">Portal Corporativo</span>
 <h2 class="sh">Explora PokéTech</h2>
-<p class="lead">Selecciona una sección para conocer nuestra estrategia, organización, forma de trabajar y compromiso.</p>
+<p class="lead">Selecciona una sección para descubrir nuestro catálogo, promociones, estrategia, estructura organizacional, cultura de trabajo y estándares de calidad.</p>
+</div>
+</div>
 <div class="g3">
-<a class="bx tz" href="pages/estrategia.html"><h3>Estrategia</h3><p>Misión, visión, valores y nuestro panorama FODA.</p><span>Ver más →</span></a>
-<a class="bx tz" href="pages/organizacion.html"><h3>Organización</h3><p>Organigrama, departamentos clave y equipo directivo.</p><span>Ver más →</span></a>
-<a class="bx tz" href="pages/trabajo.html"><h3>Forma de trabajar</h3><p>Nuestros principios, liderazgo y cultura de equipo.</p><span>Ver más →</span></a>
-<a class="bx tz" href="pages/compromiso.html"><h3>Compromiso</h3><p>Estándares de calidad y sostenibilidad certificados.</p><span>Ver más →</span></a>
-<a class="bx tz" href="pages/tienda.html"><h3>Tienda Pokédex</h3><p>Las 9 generaciones de Pokédex, listas para pedir.</p><span>Comprar →</span></a>
+<a class="bx tz" href="pages/tienda.html">
+<div class="tz-top"><span class="tz-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 9h16l-1 11H5zM8 9V6a4 4 0 0 1 8 0v3"/></svg></span><span class="tz-tag">9 Generaciones</span></div>
+<h3>Tienda Pokédex</h3>
+<p>Todos los modelos restaurados y certificados por PokéTech, desde Kanto hasta Paldea, listos para pedir.</p>
+<span class="tz-go">Comprar en tienda →</span>
+</a>
+
+<a class="bx tz b" href="pages/ofertas.html">
+<div class="tz-top"><span class="tz-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12 12 20 4 12V4h8z"/><circle cx="8" cy="8" r="1.5"/></svg></span><span class="tz-tag">Hasta -40%</span></div>
+<h3>Ofertas y Combos</h3>
+<p>Descuentos semanales por tiempo limitado, paquetes multi-región con ahorro extra y cupón de bienvenida.</p>
+<span class="tz-go">Ver ofertas →</span>
+</a>
+
+<a class="bx tz" href="pages/estrategia.html">
+<div class="tz-top"><span class="tz-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m16 8-2 6-6 2 2-6z"/></svg></span><span class="tz-tag">Rumbo 2026</span></div>
+<h3>Estrategia</h3>
+<p>Misión, visión, valores, diagnóstico FODA interactivo, objetivos SMART y plan de acción regional.</p>
+<span class="tz-go">Explorar estrategia →</span>
+</a>
+
+<a class="bx tz b" href="pages/organizacion.html">
+<div class="tz-top"><span class="tz-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="16" y="16" width="6" height="6" rx="1"/><path d="M5 16v-3h14v3M12 13V8"/></svg></span><span class="tz-tag">6 Direcciones</span></div>
+<h3>Organización</h3>
+<p>Organigrama interactivo con registro Pokédex del personal, departamentos clave y liderazgo directivo.</p>
+<span class="tz-go">Conocer al equipo →</span>
+</a>
+
+<a class="bx tz" href="pages/trabajo.html">
+<div class="tz-top"><span class="tz-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="tz-tag">Cultura</span></div>
+<h3>Forma de trabajar</h3>
+<p>Cómo lideramos, nos comunicamos e impulsamos el talento mediante decisiones compartidas entre áreas.</p>
+<span class="tz-go">Ver cultura →</span>
+</a>
+
+<a class="bx tz b" href="pages/compromiso.html">
+<div class="tz-top"><span class="tz-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="tz-tag">ISO &amp; Ética</span></div>
+<h3>Compromiso</h3>
+<p>Estándares internacionales de calidad, seguridad de datos, bienestar Pokémon y mejora continua.</p>
+<span class="tz-go">Ver certificaciones →</span>
+</a>
+</div>
+</div></section>
+
+<section class="hm-alt"><div class="w">
+<div class="hm-head b">
+<div>
+<span class="hm-kicker">Ingeniería PokéTech</span>
+<h2 class="sh">Tecnología diseñada para cada ruta</h2>
+<p class="lead">Combinamos hardware resistente de campo con investigación biológica ética para acompañar a entrenadores y laboratorios.</p>
+</div>
+</div>
+<div class="hm-feats">
+<article class="bx hm-feat">
+<span class="hm-feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2"/></svg></span>
+<h3>Identificación en milisegundos</h3>
+<p>Sensores ópticos y biológicos que registran especie, tipo, habilidad y hábitat sin perturbar el ecosistema Pokémon.</p>
+</article>
+<article class="bx hm-feat">
+<span class="hm-feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg></span>
+<h3>Garantía y respaldo total</h3>
+<p>12 meses de garantía certificada, envíos a domicilio en toda la región y recolección gratuita en sucursal en 24 horas.</p>
+</article>
+<article class="bx hm-feat">
+<span class="hm-feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+<h3>Soporte directo al entrenador</h3>
+<p>Chat de atención inmediata, seguimiento por folio y acompañamiento técnico para cualquier generación de Pokédex.</p>
+</article>
+</div>
+
+<div class="bx hm-cta-box">
+<div class="hm-cta-copy">
+<span>Atención y Promociones</span>
+<h3>¿Listo para estrenar tu Pokédex o necesitas ayuda con tu equipo?</h3>
+<p>Aprovecha el cupón de bienvenida <b>POKETECH10</b> en nuestras ofertas de la semana o habla en vivo con nuestro equipo de soporte.</p>
+</div>
+<div class="hm-cta-btns">
+<a class="btn r" href="pages/contactanos.html">Contáctanos</a>
+<a class="btn w2" href="pages/ofertas.html">Ir a ofertas</a>
+</div>
 </div>
 </div></section>
 </main>
@@ -103,5 +263,7 @@ header{border-bottom-color:#000}
 <div class="cp">© 2026 PokéTech Research &amp; Development Corp. Todos los derechos reservados. Privacidad · Términos · Ética Pokémon</div>
 </div></footer>
 
+<script src="js/moderno.js"></script>
+<script src="js/animaciones.js"></script>
 </body>
 </html>

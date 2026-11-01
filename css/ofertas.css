@@ -28,11 +28,11 @@
 
 /* ---------- DESTACADAS (carrusel) ---------- */
 .of-dia { display: grid; grid-template-columns: 1.05fr 1fr; overflow: hidden; border-radius: 32px; background: var(--card); border: 1px solid var(--ln); box-shadow: var(--sh); }
-.of-dia-vis { position: relative; display: grid; place-items: center; min-height: 420px; background: radial-gradient(circle at 50% 42%, rgba(255, 255, 255, .5), transparent 60%), var(--c, var(--red)); }
+.of-dia-vis { position: relative; display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; min-height: 420px; overflow: hidden; background: radial-gradient(circle at 50% 42%, rgba(255, 255, 255, .5), transparent 60%), var(--c, var(--red)); }
 .of-dia-vis .of-pic { width: min(320px, 78%); height: 280px; }
 .of-dia-vis .of-gen { left: 22px; top: 20px; }
 .of-dia-vis .of-vars { left: 22px; bottom: 22px; }
-.of-burst { position: absolute; right: 24px; top: 22px; display: grid; place-content: center; width: 104px; height: 104px; border-radius: 50%; background: #fff; color: #000; text-align: center; font: 600 32px/1 Fredoka, sans-serif; transform: rotate(8deg); }
+.of-burst { position: absolute; z-index: 2; right: 24px; top: 22px; display: grid; place-content: center; width: 104px; height: 104px; border-radius: 50%; background: #fff; color: #000; text-align: center; font: 600 32px/1 Fredoka, sans-serif; transform: rotate(8deg); }
 .of-burst small { font-size: 14px; font-weight: 600; letter-spacing: .06em; color: var(--red); }
 .of-dia-body { display: flex; flex-direction: column; justify-content: center; padding: 40px 44px; }
 .of-flag { align-self: flex-start; margin-bottom: 14px; padding: 5px 14px; border-radius: 99px; background: var(--blu); color: #fff; font: 600 14px Fredoka, sans-serif; }
@@ -41,11 +41,11 @@
 .of-dia-body .of-now { font-size: 46px; }
 
 /* ---------- Piezas compartidas de las tarjetas ---------- */
-.of-gen { position: absolute; z-index: 1; left: 16px; top: 14px; padding: 4px 12px; background: rgba(0, 0, 0, .35); color: #fff; border-radius: 99px; font: 600 14px Fredoka, sans-serif; backdrop-filter: blur(4px); }
-.of-pic { display: grid; place-items: center; width: 168px; height: 150px; }
-.of-img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 14px 14px rgba(0, 0, 0, .35)); transition: transform .35s; }
+.of-gen { position: absolute; z-index: 2; left: 16px; top: 14px; padding: 4px 12px; background: rgba(0, 0, 0, .35); color: #fff; border-radius: 99px; font: 600 14px Fredoka, sans-serif; backdrop-filter: blur(4px); }
+.of-pic { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; width: 168px; height: 150px; min-width: 0; min-height: 0; }
+.of-img { width: 100%; height: 100%; max-width: 100%; max-height: 100%; min-width: 0; min-height: 0; object-fit: contain; filter: drop-shadow(0 14px 14px rgba(0, 0, 0, .35)); transition: transform .35s; }
 .of-fallback { width: 78px; height: 98px; }
-.of-vars { position: absolute; left: 14px; bottom: 14px; z-index: 1; display: flex; gap: 6px; }
+.of-vars { position: absolute; left: 14px; bottom: 14px; z-index: 2; display: flex; gap: 6px; }
 .of-var { width: 38px; height: 38px; padding: 4px; background: #fff; border: 0; border-radius: 11px; cursor: pointer; opacity: .75; transition: opacity .15s, transform .15s; }
 .of-var:hover { opacity: 1; transform: translateY(-2px); }
 .of-var[aria-pressed="true"] { opacity: 1; box-shadow: 0 0 0 3px #000, 0 0 0 5px #fff; }
@@ -53,7 +53,7 @@
 .of-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; }
 .of-now { font: 600 34px/1 Fredoka, sans-serif; color: var(--red); font-variant-numeric: tabular-nums; }
 .of-was { color: var(--mut); text-decoration: line-through; font-size: 18px; }
-.of-save { display: inline-block; margin-top: 6px; color: var(--blu); font: 600 14px Fredoka, sans-serif; }
+.of-save { display: inline-block; margin-top: 6px; color: var(--blu); font-weight: 600; font: 600 14px Fredoka, sans-serif; }
 .of-stock { margin: 16px 0 4px; }
 .of-stock-top { display: flex; justify-content: space-between; margin-bottom: 8px; color: var(--mut); font-size: 13.5px; }
 .of-stock-top b { color: var(--ink); }
@@ -78,8 +78,8 @@
 .of-card:hover .of-img { transform: scale(1.07) rotate(-3deg); }
 .of-ribbon { position: absolute; z-index: 3; right: 16px; top: 14px; padding: 4px 12px; background: #fff; color: #000; border-radius: 99px; font: 600 16px Fredoka, sans-serif; }
 .of-hot .of-ribbon { background: #000; color: #fff; box-shadow: 0 0 0 2px #fff; }
-.of-th { position: relative; display: grid; place-items: center; height: 224px; background-image: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, .46), transparent 60%); }
-.of-tag { position: absolute; right: 16px; bottom: 14px; padding: 3px 12px; background: #fff; color: #000; border-radius: 99px; font: 600 13px Fredoka, sans-serif; }
+.of-th { position: relative; display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; height: 224px; overflow: hidden; background-image: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, .46), transparent 60%); }
+.of-tag { position: absolute; z-index: 2; right: 16px; bottom: 14px; padding: 3px 12px; background: #fff; color: #000; border-radius: 99px; font: 600 13px Fredoka, sans-serif; }
 .of-bd { display: flex; flex: 1; flex-direction: column; padding: 22px; }
 .of-bd h3 { font-size: 22px; }
 .of-d { flex: 1; margin: 8px 0 16px; color: var(--mut); font-size: 15px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }

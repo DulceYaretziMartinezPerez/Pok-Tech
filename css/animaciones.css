@@ -1,15 +1,15 @@
 /* ============================================================
    css/animaciones.css — Capa de movimiento compartida (PokéTech)
-   Se usa en TIENDA, OFERTAS y CONTÁCTANOS.
+   Se usa en TODAS las páginas del portal:
+   INICIO, TIENDA, OFERTAS, ESTRATEGIA, ORGANIZACIÓN,
+   FORMA DE TRABAJAR, COMPROMISO y CONTÁCTANOS.
    Cárgalo DESPUÉS del css de cada página y ANTES de tema.css.
-   Paleta: #000 · #E3350D · #FFF · #0075BE (sin colores nuevos:
-   solo negro o blanco con transparencia).
    La lógica vive en js/animaciones.js. Todo respeta
-   prefers-reduced-motion (moderno.css ya apaga las animaciones).
+   prefers-reduced-motion.
    ============================================================ */
 @property --fx-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
 
-body.mx { overflow-x: clip; }
+body.mx, .fx body { overflow-x: clip; }
 
 /* ---------- Keyframes (usan las propiedades translate / rotate / scale
    para no pelearse con los transform que ya tienen las tarjetas) ---------- */
@@ -49,28 +49,30 @@ body.mx { overflow-x: clip; }
 }
 @keyframes fx-tick { 0% { box-shadow: 0 0 0 0 rgba(227, 53, 13, .75); } 100% { box-shadow: 0 0 0 16px rgba(227, 53, 13, 0); } }
 @keyframes fx-rip { from { scale: 0; opacity: .3; } to { scale: 1; opacity: 0; } }
+@keyframes fx-beam { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
 
 /* ============================================================
    1) BARRA DE PROGRESO + HEADER
    ============================================================ */
 .fx-progress { position: fixed; z-index: 60; left: 0; right: 0; top: 0; height: 4px; pointer-events: none; }
-.fx-progress i { display: block; height: 100%; background: linear-gradient(90deg, #fff, var(--blu)); transform-origin: left; transform: scaleX(0); }
+.fx-progress i { display: block; height: 100%; background: linear-gradient(90deg, #fff, var(--blu), var(--red)); transform-origin: left; transform: scaleX(0); }
 header { transition: box-shadow .3s; }
 header.fx-stuck { box-shadow: 0 14px 30px -14px rgba(0, 0, 0, .65); }
 .hd { transition: min-height .3s; }
 .logo-img { transition: height .3s, rotate .3s; }
 header.fx-stuck .hd { min-height: 56px; }
 header.fx-stuck .logo-img { height: 34px; }
-.logo:hover .logo-img { animation: fx-wiggle .6s; }
+.logo:hover .logo-img, .logo:hover svg { animation: fx-wiggle .6s; }
 nav a { transition: background .2s, translate .2s; }
 nav a:hover { translate: 0 -2px; }
 footer a { transition: translate .2s, color .2s; }
 footer a:hover { translate: 5px 0; }
 
 /* ============================================================
-   2) HERO (tienda y ofertas): entrada orquestada, foco de luz y burbujas
+   2) HERO (inicio, tienda, ofertas y portadas .pagehead):
+      entrada orquestada, foco de luz y burbujas/Pokébolas
    ============================================================ */
-.mx-hero { --mx: 70%; --my: 30%; }
+.mx-hero, .pagehead, .hero { --mx: 70%; --my: 30%; }
 .mx-hero::before {
   background:
     radial-gradient(420px circle at var(--mx) var(--my), rgba(255, 255, 255, .12), transparent 60%),
@@ -85,19 +87,28 @@ footer a:hover { translate: 5px 0; }
 }
 .fx-w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
 .fx-w > span { display: inline-block; transform-origin: left bottom; animation: fx-word .95s cubic-bezier(.2, .9, .2, 1) calc(var(--i) * 90ms + .1s) backwards; }
-.mx-hero .mx-sub { animation: fx-up .8s cubic-bezier(.2, .8, .2, 1) .45s backwards; }
+.mx-hero .mx-sub, .pagehead .pagehead-copy p, .hero .lead { animation: fx-up .8s cubic-bezier(.2, .8, .2, 1) .45s backwards; }
+.pagehead .pagehead-copy p + p { animation-delay: .6s; }
+.pagehead .dex-strip, .hero .hm-badge { animation: fx-side .75s cubic-bezier(.2, .9, .25, 1) .05s backwards; }
 .mx-hero .td-stats { animation: fx-up .8s cubic-bezier(.2, .8, .2, 1) .6s backwards; }
 .mx-hero .td-stats li { animation: fx-up .7s cubic-bezier(.2, .8, .2, 1) calc(.7s + var(--n, 0) * .12s) backwards; }
 .mx-hero .td-stats li:nth-child(2) { --n: 1; }
 .mx-hero .td-stats li:nth-child(3) { --n: 2; }
-.mx-hero .mx-cta { animation: fx-up .8s cubic-bezier(.2, .8, .2, 1) .8s backwards; }
-.mx-hero .cr, .of-clock { animation: fx-swing 1.1s cubic-bezier(.2, .9, .3, 1.08) .35s backwards; }
+.mx-hero .mx-cta, .hero .cta { animation: fx-up .8s cubic-bezier(.2, .8, .2, 1) .75s backwards; }
+.mx-hero .cr, .of-clock, .hero .hm-stage { animation: fx-swing 1.1s cubic-bezier(.2, .9, .3, 1.08) .35s backwards; }
 
 .fx-bits { position: absolute; z-index: -1; inset: 0; overflow: hidden; pointer-events: none; }
+.pagehead > .fx-bits, .hero > .fx-bits { z-index: 1; }
 .fx-bit { position: absolute; left: var(--x); bottom: -40px; width: var(--s); height: var(--s); border-radius: 50%; background: rgba(255, 255, 255, .16); animation: fx-rise var(--t) linear var(--dl) infinite; }
 .fx-bit.r { background: rgba(227, 53, 13, .55); }
 .fx-bit.b { background: rgba(0, 117, 190, .65); }
 .fx-bit.p { background: linear-gradient(rgba(227, 53, 13, .6) 0 44%, rgba(0, 0, 0, .55) 44% 56%, rgba(255, 255, 255, .5) 56%); box-shadow: 0 0 0 2px rgba(255, 255, 255, .28); }
+
+/* Foco de luz interactivo en portadas .pagehead y .hero */
+.pagehead > .fx-bits::after, .hero > .fx-bits::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(480px circle at var(--mx, 70%) var(--my, 30%), rgba(255, 255, 255, .1), transparent 62%);
+}
 
 /* rayos giratorios detrás del producto destacado */
 .td-s-vis, .of-dia-vis { overflow: hidden; }
@@ -131,51 +142,57 @@ footer a:hover { translate: 5px 0; }
 .fx-k-wipe.fx-in { animation: fx-wipe 1s cubic-bezier(.7, 0, .2, 1) var(--d, 0ms) backwards; }
 .fx-k-side.fx-in { animation: fx-side .75s cubic-bezier(.2, .9, .25, 1) var(--d, 0ms) backwards; }
 .fx-k-rise.fx-in { animation: fx-up .9s cubic-bezier(.2, .8, .2, 1) var(--d, 0ms) backwards; }
+.fx-k-hop.fx-in  { animation: fx-hop .75s cubic-bezier(.2, 1.25, .4, 1) var(--d, 0ms) backwards; }
 
 /* íconos que se dibujan solos */
-.fx-draw:not(.fx-in) :is(path, circle) { opacity: 0; }
-.fx-draw.fx-in :is(path, circle) { stroke-dasharray: 1 1; animation: fx-draw 1.2s cubic-bezier(.5, 0, .2, 1) .15s backwards; }
+.fx-draw:not(.fx-in) :is(path, circle, rect) { opacity: 0; }
+.fx-draw.fx-in :is(path, circle, rect) { stroke-dasharray: 1 1; animation: fx-draw 1.2s cubic-bezier(.5, 0, .2, 1) .15s backwards; }
 
 /* divisor Pokébola: se "captura" al llegar */
 .bd2.fx-in::after { animation: fx-catch 1.4s cubic-bezier(.3, .8, .3, 1) .1s; }
 
-/* listas de condiciones: viñetas en cascada */
-.td-cond li, .of-info p { transition: translate .2s; }
-.td-cond > .bx.fx-in li { animation: fx-side .6s cubic-bezier(.2, .9, .25, 1) backwards; }
-.td-cond > .bx.fx-in li:nth-child(1) { animation-delay: .35s; }
-.td-cond > .bx.fx-in li:nth-child(2) { animation-delay: .45s; }
-.td-cond > .bx.fx-in li:nth-child(3) { animation-delay: .55s; }
-.td-cond > .bx.fx-in li:nth-child(4) { animation-delay: .65s; }
+/* listas de condiciones y FODA: viñetas en cascada */
+.td-cond li, .of-info p, .fd li { transition: translate .2s; }
+.fd li:hover { translate: 4px 0; }
+.td-cond > .bx.fx-in li, .fd.fx-in li { animation: fx-side .6s cubic-bezier(.2, .9, .25, 1) backwards; }
+.td-cond > .bx.fx-in li:nth-child(1), .fd.fx-in li:nth-child(1) { animation-delay: .28s; }
+.td-cond > .bx.fx-in li:nth-child(2), .fd.fx-in li:nth-child(2) { animation-delay: .36s; }
+.td-cond > .bx.fx-in li:nth-child(3), .fd.fx-in li:nth-child(3) { animation-delay: .44s; }
+.td-cond > .bx.fx-in li:nth-child(4), .fd.fx-in li:nth-child(4) { animation-delay: .52s; }
+.fd.fx-in li:nth-child(5) { animation-delay: .60s; }
 .td-cond > .bx:hover .td-ico, .of-info > .bx:hover .of-ico { animation: fx-wiggle .6s; }
 
 /* ============================================================
    4) BOTONES: onda, brillo e imán
    ============================================================ */
-.mx .btn { position: relative; overflow: hidden; isolation: isolate; }
-.mx .btn.fx-mag { transition: transform .15s, filter .15s, box-shadow .15s, translate .3s cubic-bezier(.2, .9, .3, 1.4); }
-.mx .btn.r::after {
+.btn { position: relative; overflow: hidden; isolation: isolate; }
+.btn.fx-mag { transition: transform .15s, filter .15s, box-shadow .15s, translate .3s cubic-bezier(.2, .9, .3, 1.4); }
+.btn.r::after {
   content: ""; position: absolute; z-index: 1; inset: 0; pointer-events: none;
   background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .38) 50%, transparent 65%);
   translate: -120% 0; transition: translate .65s cubic-bezier(.2, .8, .2, 1);
 }
-.mx .btn.r:hover::after { translate: 120% 0; }
+.btn.r:hover::after { translate: 120% 0; }
 .fx-rip { position: absolute; z-index: 2; border-radius: 50%; background: currentColor; pointer-events: none; opacity: 0; animation: fx-rip .65s ease-out; }
 
 /* ============================================================
-   5) TARJETAS DE PRODUCTO: inclinación 3D, brillo y levitación
+   5) TARJETAS INTERACTIVAS: inclinación 3D, brillo y levitación
    ============================================================ */
-.td-card, .of-card, .of-combo { position: relative; }
-.mx .fx-tilt {
+.td-card, .of-card, .of-combo, .tz, .mv, .fd, .og-ceo, .og-d, .og-mn, .og-k, .og-p, .pk-card, .cf, .evaluation-card, .hm-feat { position: relative; }
+.fx-tilt {
   transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-  transition: transform .18s ease-out, box-shadow .25s; will-change: transform;
+  transition: transform .18s ease-out, box-shadow .25s, border-color .25s;
+  will-change: transform;
+}
+.fx-tilt:hover {
+  transform: perspective(900px) translateY(-6px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
 }
 .mx .fx-tilt:hover {
-  transform: perspective(900px) translateY(-6px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
   box-shadow: 0 2px 4px rgba(0, 0, 0, .06), 0 36px 56px -24px rgba(0, 0, 0, .55);
 }
 .fx-tilt::after {
   content: ""; position: absolute; z-index: 4; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .25s;
-  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, .24), transparent 45%);
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, .22), transparent 45%);
 }
 .fx-tilt:hover::after { opacity: 1; }
 
@@ -210,9 +227,9 @@ footer a:hover { translate: 5px 0; }
 .td-trust li:hover { translate: 0 -3px; }
 .td-trust svg { transition: rotate .4s cubic-bezier(.2, 1.4, .4, 1), scale .3s; }
 .td-trust li:hover svg { rotate: -14deg; scale: 1.14; }
-.td-chip, .of-chip { transition: background .25s, color .25s, box-shadow .25s, scale .2s; }
-.td-chip:active, .of-chip:active { scale: .94; }
-.td-chip[aria-pressed="true"], .of-chip[aria-pressed="true"] { animation: fx-chip .45s cubic-bezier(.2, 1.6, .4, 1); }
+.td-chip, .of-chip, .og-filter button { transition: background .25s, color .25s, box-shadow .25s, scale .2s; }
+.td-chip:active, .of-chip:active, .og-filter button:active { scale: .94; }
+.td-chip[aria-pressed="true"], .of-chip[aria-pressed="true"], .og-filter button[aria-pressed="true"] { animation: fx-chip .45s cubic-bezier(.2, 1.6, .4, 1); }
 @media (min-width: 861px) {
   .td-search { transition: width .35s cubic-bezier(.2, .8, .2, 1), box-shadow .15s; }
   .td-search:focus { width: 330px; }
@@ -293,10 +310,95 @@ footer a:hover { translate: 5px 0; }
 .of-coupon:hover .of-pct { scale: 1.08; }
 
 /* ============================================================
+   8) ESTRATEGIA
+   ============================================================ */
+.mv .dex-tag { transition: translate .25s cubic-bezier(.2, 1.5, .4, 1), rotate .25s; }
+.mv:hover .dex-tag { translate: 0 -4px; rotate: -4deg; }
+.vals span { transition: translate .22s cubic-bezier(.2, 1.5, .4, 1), box-shadow .22s; cursor: default; }
+.vals span:hover { translate: 0 -4px; }
+.vals span:hover i { animation: fx-wiggle .55s; display: inline-block; }
+.fd:hover h3 i { animation: fx-wiggle .6s; display: inline-block; }
+.fd li::before { transition: rotate .45s cubic-bezier(.2, 1.4, .4, 1), scale .25s; }
+.fd li:hover::before { rotate: 180deg; scale: 1.2; }
+.stat-fill {
+  background-image: repeating-linear-gradient(135deg, transparent 0 10px, rgba(255, 255, 255, .22) 10px 20px);
+  background-size: 28px 28px;
+  animation: fx-stripes 1.2s linear infinite;
+}
+.evo-arrow i { display: inline-block; animation: fx-float 2s ease-in-out infinite; }
+.evo-step .evo-n { transition: scale .25s cubic-bezier(.2, 1.5, .4, 1), rotate .35s; }
+.evo-step:hover .evo-n { scale: 1.15; rotate: -10deg; }
+
+/* ============================================================
+   9) ORGANIZACIÓN
+   ============================================================ */
+.og-stem, .og-cols::before {
+  background-image: linear-gradient(90deg, transparent, rgba(131, 189, 232, .85), transparent);
+  background-size: 200% 100%;
+  animation: fx-beam 3.2s linear infinite;
+}
+.og-ceo:hover .og-av, .og-d:hover .og-av, .og-mn:hover .og-av { animation: fx-wiggle .55s; }
+.og-p { overflow: hidden; }
+.og-p::before {
+  content: ""; position: absolute; right: -42px; top: -42px; width: 120px; height: 120px; border-radius: 50%; pointer-events: none;
+  border: 4px solid rgba(255, 255, 255, .07);
+  background: linear-gradient(transparent 46%, rgba(255, 255, 255, .07) 46% 54%, transparent 54%);
+  transition: rotate .8s cubic-bezier(.2, .9, .3, 1.2), scale .4s;
+}
+:root[data-theme="light"] .og-p::before {
+  border-color: rgba(0, 0, 0, .06);
+  background: linear-gradient(transparent 46%, rgba(0, 0, 0, .06) 46% 54%, transparent 54%);
+}
+.og-p:hover::before { rotate: 180deg; scale: 1.18; }
+
+/* ============================================================
+   10) FORMA DE TRABAJAR
+   ============================================================ */
+.pk-card .pk-img img { transition: scale .55s cubic-bezier(.2, .8, .2, 1), rotate .55s; }
+.pk-card:hover .pk-img img { scale: 1.08; rotate: -1deg; }
+.pk-rail .pk-card .pk-img { transition: rotate .6s cubic-bezier(.2, 1.3, .4, 1), scale .35s; }
+.pk-rail .pk-card:hover .pk-img { rotate: 8deg; scale: 1.06; }
+
+/* ============================================================
+   11) COMPROMISO
+   ============================================================ */
+.cf::before { animation: fx-spin 55s linear infinite; }
+.cf img { animation: fx-float 5.5s ease-in-out infinite; transition: scale .4s cubic-bezier(.2, 1.3, .4, 1); }
+.cf:hover img { scale: 1.05; }
+.cf.is-active .cf-copy > * { animation: fx-up .55s cubic-bezier(.2, .8, .2, 1) backwards; }
+.cf.is-active .cf-copy > :nth-child(2) { animation-delay: .08s; }
+.cf.is-active .cf-copy > :nth-child(3) { animation-delay: .16s; }
+.evaluation-card > img { transition: scale .55s cubic-bezier(.2, .8, .2, 1); }
+.evaluation-card:hover > img { scale: 1.07; }
+.improvement-wheel-ring::before { animation: fx-spin 42s linear infinite; border-style: dashed; }
+.improvement-wheel-ring::after { animation: fx-unspin 32s linear infinite; border-style: dashed; }
+.improvement-card[aria-current="true"] { animation: fx-tick 2s ease-out infinite; }
+
+/* ============================================================
+   12) INICIO (index.html)
+   ============================================================ */
+.hero .dev { animation: fx-float 5.2s ease-in-out infinite; filter: drop-shadow(0 24px 36px rgba(0, 0, 0, .55)); transition: rotate .3s, scale .3s; }
+.hero .dev:hover { scale: 1.03; rotate: -2deg; }
+.spec > div { transition: translate .25s, background .25s; }
+.spec > div:hover { translate: 0 -4px; }
+.tz { overflow: hidden; transition: transform .18s ease-out, box-shadow .25s, border-color .25s; }
+.tz::before {
+  content: ""; position: absolute; right: -38px; bottom: -38px; width: 130px; height: 130px; border-radius: 50%; pointer-events: none;
+  border: 5px solid rgba(184, 53, 43, .12);
+  background: linear-gradient(transparent 45%, rgba(184, 53, 43, .12) 45% 55%, transparent 55%), radial-gradient(circle, rgba(184, 53, 43, .14) 0 16%, transparent 17%);
+  transition: rotate .85s cubic-bezier(.2, .9, .3, 1.2), scale .45s;
+}
+.tz:hover::before { rotate: 180deg; scale: 1.16; }
+.tz .tz-go { display: inline-flex; align-items: center; gap: 6px; transition: translate .22s cubic-bezier(.2, 1.4, .4, 1); }
+.tz:hover .tz-go { translate: 6px 0; }
+.tz:hover .tz-ico { animation: fx-wiggle .6s; }
+
+/* ============================================================
    Accesibilidad
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   .fx-hide { opacity: 1 !important; }
   .fx-progress, .fx-bits { display: none; }
   .of-strip { rotate: 0deg; scale: 1; }
+  .fx-tilt, .fx-tilt:hover { transform: none !important; }
 }

@@ -1,15 +1,15 @@
 /* ============================================================
    js/animaciones.js — Capa de movimiento compartida (PokéTech)
-   Se usa en TIENDA, OFERTAS y CONTÁCTANOS. Cárgalo AL FINAL, después
-   de tienda.js / ofertas.js / contactanos.js.
+   Se usa en TODAS las páginas del portal:
+   INICIO, TIENDA, OFERTAS, ESTRATEGIA, ORGANIZACIÓN,
+   FORMA DE TRABAJAR, COMPROMISO y CONTÁCTANOS.
+   Cárgalo AL FINAL, después del script propio de cada página.
    - Barra de progreso y header que se compacta al bajar.
    - Titular del hero palabra por palabra + burbujas + foco de luz.
    - Aparición al hacer scroll (cada tipo de bloque entra distinto).
    - Tarjetas con inclinación 3D y brillo que sigue al cursor.
    - Botones con onda e imán; el producto vuela al carrito.
    - Contadores, barras de stock e íconos que se dibujan al verse.
-   Vigila los contenedores que pintan tienda.js y ofertas.js, así que
-   también anima lo que se redibuja al filtrar u ordenar.
    ============================================================ */
 (function () {
   'use strict';
@@ -40,7 +40,8 @@
 
   /* ---------- Hero: titular, burbujas y foco de luz ---------- */
   function palabras(h) {
-    if (h.__fx || REDUCE) return; h.__fx = 1;
+    if (h.__fx || REDUCE || h.hasAttribute('data-split')) return;
+    h.__fx = 1;
     var t = h.textContent.trim();
     h.setAttribute('aria-label', t);
     h.innerHTML = t.split(/\s+/).map(function (w, i) {
@@ -77,17 +78,23 @@
     });
   }
 
-  /* ---------- Contador animado ---------- */
+  /* ---------- Contador animado (soporta prefijos, decimales y sufijos) ---------- */
   function contar(el) {
-    var fin = parseInt(el.textContent.replace(/[^\d]/g, ''), 10);
-    if (!fin || REDUCE) return;
-    var t0 = null; el.textContent = '0';
+    if (REDUCE) return;
+    var raw = el.textContent.trim();
+    var m = raw.match(/^([^\d]*?)(\d+(?:\.\d+)?)(.*)$/);
+    if (!m) return;
+    var pre = m[1], fin = parseFloat(m[2]), suf = m[3];
+    var dec = (m[2].split('.')[1] || '').length;
+    if (!fin) return;
+    var t0 = null;
+    el.textContent = pre + (0).toFixed(dec) + suf;
     raf(function paso(t) {
       t = t || Date.now();
       if (t0 === null) t0 = t;
       var k = Math.min(1, (t - t0) / 1100), e = 1 - Math.pow(1 - k, 3);
-      el.textContent = Math.round(fin * e);
-      if (k < 1) raf(paso); else el.textContent = fin;
+      el.textContent = pre + (fin * e).toFixed(dec) + suf;
+      if (k < 1) raf(paso); else el.textContent = raw;
     });
   }
 
@@ -106,19 +113,20 @@
 
   // [selector, tipo de entrada, ¿escalonar entre hermanos?]
   var REGLAS = [
-    ['.mx-head', 'wipe'],
-    ['.td-card, .of-card, .of-combo', 'pop', 1],
-    ['.td-trust li', 'side', 1],
-    ['.td-cond > .bx, .of-info > .bx', 'pop', 1],
-    ['.of-coupon', 'rise'],
+    ['.mx-head, .sec-head, .og-head, .commit-section-heading, .evaluation-heading, .improvement-heading, .pk-team > h2, .hm-head', 'wipe'],
+    ['.td-card, .of-card, .of-combo, .tz, .mv, .fd, .og-ceo, .og-d, .og-k, .og-p, .pk-card, .cf.is-active, .evaluation-card, .hm-feat', 'pop', 1],
+    ['.td-trust li, .og-mn, .spec > div', 'side', 1],
+    ['.vals span', 'hop', 1],
+    ['.td-cond > .bx, .of-info > .bx, .stat-card, .strat-card, .improvement-carousel, .improvement-copy, .hm-cta-box', 'pop', 1],
+    ['.of-coupon, .flavor', 'rise'],
     ['.bd2', 'plain'],
     ['.of-bar i[data-w]', 'bar'],
-    ['.td-stats b', 'count'],
+    ['.td-stats b, .spec strong, .stat-label b', 'count'],
     ['.ct-ch', 'side', 1],
     ['.ct-it', 'rise', 1],
     ['.ct-tl', 'plain'],
     ['.ct-form, .ct-ticket', 'pop'],
-    ['.of-ico, .td-ico, .ct-ico, .td-trust svg', 'draw']
+    ['.of-ico, .td-ico, .ct-ico, .td-trust svg, .og-ic svg, .tz-ico svg, .hm-feat-ico svg', 'draw']
   ];
   function marcar(el, tipo, d) {
     if (el.__fx) return; el.__fx = 1;
@@ -127,7 +135,7 @@
     if (!vivo) return;
     if (tipo === 'draw') {
       el.classList.add('fx-draw');
-      $$('path, circle', el).forEach(function (p) { p.setAttribute('pathLength', '1'); });
+      $$('path, circle, rect', el).forEach(function (p) { p.setAttribute('pathLength', '1'); });
     } else {
       el.classList.add('fx-k-' + tipo);
       if (tipo !== 'plain' && tipo !== 'bar' && tipo !== 'count') el.classList.add('fx-hide');
@@ -140,7 +148,7 @@
       var nuevos = $$(r[0]).filter(function (el) { return !el.__fx; }), padres = [];
       nuevos.forEach(function (el) {
         var d = 0;
-        if (r[2]) {
+        if (r[2] && el.parentNode) {
           var p = el.parentNode;
           if (p.__n === undefined) { p.__n = 0; padres.push(p); }
           d = Math.min(p.__n++, 8) * 60;
@@ -152,9 +160,10 @@
   }
 
   /* ---------- Tarjetas: inclinación 3D y brillo ---------- */
+  var TILT_SEL = '.td-card, .of-card, .tz, .mv, .fd, .og-ceo, .og-d, .og-mn, .og-k, .og-p, .pk-card, .cf, .evaluation-card, .hm-feat, .td-cond > .bx, .of-info > .bx';
   function inclinar(el) {
     if (el.__tilt) return; el.__tilt = 1;
-    if (el.style.getPropertyValue('--i') === '') {
+    if (el.parentNode && el.style.getPropertyValue('--i') === '') {
       el.style.setProperty('--i', Array.prototype.indexOf.call(el.parentNode.children, el));
     }
     if (!FINO || REDUCE) return;
@@ -176,7 +185,7 @@
       el.style.setProperty('--rx', '0deg'); el.style.setProperty('--ry', '0deg');
     });
   }
-  function inclinarTodo() { $$('.td-card, .of-card').forEach(inclinar); }
+  function inclinarTodo() { $$(TILT_SEL).forEach(inclinar); }
 
   /* ---------- Carruseles: marca la diapositiva activa ---------- */
   function diapositivas() {
@@ -213,6 +222,9 @@
       b.style.translate = ((e.clientX - (r.left + r.width / 2)) * .22).toFixed(1) + 'px ' + ((e.clientY - (r.top + r.height / 2)) * .3).toFixed(1) + 'px';
     });
     b.addEventListener('pointerleave', function () { b.style.translate = ''; });
+  }
+  function imantarTodo() {
+    $$('.mx-cta .btn, .ct-hero-cta .btn, .cta .btn, .hm-cta-box .btn, .og-a .btn').forEach(imantar);
   }
 
   /* ---------- El producto vuela al carrito ---------- */
@@ -251,9 +263,9 @@
   function iniciar() {
     document.documentElement.classList.add('fx');
     barra();
-    $$('.mx-hero h1').forEach(palabras);
-    $$('.mx-hero').forEach(hero);
-    $$('.mx-cta .btn, .ct-hero-cta .btn').forEach(imantar);
+    $$('.mx-hero h1, .pagehead h1, .hero h1').forEach(palabras);
+    $$('.mx-hero, .pagehead, .hero').forEach(hero);
+    imantarTodo();
     ondas();
     barrer(); inclinarTodo(); diapositivas(); carritos();
 
@@ -262,11 +274,14 @@
       if (b) volar(b);
     });
 
-    // Lo que tienda.js y ofertas.js vuelven a pintar (filtros, orden, carruseles)
-    var hosts = ['td-grid', 'of-grid', 'of-combos', 'td-cr-track'].map($).filter(Boolean).concat($$('.cr-track'));
+    // Lo que tienda.js, ofertas.js y organizacion.js vuelven a pintar
+    var hosts = ['td-grid', 'of-grid', 'of-combos', 'td-cr-track', 'og-team', 'og-cols', 'og-areas'].map($).filter(Boolean).concat($$('.cr-track'));
     if (window.MutationObserver) {
-      var mo = new MutationObserver(function () { barrer(); inclinarTodo(); diapositivas(); });
+      var mo = new MutationObserver(function () { barrer(); inclinarTodo(); imantarTodo(); diapositivas(); });
       hosts.forEach(function (h) { mo.observe(h, { childList: true }); });
+      $$('.og-sec').forEach(function (sec) {
+        mo.observe(sec, { attributes: true, attributeFilter: ['hidden'] });
+      });
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar();
