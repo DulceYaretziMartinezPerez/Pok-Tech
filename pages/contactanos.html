@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contáctanos | PokéTech</title>
+<link rel="icon" href="../assets/img/logo.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/moderno.css">
+<link rel="stylesheet" href="../css/contactanos.css">
+<link rel="stylesheet" href="../css/animaciones.css">
+<link rel="stylesheet" href="../css/tema.css">
+<script src="../js/tema.js"></script>
+</head>
+<body class="mx ct">
+
+<!-- ===== HEADER (igual en todas las páginas; fuente: components/header.html) ===== -->
+<header><div class="w hd">
+<a class="logo" href="../index.html"><img src="../assets/img/loguito.png" alt="PokéTech" class="logo-img"></a>
+<nav>
+<a href="../pages/tienda.html">Tienda Pokédex</a>
+<a href="../pages/ofertas.html">Ofertas</a>
+<a href="../pages/estrategia.html">Estrategia</a>
+<a href="../pages/organizacion.html">Organización</a>
+<a href="../pages/trabajo.html">Forma de trabajar</a>
+<a href="../pages/compromiso.html">Compromiso</a>
+<a href="../pages/contactanos.html" class="on">Contáctanos</a>
+</nav>
+</div></header>
+
+<!-- ===== HERO CLARO: la Poké Ball abre el chat ===== -->
+<section class="ct-hero">
+<div class="w ct-hero-grid">
+<div class="ct-hero-txt">
+<p class="ct-status" data-status data-open="true"><i aria-hidden="true"></i><span>Lunes a sábado, de 9:00 a 18:00 h</span></p>
+<h1 class="ct-h1" data-split>Hablemos.</h1>
+<p class="ct-lead">Dudas, quejas o sugerencias: te escuchamos y te damos seguimiento hasta resolver tu caso.</p>
+<div class="ct-hero-cta"><button type="button" class="btn r" data-chat>Abrir chat</button><a class="btn w2" href="#quejas">Enviar una queja</a></div>
+</div>
+<div class="ct-radar">
+<i class="ct-ring" aria-hidden="true"></i><i class="ct-ring" aria-hidden="true"></i><i class="ct-ring" aria-hidden="true"></i>
+<div class="ct-orbit" aria-hidden="true">
+<span class="ct-chip" style="--a:0deg"><span><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3zM3 7l9 7 9-7"/></svg></span></span>
+<span class="ct-chip" style="--a:120deg"><span><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></span></span>
+<span class="ct-chip" style="--a:240deg"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span></span>
+</div>
+<button type="button" class="ct-ball" data-chat aria-label="Abrir el chat de atención"><span class="ct-ball-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></span></button>
+<p class="ct-hint">Toca la Poké Ball para abrir el chat</p>
+</div>
+</div>
+</section>
+
+<main>
+<!-- ===== 1.1 ESTAMOS PARA AYUDARTE ===== -->
+<section class="ct-sec mx-alt" id="ayuda">
+<div class="w ct-split">
+<div class="ct-stick">
+<h2>Estamos para ayudarte</h2>
+<p>¿Tienes dudas sobre nuestros productos? Comunícate con nosotros al correo <a href="mailto:atencion@poketech.com">atencion@poketech.com</a> o mediante nuestro chat de atención.</p>
+</div>
+<div class="ct-chs">
+<a class="ct-ch" style="--c:var(--red)" href="mailto:atencion@poketech.com">
+<span class="ct-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3zM3 7l9 7 9-7"/></svg></span>
+<span class="ct-tx"><span class="ct-t">Correo</span><span class="ct-d">Respondemos en menos de 24 horas.</span><span class="ct-val">atencion@poketech.com</span></span>
+<span class="ct-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+</a>
+<button type="button" class="ct-ch" id="ct-chat-open" style="--c:var(--blu)">
+<span class="ct-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></span>
+<span class="ct-tx"><span class="ct-t">Chat de atención</span><span class="ct-d">Resolvemos tus dudas al momento.</span><span class="ct-val">Abrir chat</span></span>
+<span class="ct-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+</button>
+<div class="ct-ch ct-static">
+<span class="ct-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+<span class="ct-tx"><span class="ct-t">Horario</span><span class="ct-d">Lunes a sábado, de 9:00 a 18:00 h.</span></span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== RESPUESTAS RÁPIDAS ===== -->
+<section class="ct-sec" id="respuestas">
+<div class="w ct-faq">
+<div class="mx-head"><div><h2>Respuestas rápidas</h2><p>Lo que más nos preguntan. Si no encuentras lo tuyo, pregúntanos en el chat.</p></div></div>
+<div class="ct-acc">
+
+<article class="ct-it open">
+<h3><button type="button" class="ct-q" id="ct-q1" aria-expanded="true" aria-controls="ct-a1"><span class="ct-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></span><span>Envíos</span><i class="ct-pm" aria-hidden="true"></i></button></h3>
+<div class="ct-a" id="ct-a1" role="region" aria-labelledby="ct-q1"><div><div class="ct-a-in"><p>A domicilio en 3 a 5 días hábiles por $99, gratis desde $500. También puedes recoger gratis en sucursal en 24 horas.</p><button type="button" class="btn w2" data-chat>Preguntar en el chat</button></div></div></div>
+</article>
+
+<article class="ct-it">
+<h3><button type="button" class="ct-q" id="ct-q2" aria-expanded="false" aria-controls="ct-a2"><span class="ct-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg></span><span>Cambios y devoluciones</span><i class="ct-pm" aria-hidden="true"></i></button></h3>
+<div class="ct-a" id="ct-a2" role="region" aria-labelledby="ct-q2"><div><div class="ct-a-in"><p>Cambios dentro de 15 días y devolución con reembolso si llega con defecto, hasta 30 días.</p><button type="button" class="btn w2" data-chat>Preguntar en el chat</button></div></div></div>
+</article>
+
+<article class="ct-it">
+<h3><button type="button" class="ct-q" id="ct-q3" aria-expanded="false" aria-controls="ct-a3"><span class="ct-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span>Garantía</span><i class="ct-pm" aria-hidden="true"></i></button></h3>
+<div class="ct-a" id="ct-a3" role="region" aria-labelledby="ct-q3"><div><div class="ct-a-in"><p>12 meses de garantía en todos los modelos certificados por PokéTech.</p><button type="button" class="btn w2" data-chat>Preguntar en el chat</button></div></div></div>
+</article>
+
+<article class="ct-it">
+<h3><button type="button" class="ct-q" id="ct-q4" aria-expanded="false" aria-controls="ct-a4"><span class="ct-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7h18v13H3zM3 7l3-4h12l3 4M12 7v13"/></svg></span><span>Estado de mi pedido</span><i class="ct-pm" aria-hidden="true"></i></button></h3>
+<div class="ct-a" id="ct-a4" role="region" aria-labelledby="ct-q4"><div><div class="ct-a-in"><p>Con tu folio (PT-XXXXXX) revisamos tu pedido. Envíalo a atencion@poketech.com y respondemos en menos de 24 horas.</p><button type="button" class="btn w2" data-chat>Preguntar en el chat</button></div></div></div>
+</article>
+
+</div>
+</div>
+</section>
+
+<!-- ===== 1.2 ATENCIÓN A QUEJAS Y SUGERENCIAS ===== -->
+<section class="ct-quejas" id="quejas">
+<div class="w ct-qgrid">
+<div class="ct-qtxt">
+<h2>Quejas y sugerencias</h2>
+<p>Tu opinión es importante para nosotros. Si tuviste algún inconveniente con nuestros productos o servicios, envíanos tu queja o sugerencia a través de nuestro formulario. Nuestro equipo revisará tu caso y se pondrá en contacto contigo para ofrecerte una solución.</p>
+<ol class="ct-tl">
+<li><b>Recibes un folio</b><span>Al enviar tu mensaje.</span></li>
+<li><b>Revisamos tu caso</b><span>En un máximo de 48 horas.</span></li>
+<li><b>Te contactamos</b><span>Por correo, con una solución.</span></li>
+</ol>
+</div>
+
+<form class="ct-form" id="ct-form" novalidate>
+<h3>Envíanos tu mensaje</h3>
+<div class="ct-two">
+<label class="ct-f" data-err="Escribe tu nombre"><input name="nombre" placeholder=" " required autocomplete="name"><span>Nombre</span></label>
+<label class="ct-f" data-err="Escribe un correo válido"><input name="correo" type="email" placeholder=" " required autocomplete="email"><span>Correo</span></label>
+</div>
+<fieldset class="ct-tipo">
+<legend>Tipo de mensaje</legend>
+<div class="ct-pills">
+<label><input type="radio" name="tipo" value="Queja" checked><span>Queja</span></label>
+<label><input type="radio" name="tipo" value="Sugerencia"><span>Sugerencia</span></label>
+<label><input type="radio" name="tipo" value="Reclamación"><span>Reclamación</span></label>
+</div>
+</fieldset>
+<label class="ct-f" data-err="Cuéntanos qué pasó"><textarea name="msg" placeholder=" " required maxlength="500"></textarea><span>Cuéntanos qué pasó</span></label>
+<small class="ct-count" id="ct-count">0 / 500</small>
+<button class="btn r" type="submit">Enviar mensaje</button>
+</form>
+
+<form class="ct-ticket" id="ct-seg">
+<div class="ct-tk-l"><h3>Consulta tu folio</h3><p>¿Ya enviaste tu mensaje? Escribe tu folio para ver el estado de tu solicitud.</p></div>
+<div class="ct-tk-r"><div class="ct-tk-row"><input id="ct-seg-q" placeholder="QS-XXXXX" aria-label="Folio de tu solicitud" autocomplete="off"><button class="btn r" type="submit">Consultar</button></div></div>
+<div class="ct-estado" id="ct-estado" role="status" hidden></div>
+</form>
+</div>
+</section>
+</main>
+
+<!-- Botón flotante del chat -->
+<button type="button" class="ct-fab" data-chat aria-label="Abrir chat de atención"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span>Chat</span></button>
+
+<!-- Chat -->
+<section class="ct-chat" id="ct-chat" aria-label="Chat de atención">
+<header><span class="ct-av" aria-hidden="true"></span><div><b>Chat PokéTech</b><small>Respuestas al momento</small></div><button type="button" class="ct-x" id="ct-chat-x" aria-label="Cerrar chat">×</button></header>
+<div class="ct-msgs" id="ct-msgs" aria-live="polite"></div>
+<div class="ct-quick" id="ct-quick"></div>
+<form class="ct-say" id="ct-say"><input id="ct-say-q" placeholder="Escribe tu duda…" aria-label="Escribe tu mensaje" autocomplete="off"><button class="btn r" type="submit">Enviar</button></form>
+</section>
+
+<canvas class="mx-confetti" id="ct-confetti" aria-hidden="true"></canvas>
+<div class="mx-toast" id="ct-toast" role="status" aria-live="polite"></div>
+
+<!-- ===== FOOTER (igual en todas las páginas; fuente: components/footer.html) ===== -->
+<div class="bd2"></div>
+<footer><div class="w">
+<div class="fg">
+<div><h4>PokéTech Research &amp; Development Corp.</h4><p>Investigación de especies y tecnología Pokédex para todas las regiones.</p><p class="dots" style="margin-top:14px"><i style="background:#000"></i><i style="background:var(--red)"></i><i style="background:#fff"></i><i style="background:var(--blu)"></i></p></div>
+<div><h4>Empresa</h4><a href="../pages/estrategia.html">Estrategia</a><a href="../pages/organizacion.html">Organización</a><a href="../pages/compromiso.html">Compromiso</a></div>
+<div><h4>Tienda</h4><a href="../pages/tienda.html">Catálogo Pokédex</a><a href="../pages/contactanos.html">Atención al cliente</a><a href="../pages/trabajo.html">Trabaja con nosotros</a></div>
+</div>
+<div class="cp">© 2026 PokéTech Research &amp; Development Corp. Todos los derechos reservados. Privacidad · Términos · Ética Pokémon</div>
+</div></footer>
+
+<script src="../js/moderno.js"></script>
+<script src="../js/contactanos.js"></script>
+<script src="../js/animaciones.js"></script>
+</body>
+</html>

@@ -8,34 +8,117 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/variables.css">
 <link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/moderno.css">
+<link rel="stylesheet" href="../css/tienda.css">
+<link rel="stylesheet" href="../css/animaciones.css">
 <link rel="stylesheet" href="../css/tema.css">
 <script src="../js/tema.js"></script>
 </head>
-<body>
+<body class="mx">
 
 <!-- ===== HEADER (igual en todas las páginas; fuente: components/header.html) ===== -->
 <header><div class="w hd">
 <a class="logo" href="../index.html"><img src="../assets/img/loguito.png" alt="PokéTech" class="logo-img"></a>
 <nav>
 <a href="../pages/tienda.html" class="on">Tienda Pokédex</a>
+<a href="../pages/ofertas.html">Ofertas</a>
 <a href="../pages/estrategia.html">Estrategia</a>
 <a href="../pages/organizacion.html">Organización</a>
 <a href="../pages/trabajo.html">Forma de trabajar</a>
 <a href="../pages/compromiso.html">Compromiso</a>
+<a href="../pages/contactanos.html">Contáctanos</a>
 </nav>
 </div></header>
 
-<!-- ===== CONTENIDO ===== -->
-<div class="pagehead"><div class="w">
+<!-- ===== HERO CON CARRUSEL (las diapositivas las pinta js/tienda.js: las 5 Pokédex con más descuento) ===== -->
+<section class="mx-hero td-hero">
+<div class="w mx-grid">
+<div>
 <h1>Tienda Pokédex</h1>
-<p>Cada modelo está restaurado y certificado por PokéTech. Elige la generación de tu región.</p>
-</div></div>
+<p class="mx-sub">Cada modelo está restaurado y certificado por PokéTech. Elige la generación de tu región o llévate un combo y ahorra.</p>
+<ul class="td-stats">
+<li><b id="td-n-op">12</b><span>opciones</span></li>
+<li><b id="td-n-gen">9</b><span>generaciones</span></li>
+<li><b>15</b><span>días para cambios</span></li>
+</ul>
+<div class="mx-cta"><a class="btn r" href="#catalogo">Ver catálogo</a><a class="btn w2" href="../pages/ofertas.html">Ir a ofertas</a></div>
+</div>
+<div class="cr td-cr" id="td-cr" data-auto="5500" aria-label="Pokédex con más descuento">
+<div class="cr-track" id="td-cr-track"></div>
+</div>
+</div>
+</section>
+
+<div class="td-trust"><ul class="w">
+<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg><div><b>Envío a domicilio</b><small>3 a 5 días hábiles</small></div></li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h16l-1 11H5zM8 9V6a4 4 0 0 1 8 0v3"/></svg><div><b>Recoge en sucursal</b><small>Gratis, lista en 24 h</small></div></li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg><div><b>Cambios y devoluciones</b><small>Sin complicaciones</small></div></li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><div><b>Certificadas PokéTech</b><small>12 meses de garantía</small></div></li>
+</ul></div>
 
 <main>
-<section><div class="w">
-<div class="row" id="cat"></div>
-</div></section>
+<!-- ===== CATÁLOGO ===== -->
+<section class="mx-sec td-sec" id="catalogo">
+<div class="w">
+<div class="mx-head td-head"><div><h2>Elige tu Pokédex</h2><p>Nombre, imagen, descripción, precio y condiciones de cada modelo. Toca “Detalles” para ver cambios, devoluciones y entrega.</p></div></div>
+<div class="td-tools">
+<div class="td-chips" role="group" aria-label="Filtrar catálogo">
+<button type="button" class="td-chip" data-f="todas" aria-pressed="true">Todas</button>
+<button type="button" class="td-chip" data-f="clasicas" aria-pressed="false">Clásicas · I–III</button>
+<button type="button" class="td-chip" data-f="medias" aria-pressed="false">Intermedias · IV–VI</button>
+<button type="button" class="td-chip" data-f="modernas" aria-pressed="false">Modernas · VII–IX</button>
+<button type="button" class="td-chip" data-f="combos" aria-pressed="false">Combos</button>
+<button type="button" class="td-chip" data-f="oferta" aria-pressed="false">En oferta</button>
+</div>
+<div class="td-right">
+<input class="td-search" id="td-q" type="search" placeholder="Buscar por región o función" aria-label="Buscar en el catálogo">
+<label class="td-sort">Ordenar
+<select id="td-orden" aria-label="Ordenar catálogo">
+<option value="gen">Generación</option>
+<option value="asc">Menor precio</option>
+<option value="prc">Mayor precio</option>
+<option value="off">Mayor descuento</option>
+</select></label>
+</div>
+</div>
+<p class="td-count" id="td-count" aria-live="polite"></p>
+<div class="td-grid" id="td-grid"></div>
+</div>
+</section>
+
+<!-- ===== CONDICIONES DE COMPRA Y ENTREGA ===== -->
+<section class="mx-sec mx-alt td-sec" id="condiciones">
+<div class="w">
+<div class="mx-head td-head"><div><h2>Condiciones de compra y entrega</h2><p>Lo que necesitas saber antes de comprar. Aplica a todos los productos y combos.</p></div></div>
+<div class="td-cond">
+<div class="bx"><span class="td-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg></span><h3>Cambios y devoluciones</h3>
+<ul><li>Aceptamos cambios por otro modelo dentro de 15 días naturales.</li><li>Devolución con reembolso completo si llega con defecto, hasta 30 días.</li><li>El equipo debe conservar su caja y accesorios.</li><li>Los combos se cambian o devuelven completos.</li></ul>
+<p class="td-note">Escríbenos a atencion@poketech.com o entra a <a href="../pages/contactanos.html">Contáctanos</a> para iniciar el trámite.</p></div>
+<div class="bx"><span class="td-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></span><h3>Opciones de entrega</h3>
+<ul><li><b>Envío a domicilio:</b> 3 a 5 días hábiles, $99. Gratis en compras desde $500.</li><li><b>Recolección en sucursal:</b> gratis, lista en 24 horas con tu folio.</li><li>Te enviamos el número de guía por correo.</li></ul>
+<p class="td-note">Elige la opción en tu carrito antes de finalizar la compra.</p></div>
+<div class="bx"><span class="td-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><h3>Garantía y pago</h3>
+<ul><li>12 meses de garantía en todos los modelos certificados.</li><li>Precios en pesos mexicanos con IVA incluido.</li><li>Los descuentos ya están aplicados en el precio que ves.</li><li>Cupón de bienvenida POKETECH10 en tu primera compra.</li></ul>
+<p class="td-note">Mira más promociones en la <a href="../pages/ofertas.html">página de ofertas</a>.</p></div>
+</div>
+</div>
+</section>
 </main>
+
+<!-- Detalle de producto -->
+<dialog class="td-modal" id="td-modal" aria-label="Detalle del producto"><div class="td-modal-wrap" id="td-modal-in"></div></dialog>
+
+<!-- Carrito -->
+<div class="td-over" id="td-over"></div>
+<aside class="td-cart" id="td-cart" aria-label="Carrito de compras" aria-hidden="true">
+<header><h3>Tu carrito</h3><button type="button" class="td-x" id="td-cart-x" aria-label="Cerrar carrito">×</button></header>
+<div class="td-items" id="td-items"></div>
+<div class="td-foot" id="td-foot"></div>
+</aside>
+<button type="button" class="td-fab" id="td-fab" aria-label="Abrir carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h16l-1 11H5zM8 9V6a4 4 0 0 1 8 0v3"/></svg><b id="td-fab-n">0</b></button>
+
+<canvas class="mx-confetti" id="td-confetti" aria-hidden="true"></canvas>
+<div class="mx-toast" id="td-toast" role="status" aria-live="polite"></div>
 
 <!-- ===== FOOTER (igual en todas las páginas; fuente: components/footer.html) ===== -->
 <div class="bd2"></div>
@@ -43,13 +126,15 @@
 <div class="fg">
 <div><h4>PokéTech Research &amp; Development Corp.</h4><p>Investigación de especies y tecnología Pokédex para todas las regiones.</p><p class="dots" style="margin-top:14px"><i style="background:#000"></i><i style="background:var(--red)"></i><i style="background:#fff"></i><i style="background:var(--blu)"></i></p></div>
 <div><h4>Empresa</h4><a href="../pages/estrategia.html">Estrategia</a><a href="../pages/organizacion.html">Organización</a><a href="../pages/compromiso.html">Compromiso</a></div>
-<div><h4>Tienda</h4><a href="../pages/tienda.html">Catálogo Pokédex</a><a href="../pages/trabajo.html">Trabaja con nosotros</a></div>
+<div><h4>Tienda</h4><a href="../pages/tienda.html">Catálogo Pokédex</a><a href="../pages/contactanos.html">Atención al cliente</a><a href="../pages/trabajo.html">Trabaja con nosotros</a></div>
 </div>
 <div class="cp">© 2026 PokéTech Research &amp; Development Corp. Todos los derechos reservados. Privacidad · Términos · Ética Pokémon</div>
 </div></footer>
 
+<script src="../js/moderno.js"></script>
 <script src="../js/utilidades.js"></script>
 <script src="../js/catalogo.js"></script>
-<script src="../js/app.js"></script>
+<script src="../js/tienda.js"></script>
+<script src="../js/animaciones.js"></script>
 </body>
 </html>

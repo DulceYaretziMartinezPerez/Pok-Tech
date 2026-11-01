@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ofertas Pokédex | PokéTech</title>
+<link rel="icon" href="../assets/img/logo.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/moderno.css">
+<link rel="stylesheet" href="../css/ofertas.css">
+<link rel="stylesheet" href="../css/animaciones.css">
+<link rel="stylesheet" href="../css/tema.css">
+<script src="../js/tema.js"></script>
+</head>
+<body class="mx">
+
+<!-- ===== HEADER (fuente: components/header.html) ===== -->
+<header><div class="w hd">
+<a class="logo" href="../index.html"><img src="../assets/img/loguito.png" alt="PokéTech" class="logo-img"></a>
+<nav>
+<a href="../pages/tienda.html">Tienda Pokédex</a>
+<a href="../pages/ofertas.html" class="on">Ofertas</a>
+<a href="../pages/estrategia.html">Estrategia</a>
+<a href="../pages/organizacion.html">Organización</a>
+<a href="../pages/trabajo.html">Forma de trabajar</a>
+<a href="../pages/compromiso.html">Compromiso</a>
+<a href="../pages/contactanos.html">Contáctanos</a>
+</nav>
+</div></header>
+
+<!-- ===== HERO ===== -->
+<section class="mx-hero of-hero">
+<div class="w mx-grid">
+<div>
+<h1>Ofertas Pokédex</h1>
+<p class="mx-sub">Los mejores modelos de cada región con descuentos por tiempo limitado. Stock real, precios claros y cero letras chiquitas.</p>
+<div class="mx-cta">
+<a class="btn r" href="#destacadas">Ver ofertas</a>
+<a class="btn w2" href="../pages/tienda.html">Catálogo completo</a>
+</div>
+</div>
+<aside class="of-clock" aria-label="Tiempo restante de las ofertas">
+<h2><span class="of-live" aria-hidden="true"></span>Las ofertas terminan en</h2>
+<div class="of-time" role="timer">
+<div><b data-t="d">00</b><span>Días</span></div>
+<div><b data-t="h">00</b><span>Horas</span></div>
+<div><b data-t="m">00</b><span>Min</span></div>
+<div><b data-t="s">00</b><span>Seg</span></div>
+</div>
+<small>Cada semana renovamos modelos y descuentos.</small>
+</aside>
+</div>
+</section>
+
+<div class="of-strip" aria-hidden="true"><div class="of-strip-track">
+<span>Hasta 40% de descuento</span><span>Stock limitado</span><span>Combos con ahorro extra</span><span>Cupón de bienvenida</span>
+<span>Hasta 40% de descuento</span><span>Stock limitado</span><span>Combos con ahorro extra</span><span>Cupón de bienvenida</span>
+</div></div>
+
+<main>
+<!-- ===== OFERTAS DESTACADAS (carrusel con las 3 de mayor descuento; las pinta js/ofertas.js) ===== -->
+<section class="mx-sec of-sec" id="destacadas">
+<div class="w">
+<div class="mx-head of-head"><div><h2>Ofertas destacadas</h2><p>Los mayores descuentos de hoy. Cuando se acaban, se acaban.</p></div></div>
+<div class="cr of-cr" id="of-dia" data-auto="7000" aria-label="Ofertas destacadas"><div class="cr-track"></div></div>
+</div>
+</section>
+
+<!-- ===== TODAS LAS OFERTAS ===== -->
+<section class="mx-sec mx-alt of-sec" id="ofertas">
+<div class="w">
+<div class="mx-head of-head"><div><h2>Todas las ofertas</h2><p>Filtra por época o por precio y elige tu Pokédex.</p></div></div>
+<div class="of-bar-tools">
+<div class="of-chips" role="group" aria-label="Filtrar por época">
+<button type="button" class="of-chip" data-f="todas" aria-pressed="true">Todas</button>
+<button type="button" class="of-chip" data-f="clasicas" aria-pressed="false">Clásicas · I–III</button>
+<button type="button" class="of-chip" data-f="medias" aria-pressed="false">Intermedias · IV–VI</button>
+<button type="button" class="of-chip" data-f="modernas" aria-pressed="false">Modernas · VII–IX</button>
+</div>
+<label class="of-sort">Ordenar
+<select id="of-orden">
+<option value="desc">Mayor descuento</option>
+<option value="asc">Menor precio</option>
+<option value="prc">Mayor precio</option>
+<option value="gen">Generación</option>
+</select></label>
+</div>
+<p class="of-count" id="of-count" aria-live="polite"></p>
+<div class="of-grid" id="of-grid"></div>
+</div>
+</section>
+
+<!-- ===== COMBOS Y CUPÓN ===== -->
+<section class="mx-sec of-sec">
+<div class="w">
+<div class="mx-head of-head"><div><h2>Combos con ahorro extra</h2><p>Llévate varias generaciones juntas y ahorra todavía más.</p></div></div>
+<div class="cr of-cr2" id="of-combos-cr" aria-label="Combos con ahorro extra"><div class="cr-track" id="of-combos"></div></div>
+
+<div class="of-coupon">
+<div class="of-pct">10%</div>
+<div class="of-coupon-txt"><h3>Cupón de bienvenida</h3><p>Úsalo en tu primera compra y obtén un descuento adicional.</p></div>
+<div class="of-code"><code>POKETECH10</code><button type="button" class="btn w2" id="of-copiar">Copiar</button></div>
+</div>
+</div>
+</section>
+
+<!-- ===== CÓMO FUNCIONAN ===== -->
+<section class="mx-sec mx-alt of-sec">
+<div class="w">
+<div class="mx-head of-head"><div><h2>Cómo funcionan las ofertas</h2></div></div>
+<div class="of-info">
+<div class="bx"><span class="of-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12 12 20 4 12V4h8z"/><circle cx="8" cy="8" r="1.4"/></svg></span><h3>Precio ya con descuento</h3><p>El precio que ves es el final, sin cálculos ni sorpresas.</p></div>
+<div class="bx"><span class="of-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v13H3zM3 7l3-4h12l3 4M12 7v13"/></svg></span><h3>Stock limitado</h3><p>Cada oferta tiene piezas contadas. La barra muestra cuántas quedan.</p></div>
+<div class="bx"><span class="of-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>Se renuevan cada semana</h3><p>Al terminar el contador cambian los modelos y los descuentos.</p></div>
+<div class="bx"><span class="of-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg></span><h3>Certificadas por PokéTech</h3><p>Todos los modelos pasan por nuestra revisión de calidad.</p></div>
+</div>
+</div>
+</section>
+</main>
+
+<canvas class="mx-confetti" id="of-confetti" aria-hidden="true"></canvas>
+<div class="mx-toast" id="of-toast" role="status" aria-live="polite"></div>
+
+<!-- Carrito (comparte los productos con la tienda) -->
+<a class="of-fab" id="of-fab" href="../pages/tienda.html#carrito" aria-label="Ver mi carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h16l-1 11H5zM8 9V6a4 4 0 0 1 8 0v3"/></svg><b id="of-fab-n">0</b></a>
+
+<!-- ===== FOOTER (fuente: components/footer.html) ===== -->
+<div class="bd2"></div>
+<footer><div class="w">
+<div class="fg">
+<div><h4>PokéTech Research &amp; Development Corp.</h4><p>Investigación de especies y tecnología Pokédex para todas las regiones.</p><p class="dots" style="margin-top:14px"><i style="background:#000"></i><i style="background:var(--red)"></i><i style="background:#fff"></i><i style="background:var(--blu)"></i></p></div>
+<div><h4>Empresa</h4><a href="../pages/estrategia.html">Estrategia</a><a href="../pages/organizacion.html">Organización</a><a href="../pages/compromiso.html">Compromiso</a></div>
+<div><h4>Tienda</h4><a href="../pages/tienda.html">Catálogo Pokédex</a><a href="../pages/contactanos.html">Atención al cliente</a><a href="../pages/trabajo.html">Trabaja con nosotros</a></div>
+</div>
+<div class="cp">© 2026 PokéTech Research &amp; Development Corp. Todos los derechos reservados. Privacidad · Términos · Ética Pokémon</div>
+</div></footer>
+
+<script src="../js/moderno.js"></script>
+<script src="../js/utilidades.js"></script>
+<script src="../js/catalogo.js"></script>
+<script src="../js/ofertas.js"></script>
+<script src="../js/animaciones.js"></script>
+</body>
+</html>

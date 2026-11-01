@@ -174,8 +174,28 @@ nav a.on {
     }
 
     nav a {
-        white-space: nowrap
+        white-space: nowrap;
+        scroll-snap-align: center
     }
+
+    /* menú en celular: tira deslizable con bordes difuminados */
+    header nav {
+        padding: 2px 20px;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 28px), transparent);
+        mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 28px), transparent)
+    }
+
+    header nav::-webkit-scrollbar {
+        display: none
+    }
+}
+
+/* efecto al presionar cualquier botón */
+.btn:active {
+    transform: scale(.96)
 }
 
 /* hero (home only) */
