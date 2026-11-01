@@ -8,7 +8,18 @@
    ============================================================ */
 @keyframes ct-ping { 0% { scale: .5; opacity: .85; } 100% { scale: 1.95; opacity: 0; } }
 @keyframes ct-drift { to { background-position: 30px 30px; } }
-@keyframes ct-drop { from { opacity: 0; translate: 0 -.75em; rotate: -14deg; scale: .5; } }
+@keyframes ct-drop { from { opacity: 0; translate: 0 -.9em; rotate: -18deg; scale: .4; filter: blur(8px); } }
+@keyframes ct-wave { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-.045em); } }
+@keyframes ct-tint { 0%, 78%, 100% { color: var(--ink); } 88% { color: var(--blu); } }
+@keyframes ct-ball {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  38% { transform: translateY(-.34em) scale(.92, 1.1); }
+  62% { transform: translateY(0) scale(1.22, .72); }
+  74% { transform: translateY(-.08em) scale(.98, 1.03); }
+  86% { transform: translateY(0) scale(1.06, .92); }
+}
+@keyframes ct-line { from { transform: scaleX(0); } }
+@keyframes ct-shine { 0%, 55% { translate: 0 0; opacity: 0; } 62% { opacity: .85; } 92%, 100% { translate: 2.9em 0; opacity: 0; } }
 @keyframes ct-wobble {
   0%, 68%, 100% { rotate: 0deg; } 72% { rotate: -14deg; } 78% { rotate: 11deg; }
   84% { rotate: -7deg; } 90% { rotate: 4deg; } 95% { rotate: -1deg; }
@@ -45,10 +56,38 @@
 }
 .ct-status i { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--blu); animation: ct-live 1.6s ease-out infinite; }
 .ct-status[data-open="false"] i { background: var(--mut); animation: none; }
-.ct-h1 { margin-top: 24px; font: 600 clamp(64px, 12vw, 156px)/.9 Fredoka, sans-serif; letter-spacing: -.045em; }
-.ct-l { display: inline-block; animation: ct-drop .9s cubic-bezier(.2, 1.4, .4, 1) calc(var(--i) * 70ms + .15s) backwards; transition: translate .25s cubic-bezier(.2, 1.6, .4, 1), color .2s; }
-.ct-l:hover { translate: 0 -.07em; color: var(--blu); }
-.ct-pt { color: var(--red); }
+/* Titular "Hablemos." — se mide según el ancho de su columna (cqi) para que SIEMPRE quepa */
+.ct-hero-txt { container-type: inline-size; min-width: 0; }
+.ct-h1 {
+  position: relative; display: block; margin-top: 24px; padding: 0 0 .16em; white-space: nowrap;
+  font: 600 clamp(44px, 19.5cqi, 150px)/.95 Fredoka, sans-serif; letter-spacing: -.04em;
+}
+/* Cada letra: cae con rebote, luego flota en onda y pulsa de color en cadena */
+.ct-l {
+  display: inline-block; transform-origin: 50% 85%; cursor: default;
+  animation:
+    ct-drop 1s cubic-bezier(.2, 1.5, .35, 1) calc(var(--i) * 80ms + .15s) backwards,
+    ct-wave 3.6s ease-in-out calc(var(--i) * 140ms + 1.6s) infinite,
+    ct-tint 5.4s ease-in-out calc(var(--i) * 220ms + 2s) infinite;
+  transition: translate .3s cubic-bezier(.2, 1.7, .4, 1), rotate .3s cubic-bezier(.2, 1.7, .4, 1), scale .3s cubic-bezier(.2, 1.7, .4, 1);
+}
+.ct-l:hover { translate: 0 -.12em; rotate: -6deg; scale: 1.12; }
+.ct-l:nth-child(even):hover { rotate: 6deg; }
+/* El punto rebota como una pelota y se aplasta al caer */
+.ct-pt {
+  color: var(--red); transform-origin: 50% 100%;
+  animation: ct-drop 1s cubic-bezier(.2, 1.5, .35, 1) calc(var(--i) * 80ms + .15s) backwards, ct-ball 1.9s cubic-bezier(.3, 0, .4, 1) 1.7s infinite;
+}
+/* Subrayado que se dibuja bajo la palabra, con destello que lo recorre */
+.ct-h1::after {
+  content: ""; position: absolute; left: .04em; bottom: 0; width: 78%; height: .075em; border-radius: 99px;
+  background: linear-gradient(90deg, var(--red) 0 55%, var(--blu) 55% 100%);
+  transform-origin: left; animation: ct-line 1s cubic-bezier(.6, 0, .2, 1) 1s backwards;
+}
+.ct-h1::before {
+  content: ""; position: absolute; z-index: 1; left: .04em; bottom: 0; width: .5em; height: .075em; border-radius: 99px;
+  background: #fff; opacity: .85; animation: ct-shine 3.4s ease-in-out 2.2s infinite;
+}
 .ct-lead { max-width: 44ch; margin-top: 24px; color: var(--mut); font-size: 19px; animation: fx-up .8s cubic-bezier(.2, .8, .2, 1) 1.05s backwards; }
 .ct-hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; animation: fx-up .8s cubic-bezier(.2, .8, .2, 1) 1.2s backwards; }
 
@@ -315,4 +354,6 @@ body.ct-chat-on .ct-fab { scale: 0; opacity: 0; pointer-events: none; }
   .ct-tl::after { scale: 1 1; }
   .ct-tl li::before { background: var(--red); box-shadow: none; }
   .ct-it .ct-a { transition: none; }
+  .ct-l, .ct-pt, .ct-h1::after, .ct-h1::before { animation: none; }
+  .ct-h1::before { display: none; }
 }
